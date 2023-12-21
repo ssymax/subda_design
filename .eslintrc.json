@@ -7,7 +7,20 @@
     "plugin:react/jsx-runtime",
     "plugin:prettier/recommended"
   ],
-  "rules": {},
+  "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/jsx-props-no-spreading)": 0,
+    "react/jsx-no-useless-fragment": 0
+  },
   "parserOptions": {
     "project": "./tsconfig.json"
   }

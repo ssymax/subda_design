@@ -22,7 +22,10 @@
       "@/*": ["./src/*"],
       "@/components/*": ["./src/app/_components/*"],
       "@/styles/*": ["./src/app/_styles/*"],
-      "@/providers/*": ["./src/app/_providers/*"]
+      "@/providers/*": ["./src/app/_providers/*"],
+      "@/routes/*": ["./src/app/_routes/*"],
+      "@/utils/*": ["./src/app/_utils/*"],
+      "@/hooks/*": ["./src/app/_hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
