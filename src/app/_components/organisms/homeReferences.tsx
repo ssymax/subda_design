@@ -38,6 +38,9 @@ const Wrapper = styled.div`
   min-height: 20rem;
   width: 80%;
   margin: 6rem auto;
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 100%;
+  }
 `;
 
 const IconWrapper = styled.div`

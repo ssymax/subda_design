@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import { MenuProps } from '@/components/types';
 import { routesArr } from '@/routes/routes';
@@ -39,10 +40,15 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Menu({ vertical, dark, contact }: MenuProps) {
+  const currentRoute = usePathname();
   return (
     <MenuWrap $vertical={vertical}>
       {routesArr(contact).map((r) => (
-        <StyledLink key={r.route} href={r.route}>
+        <StyledLink
+          key={r.route}
+          href={r.route}
+          className={currentRoute === r.route ? 'active' : ''}
+        >
           <Span $dark={dark} $vertical={vertical}>
             {r.text}
           </Span>

@@ -15,6 +15,9 @@ const Card = styled.div`
   flex-direction: column;
   font-size: 2rem;
   padding: 2rem 6rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    font-size: 1.6rem;
+  }
 `;
 
 const Description = styled.span`

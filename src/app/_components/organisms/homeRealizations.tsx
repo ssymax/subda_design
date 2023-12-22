@@ -50,6 +50,10 @@ const Wrapper = styled.div`
   grid-auto-flow: row;
   grid-template-rows: auto;
   gap: 4rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ButtonWrapper = styled.div`

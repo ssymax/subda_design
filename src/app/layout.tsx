@@ -25,6 +25,9 @@ const Divider = styled.div`
 
 const PagesWrapper = styled.div`
   padding: 0 5.5rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    padding: 0 2.4rem;
+  }
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
