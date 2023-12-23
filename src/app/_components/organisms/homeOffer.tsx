@@ -4,6 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeHeader from '@/components/atoms/homeHeader';
 import HomeOfferItem from '@/components/molecules/homeOfferItem';
+import HomeOfferItemMobile from '@/components/molecules/homeOfferItemMobile';
+import useMediaQuery from '@/app/_hooks/useMediaQuery';
+import { maxQuery, minQuery } from '@/app/_styles/constants';
 import offer from '../../../../public/offer.png';
 
 const dummyData = [
@@ -40,18 +43,20 @@ const dummyData = [
 const description = `Zachęcam do zapoznania się z ofertą i podzielenia się swoimi 
 potrzebami. Jestem tu, by realizować Państwa marzenia.`;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $isMobile: boolean }>`
   display: flex;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 1rem;
   width: 100%;
-  height: auto;
+  height: ${({ $isMobile }) => ($isMobile ? '80rem' : 'auto')};
+  flex-direction: ${({ $isMobile }) => $isMobile && 'column'};
 `;
 
 export default function HomeOffer() {
   const [rect, setRect] = useState<DOMRect>();
-
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const largeScreen = useMediaQuery(minQuery.lg);
+  const mediumScreen = useMediaQuery(maxQuery.md);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -78,23 +83,38 @@ export default function HomeOffer() {
         header='W czym mogę pomóc'
         description={description}
       />
-      <Wrapper ref={wrapperRef}>
+      <Wrapper $isMobile={mediumScreen} ref={wrapperRef}>
         {dummyData.map(({ id, text, image, title }, index) => (
-          <HomeOfferItem
-            key={id}
-            id={id}
-            openId={openId}
-            accordionNumber={`0${index + 1}`}
-            text={text}
-            image={image}
-            title={title}
-            onClick={() => handleOpen(id)}
-            containerWidth={rect?.width}
-            accordionWidth={80}
-            itemsQuantity={dummyData.length}
-            padding={30}
-            index={index}
-          />
+          <>
+            {mediumScreen ? (
+              <HomeOfferItemMobile
+                key={id}
+                id={id}
+                openId={openId}
+                accordionNumber={`0${index + 1}`}
+                text={text}
+                title={title}
+                image={image}
+                onClick={() => handleOpen(id)}
+              />
+            ) : (
+              <HomeOfferItem
+                key={id}
+                id={id}
+                openId={openId}
+                accordionNumber={`0${index + 1}`}
+                text={text}
+                image={image}
+                title={title}
+                onClick={() => handleOpen(id)}
+                containerWidth={rect?.width}
+                accordionWidth={largeScreen ? 80 : 60}
+                itemsQuantity={dummyData.length}
+                padding={30}
+                index={index}
+              />
+            )}
+          </>
         ))}
       </Wrapper>
     </section>

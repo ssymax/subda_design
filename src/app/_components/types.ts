@@ -99,3 +99,13 @@ export interface MenuMobileProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
 }
+
+export interface HomeOfferItemMobileProps {
+  id: number;
+  onClick: () => void;
+  openId: number;
+  text: string;
+  image: StaticImageData;
+  title: string;
+  accordionNumber: string;
+}
