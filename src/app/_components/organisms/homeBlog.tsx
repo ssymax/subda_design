@@ -35,6 +35,8 @@ const Wrapper = styled.div`
   column-gap: 6rem;
   ${({ theme }) => theme.maxWidth.lg} {
     column-gap: 3rem;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 

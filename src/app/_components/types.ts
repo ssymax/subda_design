@@ -62,8 +62,8 @@ export interface HomeRealizationItemProps {
 }
 
 export interface HomeOfferItemProps {
-  id: number;
-  openId: number;
+  id: string;
+  openId: string;
   onClick: () => void;
   accordionNumber: string;
   text: string;
@@ -101,11 +101,13 @@ export interface MenuMobileProps {
 }
 
 export interface HomeOfferItemMobileProps {
-  id: number;
+  id: string;
   onClick: () => void;
-  openId: number;
+  openId: string;
   text: string;
   image: StaticImageData;
   title: string;
   accordionNumber: string;
+  index: number;
+  itemsQuantity: number;
 }

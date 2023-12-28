@@ -15,11 +15,18 @@ const Section = styled.section`
   justify-content: center;
   border-radius: 1rem;
   overflow: hidden;
+  ${({ theme }) => theme.maxWidth.lg} {
+    height: 25rem;
+  }
 `;
 
 const Image = styled.img`
   max-width: 100%;
   height: auto;
+  ${({ theme }) => theme.maxWidth.lg} {
+    max-width: 120%;
+    height: auto;
+  }
   z-index: -1;
   object-fit: cover;
 `;
