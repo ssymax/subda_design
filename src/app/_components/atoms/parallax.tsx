@@ -16,19 +16,19 @@ const Section = styled.section`
   border-radius: 1rem;
   overflow: hidden;
   ${({ theme }) => theme.maxWidth.lg} {
-    height: 25rem;
+    height: 20rem;
   }
 `;
 
 const Image = styled.img`
   max-width: 100%;
   height: auto;
+  border-radius: 1rem;
+  z-index: -1;
   ${({ theme }) => theme.maxWidth.lg} {
     max-width: 120%;
     height: auto;
   }
-  z-index: -1;
-  object-fit: cover;
 `;
 
 const src = `https://i.iplsc.com/-/000I86TGAUEIDACW-C324-F4.webp`;

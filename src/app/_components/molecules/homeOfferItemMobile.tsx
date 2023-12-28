@@ -40,7 +40,7 @@ const ContentWrap = styled.div<{ $open: boolean; $isLast: boolean; $isFirst: boo
   flex-direction: column;
   justify-content: space-evenly;
   row-gap: 3rem;
-  overflow: hidden;
+  overflow: clip;
   padding: 0rem 1rem;
   transition: height 0.3s cubic-bezier(0.59, 0.18, 0.88, 0.88);
   border-left: 0.5px solid ${({ theme }) => theme.colors.primary};
@@ -52,6 +52,7 @@ const ContentWrap = styled.div<{ $open: boolean; $isLast: boolean; $isFirst: boo
   img {
     max-width: 100%;
     height: auto;
+    align-self: center;
   }
 `;
 

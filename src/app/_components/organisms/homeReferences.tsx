@@ -54,6 +54,9 @@ const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
   top: 50%;
   transform: ${({ $rotated }) =>
     $rotated ? 'rotate(180deg) translateY(50%)' : 'translateY(-50%)'};
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 4rem;
+  }
 `;
 
 const StyledLine = styled(Line)`

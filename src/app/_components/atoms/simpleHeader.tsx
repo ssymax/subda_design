@@ -7,7 +7,7 @@ const SimpleHeader = styled.h2`
   font-weight: 500;
   ${({ theme }) => theme.maxWidth.lg} {
     font-weight: 700;
-    font-size: 6rem;
+    font-size: 5rem;
   }
 `;
 

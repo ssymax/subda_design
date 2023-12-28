@@ -62,6 +62,7 @@ export default function HomeReferenceCard({
       {
         x: -20,
         autoAlpha: 0,
+        duration: 0.2,
       },
       {
         x: 0,

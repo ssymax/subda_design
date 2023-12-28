@@ -6,7 +6,10 @@ import Image from 'next/image';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import { routes } from '@/routes/routes';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { minQuery } from '@/styles/constants';
 import hero from '../../../../public/hero.png';
+import heroMobile from '../../../../public/hero_mobile.png';
 
 const text = `Tworząc swój wymarzony projekt wnętrz, pragną Państwo
 współpracować z kimś, kto rozumie Państwa potrzeby.`;
@@ -18,13 +21,13 @@ const Section = styled.section`
   align-items: center;
   ${({ theme }) => theme.maxWidth.lg} {
     row-gap: 2rem;
+    margin: 0 auto;
   }
-
   img {
     width: calc(100% + 11rem);
     height: auto;
     ${({ theme }) => theme.maxWidth.lg} {
-      width: 190%;
+      width: calc(100% + 4.8rem);
     }
   }
 `;
@@ -58,9 +61,11 @@ const TextAndButtons = styled.div`
 `;
 
 export default function Hero() {
+  const largeScreen = useMediaQuery(minQuery.lg);
+
   return (
     <Section>
-      <Image src={hero} alt='Dom w Gryźlinach' />
+      <Image src={largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
       <div>
         <SimpleHeader>Sztuka życia</SimpleHeader>
         <SimpleHeader>W pięknych wnętrzach</SimpleHeader>

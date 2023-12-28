@@ -16,7 +16,7 @@ const Container = styled.div<{ $open: boolean }>`
   bottom: 0;
   left: 0;
   display: ${({ $open }) => ($open ? 'flex' : 'none')};
-  height: 100vh;
+  height: 100%;
   z-index: ${({ theme }) => theme.zIndex.level10};
 `;
 
@@ -39,7 +39,6 @@ const MobileNav = styled.nav`
   align-items: center;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.secondary};
-  padding: 0 5.5rem;
   position: absolute;
   height: 100%;
   left: 50%;

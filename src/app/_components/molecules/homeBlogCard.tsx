@@ -25,10 +25,15 @@ const Card = styled.div`
     height: auto;
     border-radius: 1rem;
     border: 0.5px solid ${({ theme }) => theme.colors.primary};
+    align-self: center;
   }
   span {
     width: 80%;
     font-size: 2rem;
+    ${({ theme }) => theme.maxWidth.lg} {
+      font-weight: 600;
+      line-height: 130%;
+    }
   }
   button {
     align-self: flex-end;

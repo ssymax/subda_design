@@ -17,6 +17,12 @@ const Header = styled.h1`
   font-weight: 400;
   text-align: center;
   margin-bottom: 5rem;
+  ${({ theme }) => theme.maxWidth.md} {
+    font-size: 3rem;
+    font-weight: 300;
+    width: 100%;
+    text-align: left;
+  }
 `;
 
 const FormAndInfo = styled.div`
@@ -24,6 +30,11 @@ const FormAndInfo = styled.div`
   width: 100%;
   border-radius: 2rem;
   padding: 7rem 2rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    display: flex;
+    row-gap: 4rem;
+    flex-direction: column;
+  }
 `;
 
 const StyledLine = styled(Line)`
@@ -38,6 +49,11 @@ const RightsAndPolicy = styled.div`
   color: ${({ theme }) => theme.colors.grey};
   font-size: 1.2rem;
   padding: 0.5rem 0 1rem 0;
+  ${({ theme }) => theme.maxWidth.lg} {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1.5rem;
+  }
 `;
 
 const ActiveSpan = styled.span`
