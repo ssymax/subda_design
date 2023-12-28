@@ -51,12 +51,10 @@ const IconWrapper = styled.div`
 
 const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
   position: absolute;
+  width: 100%;
   top: 50%;
   transform: ${({ $rotated }) =>
     $rotated ? 'rotate(180deg) translateY(50%)' : 'translateY(-50%)'};
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 4rem;
-  }
 `;
 
 const StyledLine = styled(Line)`
