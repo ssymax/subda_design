@@ -62,8 +62,8 @@ export interface HomeRealizationItemProps {
 }
 
 export interface HomeOfferItemProps {
-  id: number;
-  openId: number;
+  id: string;
+  openId: string;
   onClick: () => void;
   accordionNumber: string;
   text: string;
@@ -98,4 +98,16 @@ export interface MenuMobileProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
+}
+
+export interface HomeOfferItemMobileProps {
+  id: string;
+  onClick: () => void;
+  openId: string;
+  text: string;
+  image: StaticImageData;
+  title: string;
+  accordionNumber: string;
+  index: number;
+  itemsQuantity: number;
 }

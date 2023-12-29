@@ -22,9 +22,18 @@ const InnerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 5rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    flex-direction: column;
+    flex-flow: column-reverse;
+    row-gap: 2rem;
+  }
+
   div {
     width: 50%;
-    position: relative;
+
+    ${({ theme }) => theme.maxWidth.lg} {
+      width: 100%;
+    }
   }
 
   p {
@@ -32,6 +41,12 @@ const InnerWrapper = styled.div`
     line-height: 120%;
     font-weight: 300;
     margin-bottom: 8rem;
+
+    ${({ theme }) => theme.maxWidth.lg} {
+      font-size: 1.6rem;
+      line-height: 140%;
+      margin-bottom: 5rem;
+    }
   }
 `;
 
@@ -59,7 +74,7 @@ export default function HomeAbout() {
           />
         </div>
         <ImageWrapper>
-          <Image src={hero} alt='' layout='responsive' />
+          <Image src={hero} alt='' />
         </ImageWrapper>
       </InnerWrapper>
       <Line />

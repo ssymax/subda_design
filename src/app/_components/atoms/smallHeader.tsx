@@ -7,6 +7,9 @@ const SmallHeader = styled.h1<{ $paddingBottom?: string }>`
   padding-bottom: ${({ $paddingBottom }) => $paddingBottom || '2rem'};
   font-weight: 500;
   letter-spacing: 1px;
+  ${({ theme }) => theme.maxWidth.lg} {
+    font-weight: 600;
+  }
 `;
 
 export default SmallHeader;

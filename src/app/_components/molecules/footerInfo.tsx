@@ -3,6 +3,8 @@
 import styled from 'styled-components';
 import Socials from '@/components/atoms/socials';
 import Menu from '@/components/molecules/menu';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { minQuery } from '@/styles/constants';
 import Logo from '../../../../public/images/logo.svg';
 
 const data = {
@@ -34,6 +36,7 @@ const Wrapper = styled.div`
 
 const StyledLogo = styled(Logo)`
   width: 22.5rem;
+  margin-bottom: 2rem;
 `;
 
 const MoreInfo = styled.div`
@@ -41,6 +44,10 @@ const MoreInfo = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 5rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    flex-direction: column;
+    row-gap: 4rem;
+  }
 `;
 
 const Personal = styled.div`
@@ -51,6 +58,9 @@ const Personal = styled.div`
   row-gap: 2rem;
   width: 50%;
 
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 100%;
+  }
   div {
     display: flex;
     flex-direction: column;
@@ -62,6 +72,9 @@ const LinksAndDescription = styled.div`
   width: 50%;
   display: flex;
   justify-content: space-between;
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 100%;
+  }
 `;
 
 const Info = styled.p`
@@ -70,6 +83,7 @@ const Info = styled.p`
 `;
 
 export default function FooterInfo() {
+  const largeScreen = useMediaQuery(minQuery.lg);
   return (
     <Wrapper>
       <StyledLogo />
@@ -87,8 +101,9 @@ export default function FooterInfo() {
         <LinksAndDescription>
           <Menu vertical dark contact />
           <Socials socials={socials} />
-          <Info>{text}</Info>
+          {largeScreen && <Info>{text}</Info>}
         </LinksAndDescription>
+        {!largeScreen && <Info>{text}</Info>}
       </MoreInfo>
     </Wrapper>
   );

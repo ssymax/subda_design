@@ -38,6 +38,9 @@ const Wrapper = styled.div`
   min-height: 20rem;
   width: 80%;
   margin: 6rem auto;
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 100%;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -48,6 +51,7 @@ const IconWrapper = styled.div`
 
 const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
   position: absolute;
+  width: 100%;
   top: 50%;
   transform: ${({ $rotated }) =>
     $rotated ? 'rotate(180deg) translateY(50%)' : 'translateY(-50%)'};

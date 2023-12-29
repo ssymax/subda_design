@@ -37,11 +37,12 @@ const Header = styled.header`
 `;
 
 const StyledLogo = styled(Logo)`
-  max-width: 260px;
-  height: auto;
+  height: 60%;
+  width: auto;
   fill: ${({ theme }) => theme.colors.secondary};
   overflow: hidden;
   z-index: ${({ theme }) => theme.zIndex.level10};
+  cursor: pointer;
 `;
 
 export default function Headerbar() {

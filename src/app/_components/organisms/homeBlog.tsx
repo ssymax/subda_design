@@ -33,6 +33,11 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   column-gap: 6rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    column-gap: 3rem;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export default function HomeBlog() {

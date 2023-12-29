@@ -23,6 +23,9 @@ const Wrapper = styled.div`
     align-items: center;
     span {
       font-size: 1.8rem;
+      ${({ theme }) => theme.maxWidth.lg} {
+        font-size: 1.6rem;
+      }
     }
   }
 `;
@@ -30,6 +33,9 @@ const Wrapper = styled.div`
 const Title = styled.h3`
   font-size: 2.4rem;
   font-weight: 400;
+  ${({ theme }) => theme.maxWidth.lg} {
+    font-size: 1.8rem;
+  }
 `;
 
 export default function HomeRealizationItem({

@@ -12,7 +12,12 @@ const Wrap = styled.div`
   overflow: hidden;
 `;
 
-const Accordion = styled.div<{ $isFirst: boolean; $isLast: boolean; $open: boolean }>`
+const Accordion = styled.div<{
+  $accordionWidth: number;
+  $isFirst: boolean;
+  $isLast: boolean;
+  $open: boolean;
+}>`
   display: flex;
   color: ${({ theme }) => theme.colors.primary};
   flex-direction: column;
@@ -22,7 +27,7 @@ const Accordion = styled.div<{ $isFirst: boolean; $isLast: boolean; $open: boole
   cursor: pointer;
   pointer-events: ${({ $open }) => $open && 'none'};
   padding: 1rem;
-  width: 8rem;
+  width: ${({ $accordionWidth }) => `${$accordionWidth}px`};
   position: relative;
   border-top-right-radius: ${({ $open, $isLast, $isFirst }) =>
     !$open && $isLast && !$isFirst ? '1rem' : 0};
@@ -107,6 +112,7 @@ export default function HomeOfferItem({
   return (
     <Wrap>
       <Accordion
+        $accordionWidth={accordionWidth}
         $open={openId === id}
         $isFirst={isFirst}
         $isLast={isLast}
