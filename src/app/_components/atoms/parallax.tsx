@@ -21,7 +21,7 @@ const Section = styled.section`
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  width: 100%;
   height: auto;
   border-radius: 1rem;
   z-index: -1;
@@ -36,28 +36,32 @@ const src = `https://i.iplsc.com/-/000I86TGAUEIDACW-C324-F4.webp`;
 export default function Parallax() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(() => {
-    if (!wrapperRef.current) return;
+  useGSAP(
+    () => {
+      if (!wrapperRef.current) return;
 
-    const animation = gsap.fromTo(
-      wrapperRef.current,
-      {
-        y: '-15%',
-        ease: 'expo.inOut',
-      },
-      {
-        y: '+15%',
-      },
-    );
+      const animation = gsap.fromTo(
+        wrapperRef.current,
+        {
+          y: '-15%',
+          ease: 'expo.inOut',
+        },
+        {
+          y: '+15%',
+        },
+      );
 
-    ScrollTrigger.create({
-      animation,
-      trigger: wrapperRef.current.parentElement,
-      scrub: 2,
-      start: 'top center',
-      end: 'bottom top',
-    });
-  });
+      ScrollTrigger.create({
+        animation,
+        trigger: wrapperRef.current.parentElement,
+        scrub: 2,
+        start: 'top bottom',
+        end: 'bottom top',
+        markers: true,
+      });
+    },
+    { scope: wrapperRef },
+  );
 
   return (
     <Section>

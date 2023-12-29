@@ -53,8 +53,8 @@ export interface HomeHeaderProps {
   description?: string;
 }
 
-export interface HomeRealizationItemProps {
-  id: number;
+export interface RealizationItemProps {
+  id: string;
   image: StaticImageData;
   type: string;
   year: number;
@@ -110,4 +110,19 @@ export interface HomeOfferItemMobileProps {
   accordionNumber: string;
   index: number;
   itemsQuantity: number;
+}
+
+export interface RealizationsContainerProps {
+  realizations: RealizationItemProps[];
+}
+
+export interface RedirectInfoProps {
+  header: string;
+  text: string;
+  imageSrc: StaticImageData;
+  leftLabel: string;
+  rightLabel: string;
+  onLeftClick: () => void;
+  onRightClick: () => void;
+  inverse?: boolean;
 }

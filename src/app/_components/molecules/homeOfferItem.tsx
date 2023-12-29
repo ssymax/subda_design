@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { routes } from '@/routes/routes';
 import { HomeOfferItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
@@ -103,6 +103,7 @@ export default function HomeOfferItem({
   padding,
   index,
 }: HomeOfferItemProps) {
+  const { push } = useRouter();
   const accordionsWidth = itemsQuantity * accordionWidth;
   const responsiveHalfWidth =
     containerWidth && (containerWidth - accordionWidth) / 2 - 4 * padding;
@@ -140,7 +141,7 @@ export default function HomeOfferItem({
               tabIndex={openId !== id ? -1 : 0}
               variant='primary'
               text='Porozmawiajmy'
-              onClick={() => redirect(routes.contact)}
+              onClick={() => push(routes.contact)}
             />
           </div>
         </HalfContent>

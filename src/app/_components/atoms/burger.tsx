@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { BurgerProps } from '@/components/types';
 
 const Wrapper = styled.div<{ $open: boolean }>`
-  width: 4rem;
-  height: ${({ $open }) => ($open ? '0.2rem' : '2.6rem ')};
+  width: 3rem;
+  height: ${({ $open }) => ($open ? '0.2rem' : '2.2rem ')};
   cursor: pointer;
   display: flex;
   flex-direction: column;

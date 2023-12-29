@@ -33,7 +33,7 @@ const Header = styled.h2`
     width: 100%;
   }
   ${({ theme }) => theme.maxWidth.md} {
-    font-size: 4rem;
+    font-size: 2.8rem;
     font-weight: 300;
   }
 `;

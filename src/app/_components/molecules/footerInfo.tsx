@@ -60,6 +60,7 @@ const Personal = styled.div`
 
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
+    font-weight: 700;
   }
   div {
     display: flex;
@@ -80,6 +81,9 @@ const LinksAndDescription = styled.div`
 const Info = styled.p`
   width: 30rem;
   font-size: 1.2rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 100%;
+  }
 `;
 
 export default function FooterInfo() {

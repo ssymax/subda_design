@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import Button from '@/components/atoms/button';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { routes } from '@/routes/routes';
 import { HomeOfferItemMobileProps } from '../types';
 
@@ -67,6 +67,7 @@ export default function HomeOfferItemMobile({
   index,
   itemsQuantity,
 }: HomeOfferItemMobileProps) {
+  const { push } = useRouter();
   const isFirst = index === 0;
   const isLast = index === itemsQuantity - 1;
   return (
@@ -87,7 +88,7 @@ export default function HomeOfferItemMobile({
           tabIndex={openId !== id ? -1 : 0}
           variant='primary'
           text='Porozmawiajmy'
-          onClick={() => redirect(routes.contact)}
+          onClick={() => push(routes.contact)}
         />
         <Image src={image} alt={title} />
       </ContentWrap>

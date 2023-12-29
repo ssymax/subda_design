@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
@@ -61,6 +61,7 @@ const TextAndButtons = styled.div`
 `;
 
 export default function Hero() {
+  const { push } = useRouter();
   const largeScreen = useMediaQuery(minQuery.lg);
 
   return (
@@ -75,8 +76,8 @@ export default function Hero() {
         <ButtonsGroup
           leftLabel='kontakt'
           rightLabel='oferta'
-          onLeftClick={() => redirect(routes.contact)}
-          onRightClick={() => redirect(routes.offer)}
+          onLeftClick={() => push(routes.contact)}
+          onRightClick={() => push(routes.offer)}
         />
       </TextAndButtons>
     </Section>
