@@ -79,14 +79,6 @@ export default function Headerbar() {
     return () => ctx.revert();
   });
 
-  const contactButton = (
-    <Button
-      large
-      text='Porozmawiajmy'
-      variant='primary'
-      onClick={() => push(routes.contact)}
-    />
-  );
   const menuComponent = largeScreen ? (
     <Menu />
   ) : (
@@ -105,11 +97,16 @@ export default function Headerbar() {
           }
         />
         {menuComponent}
-        {largeScreen && contactButton}
+        {largeScreen && (
+          <Button
+            large
+            text='Porozmawiajmy'
+            variant='primary'
+            onClick={() => push(routes.contact)}
+          />
+        )}
       </Header>
-      <MenuMobile open={open} setOpen={setOpen}>
-        {contactButton}
-      </MenuMobile>
+      <MenuMobile open={open} setOpen={setOpen} />
     </>
   );
 }

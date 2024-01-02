@@ -57,7 +57,6 @@ export default function Parallax() {
         scrub: 2,
         start: 'top bottom',
         end: 'bottom top',
-        markers: true,
       });
     },
     { scope: wrapperRef },

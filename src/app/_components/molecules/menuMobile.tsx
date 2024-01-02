@@ -3,10 +3,12 @@
 import { KeyboardEvent, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Button from '@/components/atoms/button';
 import { MenuMobileProps } from '@/components/types';
-import { routesArr } from '@/routes/routes';
+import { routes, routesArr } from '@/routes/routes';
 import CloseIcon from '../../../../public/images/close.svg';
 
 const Container = styled.div<{ $open: boolean }>`
@@ -60,7 +62,8 @@ const StyledCloseIcon = styled(CloseIcon)`
   cursor: pointer;
 `;
 
-export default function MenuMobile({ open, setOpen, children }: MenuMobileProps) {
+export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
+  const { push } = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftWrapRef = useRef<HTMLDivElement | null>(null);
   const rightWrapRef = useRef<HTMLDivElement | null>(null);
@@ -101,26 +104,40 @@ export default function MenuMobile({ open, setOpen, children }: MenuMobileProps)
     { dependencies: [open], scope: containerRef, revertOnUpdate: true },
   );
 
+  const { contextSafe } = useGSAP({ scope: containerRef });
+
+  const onLinkClick = contextSafe(() => {
+    entryTl.reverse().eventCallback('onReverseComplete', () => setOpen(false));
+  });
+
   return (
     <Container ref={containerRef} $open={open}>
       <HalfWrapper ref={leftWrapRef} />
       <HalfWrapper $open={open} ref={rightWrapRef}>
         <StyledCloseIcon
-          onClick={() => setOpen(false)}
+          onClick={onLinkClick}
           role='button'
           onKeyDown={(e: KeyboardEvent<SVGAElement>) =>
-            e.key === 'Enter' && setOpen(false)
+            e.key === 'Enter' && onLinkClick()
           }
           tabIndex={0}
         />
       </HalfWrapper>
       <MobileNav ref={mobileNavRef}>
         {routesArr().map((r) => (
-          <StyledLink key={r.route} href={r.route}>
+          <StyledLink key={r.route} href={r.route} onClick={() => onLinkClick()}>
             {r.text}
           </StyledLink>
         ))}
-        {children}
+        <Button
+          large
+          text='Porozmawiajmy'
+          variant='primary'
+          onClick={() => {
+            onLinkClick();
+            push(routes.contact);
+          }}
+        />
       </MobileNav>
     </Container>
   );

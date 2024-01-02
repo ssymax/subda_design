@@ -97,7 +97,6 @@ export interface BurgerProps {
 export interface MenuMobileProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  children: ReactNode;
 }
 
 export interface HomeOfferItemMobileProps {
