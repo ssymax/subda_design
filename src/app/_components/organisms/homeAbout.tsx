@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import RedirectInfo from '@/components/organisms/redirectInfo';
 import { routes } from '@/routes/routes';
-import hero from '../../../../public/hero.png';
+import kitchen from '../../../../public/kitchen.jpg';
 
 const text = `Nazywam się Marta Subda – dyplomowana architekt wnętrz i absolwentka prestiżowego Uniwersytetu Artystycznego w Poznaniu. Moja pasja do sztuki 
 i designu wyraża się w licznych projektach, które tworzyłam przez lata. 
@@ -24,7 +24,7 @@ export default function HomeAbout() {
         rightLabel='Projekty'
         onLeftClick={() => push(routes.about)}
         onRightClick={() => push(routes.realizations)}
-        imageSrc={hero}
+        imageSrc={kitchen}
       />
     </section>
   );

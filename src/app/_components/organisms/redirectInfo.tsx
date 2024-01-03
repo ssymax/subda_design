@@ -73,7 +73,7 @@ export default function RedirectInfo({
           />
         </div>
         <ImageWrapper>
-          <Image src={imageSrc} alt={header} />
+          <Image src={imageSrc} alt={header} priority />
         </ImageWrapper>
       </InnerWrapper>
       <Line />

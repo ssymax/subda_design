@@ -1,10 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import styled from 'styled-components';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import bathroom from '../../../../public/bathroom.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +22,7 @@ const Section = styled.section`
   }
 `;
 
-const Image = styled.img`
+const StyledImage = styled(Image)`
   width: 100%;
   height: auto;
   border-radius: 1rem;
@@ -30,8 +32,6 @@ const Image = styled.img`
     height: auto;
   }
 `;
-
-const src = `https://i.iplsc.com/-/000I86TGAUEIDACW-C324-F4.webp`;
 
 export default function Parallax() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -65,7 +65,7 @@ export default function Parallax() {
   return (
     <Section>
       <div ref={wrapperRef}>
-        <Image src={src} alt='' />
+        <StyledImage src={bathroom} alt='' />
       </div>
     </Section>
   );

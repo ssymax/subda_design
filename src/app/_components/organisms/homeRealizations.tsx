@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +10,7 @@ import RealizationsContainer from '@/components/molecules/realizationsContainer'
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import saloon from '../../../../public/saloon.png';
+import { getAllRealizations } from '../../../../lib/api';
 
 const dummyData = [
   {
@@ -53,6 +55,11 @@ const ButtonWrapper = styled.div`
 
 export default function HomeRealizations() {
   const { push } = useRouter();
+
+  useEffect(() => {
+    getAllRealizations().then((d) => console.log(d));
+  }, []);
+
   return (
     <section>
       <HomeHeader

@@ -32,8 +32,8 @@ const PagesWrapper = styled.div`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='pl'>
-      <body>
+    <html lang='en'>
+      <body suppressHydrationWarning>
         <main className={raleway.className}>
           <StyledComponentsRegistry>
             <Providers>

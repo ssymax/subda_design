@@ -47,7 +47,7 @@ export default function RealizationItem({
   const { push } = useRouter();
   return (
     <Wrapper>
-      <Image src={image} alt={title} />
+      <Image src={image} alt={title} priority />
       <div>
         <span>{type}</span>
         <span>{year}</span>
