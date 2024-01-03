@@ -3,6 +3,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: {
+      hostname: 'images.ctfassets.net',
+      port: '',
+      pathname: '/dt7tqh8lehg1/5SUhZvSbUkHItZAulW8C7e/100b1c262f6499b8b816f5952ae5af3d/*',
+    },
+  },
 };
 
 module.exports = nextConfig;

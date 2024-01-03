@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import Image, { ImageLoader } from 'next/image';
 import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
@@ -39,15 +39,17 @@ const Title = styled.h3`
 `;
 
 export default function RealizationItem({
-  image,
+  mainImage,
   title,
   year,
   type,
+  slug,
 }: RealizationItemProps) {
   const { push } = useRouter();
+  const loader = mainImage;
   return (
     <Wrapper>
-      <Image src={image} alt={title} priority />
+      <Image loader={() => loader} src={mainImage} alt={title} width={800} height={600} />
       <div>
         <span>{type}</span>
         <span>{year}</span>
@@ -57,7 +59,7 @@ export default function RealizationItem({
         <Button
           variant='primary'
           text='Zobacz'
-          onClick={() => push(`${routes.realizations}/${title}`)}
+          onClick={() => push(`${routes.realizations}/${slug}`)}
         />
       </div>
     </Wrapper>

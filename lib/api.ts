@@ -1,19 +1,9 @@
-const REALIZATIONS_QUERY = `query realizationsCollectionQuery {
-  realizationsCollection {
-    items {
-      sys {
-        id
-      }
-      title
-      id
-      description
-      mainImage {
-        url
-      }
-      type
-    }
-  }
-}`;
+import { detailedRealizationsConverter, simpleRealizationsConverter } from './converters';
+import {
+  REALIZATIONS_QUERY,
+  HOME_REALIZATIONS_QUERY,
+  SIMPLE_REALIZATIONS_QUERY,
+} from './queries';
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
@@ -29,12 +19,21 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
         }`,
       },
       body: JSON.stringify({ query }),
-      // next: { tags: ['realizations'] },
     },
   ).then((response) => response.json());
 }
 
 export async function getAllRealizations(): Promise<any> {
   const realizations = await fetchGraphQL(REALIZATIONS_QUERY, false);
-  return realizations.data.realizationsCollection.items;
+  return detailedRealizationsConverter(realizations.data);
+}
+
+export async function getHomeRealizations(): Promise<any> {
+  const homeRealizations = await fetchGraphQL(HOME_REALIZATIONS_QUERY, false);
+  return simpleRealizationsConverter(homeRealizations.data);
+}
+
+export async function getSimpleRealizations(): Promise<any> {
+  const simpleRealizations = await fetchGraphQL(SIMPLE_REALIZATIONS_QUERY, false);
+  return simpleRealizationsConverter(simpleRealizations.data);
 }

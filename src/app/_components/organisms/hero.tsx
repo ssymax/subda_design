@@ -66,7 +66,7 @@ export default function Hero() {
 
   return (
     <Section>
-      <Image src={largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
+      <Image priority src={largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
       <div>
         <SimpleHeader>Sztuka życia</SimpleHeader>
         <SimpleHeader>W pięknych wnętrzach</SimpleHeader>

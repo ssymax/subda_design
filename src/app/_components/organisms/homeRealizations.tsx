@@ -1,47 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
 import styled from 'styled-components';
+import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
-import { v4 as uuidv4 } from 'uuid';
 import HomeHeader from '@/components/atoms/homeHeader';
 import Line from '@/components/atoms/line';
 import RealizationsContainer from '@/components/molecules/realizationsContainer';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
-import saloon from '../../../../public/saloon.png';
-import { getAllRealizations } from '../../../../lib/api';
-
-const dummyData = [
-  {
-    id: uuidv4(),
-    image: saloon,
-    type: 'Album zdjęć',
-    year: 2022,
-    title: 'Title A',
-  },
-  {
-    id: uuidv4(),
-    image: saloon,
-    type: 'Wizualizacja',
-    year: 2023,
-    title: 'Title B',
-  },
-  {
-    id: uuidv4(),
-    image: saloon,
-    type: 'Album zdjęć',
-    year: 2021,
-    title: 'Title C',
-  },
-  {
-    id: uuidv4(),
-    image: saloon,
-    type: 'Wizualizacja',
-    year: 2020,
-    title: 'Title D',
-  },
-];
+import { getHomeRealizations } from '@/lib/api';
+import { HOME_REALIZATIONS } from '../../../../lib/constants';
 
 const description = `Każdy projekt jest wynikiem dokładnego zbadania potrzeb 
 i dodania indywidualnego charakteru Państwa wnętrzom.`;
@@ -55,10 +23,11 @@ const ButtonWrapper = styled.div`
 
 export default function HomeRealizations() {
   const { push } = useRouter();
-
-  useEffect(() => {
-    getAllRealizations().then((d) => console.log(d));
-  }, []);
+  const {
+    data: realizations,
+    error,
+    isLoading,
+  } = useSWR(HOME_REALIZATIONS, getHomeRealizations);
 
   return (
     <section>
@@ -67,7 +36,7 @@ export default function HomeRealizations() {
         header='Wybrane prace'
         description={description}
       />
-      <RealizationsContainer realizations={dummyData} />
+      <RealizationsContainer realizations={realizations} />
       <Line />
       <ButtonWrapper>
         <Button

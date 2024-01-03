@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactElement, SetStateAction } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -55,10 +55,11 @@ export interface HomeHeaderProps {
 
 export interface RealizationItemProps {
   id: string;
-  image: StaticImageData;
+  mainImage: string;
   type: string;
-  year: number;
+  year: string;
   title: string;
+  slug: string;
 }
 
 export interface HomeOfferItemProps {
