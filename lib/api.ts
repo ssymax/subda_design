@@ -37,3 +37,35 @@ export async function getSimpleRealizations(): Promise<any> {
   const simpleRealizations = await fetchGraphQL(SIMPLE_REALIZATIONS_QUERY, false);
   return simpleRealizationsConverter(simpleRealizations.data);
 }
+
+export async function getRealization(slug: string): Promise<any> {
+  const realization = await fetchGraphQL(
+    `query {
+      realizationsCollection(where: { slug: "${slug}" }) {
+        items {
+          sys {
+            id
+          }
+          slug
+          title
+          description
+          type
+          year
+          mainImage {
+            url
+          }
+          imagesCollection {
+            items {
+              url
+            }
+          }
+        }
+      }
+    }
+    
+  `,
+    false,
+  );
+
+  return detailedRealizationsConverter(realization.data);
+}
