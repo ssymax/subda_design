@@ -31,7 +31,12 @@ export const detailedRealizationsConverter = (
     type: item.type,
     description: item.description ? item.description : '',
     mainImage: item.mainImage.url,
-    images: item.imagesCollection.items.map((img) => img.url),
+    images: item.imagesCollection.items.map((img) => ({
+      id: img.sys.id,
+      url: img.url,
+      width: img.width,
+      height: img.height,
+    })),
   }));
 
   return convertedData;

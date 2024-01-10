@@ -50,7 +50,12 @@ export const REALIZATIONS_QUERY = `query realizationsCollectionQuery {
       }
       imagesCollection {
         items {
+          sys {
+            id
+          }
           url
+          width
+          height
         }
       }
     }

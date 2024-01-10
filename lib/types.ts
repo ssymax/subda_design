@@ -13,6 +13,11 @@ export interface SimpleRealizationItemModel {
 
 type ImageItem = {
   url: string;
+  sys: {
+    id: string;
+  };
+  width: number;
+  height: number;
 };
 
 export interface RealizationsItemModel extends SimpleRealizationItemModel {
@@ -42,7 +47,14 @@ export interface RealizationItem {
   year: string;
 }
 
+export type DetailedImage = {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+};
+
 export interface DetailedRealizationItem extends RealizationItem {
   mainImage: string;
-  images: string[];
+  images: DetailedImage[];
 }

@@ -4,6 +4,7 @@ import {
   HOME_REALIZATIONS_QUERY,
   SIMPLE_REALIZATIONS_QUERY,
 } from './queries';
+import { DetailedRealizationItem, RealizationItem } from './types';
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
@@ -23,22 +24,22 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-export async function getAllRealizations(): Promise<any> {
+export async function getAllRealizations(): Promise<DetailedRealizationItem[]> {
   const realizations = await fetchGraphQL(REALIZATIONS_QUERY, false);
   return detailedRealizationsConverter(realizations.data);
 }
 
-export async function getHomeRealizations(): Promise<any> {
+export async function getHomeRealizations(): Promise<RealizationItem[]> {
   const homeRealizations = await fetchGraphQL(HOME_REALIZATIONS_QUERY, false);
   return simpleRealizationsConverter(homeRealizations.data);
 }
 
-export async function getSimpleRealizations(): Promise<any> {
+export async function getSimpleRealizations(): Promise<RealizationItem[]> {
   const simpleRealizations = await fetchGraphQL(SIMPLE_REALIZATIONS_QUERY, false);
   return simpleRealizationsConverter(simpleRealizations.data);
 }
 
-export async function getRealization(slug: string): Promise<any> {
+export async function getRealization(slug: string): Promise<DetailedRealizationItem[]> {
   const realization = await fetchGraphQL(
     `query {
       realizationsCollection(where: { slug: "${slug}" }) {
@@ -56,7 +57,12 @@ export async function getRealization(slug: string): Promise<any> {
           }
           imagesCollection {
             items {
+              sys {
+                id
+              }
               url
+              width
+              height
             }
           }
         }
