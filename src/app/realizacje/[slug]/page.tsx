@@ -15,20 +15,25 @@ gsap.registerPlugin(Flip);
 const Container = styled.div`
   margin: 0 auto;
   position: relative;
+  padding-top: 10%;
 `;
 
 const Masonry = styled.div`
   column-count: 2;
-  column-gap: 6.9rem;
-  padding: 0 6.9rem;
+  column-gap: 10%;
+  padding: 0 10%;
   position: relative;
+
+  ${({ theme }) => theme.maxWidth.md} {
+    column-count: 1;
+  }
 `;
 
 const Brick = styled.div`
   break-inside: avoid;
   counter-increment: brick-counter;
-  margin: 3.5rem 0;
   position: relative;
+  margin-bottom: 19%;
   img {
     width: 100%;
     height: auto;
@@ -45,12 +50,16 @@ const Gallery = styled.div<{ $vertical: boolean }>`
   z-index: 20000;
   width: 100%;
   cursor: pointer;
+
   img {
-    max-width: ${({ $vertical }) => $vertical && '100%'};
-    max-height: ${({ $vertical }) => !$vertical && '100%'};
-    width: ${({ $vertical }) => !$vertical && 'auto'};
-    height: ${({ $vertical }) => $vertical && '100%'};
+    max-height: 100%;
+    width: 'auto';
     object-fit: contain;
+
+    ${({ theme }) => theme.maxWidth.xl} {
+      max-width: 100%;
+      height: auto;
+    }
   }
 `;
 
@@ -60,15 +69,15 @@ export default function Realization({ params }: { params: { slug: string } }) {
   const { data } = useSWR<DetailedRealizationItem[], Error>(params?.slug, getRealization);
 
   const normalizedData = data?.[0];
-  const [galleryImage, setGalleryImage] = useState<DetailedImage>({
+  const initialState = {
     id: '',
     url: '',
     width: 0,
     height: 0,
-  });
+  };
+  const [galleryImage, setGalleryImage] = useState<DetailedImage>(initialState);
 
   const animation = gsap.timeline();
-  animation.set(galleryRef, { paused: true });
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   useGSAP(
@@ -90,7 +99,7 @@ export default function Realization({ params }: { params: { slug: string } }) {
           top: 0,
           right: 0,
           height: window.innerHeight,
-          width: '100vw',
+          width: '100%',
           backgroundColor: '#000',
         },
       );
@@ -98,44 +107,56 @@ export default function Realization({ params }: { params: { slug: string } }) {
       animation.play();
     },
     {
-      dependencies: [galleryImage],
+      dependencies: [galleryImage.id],
       scope: containerRef,
       revertOnUpdate: true,
     },
   );
 
-  const onImageClick = (e: MouseEvent<HTMLDivElement>, image: DetailedImage) => {
+  const onImageClick = (image: DetailedImage) => {
     setGalleryImage(image);
-
-    e.stopPropagation();
-    e.preventDefault();
   };
 
   const onGalleryClick = contextSafe(() => {
     const element = document.getElementById(galleryImage?.id);
     const elementRect = element?.children[0].getBoundingClientRect();
-    animation.to(galleryRef.current, {
-      left: elementRect?.left,
-      top: elementRect?.top,
-      width: elementRect?.width,
-      height: elementRect?.height,
-      display: 'none',
-    });
+    animation
+      .to(galleryRef.current, {
+        left: elementRect?.left,
+        top: elementRect?.top,
+        width: elementRect?.width,
+        height: elementRect?.height,
+        display: 'none',
+      })
+      .eventCallback('onComplete', () => setGalleryImage(initialState));
   });
 
   return (
     <Container ref={containerRef}>
       <Masonry>
         {normalizedData?.images.map((image) => (
-          <Brick key={image.id} id={image.id} onClick={(e) => onImageClick(e, image)}>
+          <Brick
+            key={image.id}
+            id={image.id}
+            tabIndex={0}
+            role='presentation'
+            onClick={() => onImageClick(image)}
+            onKeyDown={(e) => e.key === 'Enter' && onImageClick(image)}
+          >
             <img alt={normalizedData?.title} src={image.url} />
           </Brick>
         ))}
       </Masonry>
       <Gallery
-        $vertical={galleryImage.height > galleryImage.width}
+        $vertical={
+          window.innerHeight > window.innerWidth &&
+          galleryImage.width > galleryImage.height
+        }
         ref={galleryRef}
+        tabIndex={0}
+        role='presentation'
         onClick={() => onGalleryClick()}
+        onKeyDown={(e) => e.key === 'Enter' && onGalleryClick()}
       >
         <img src={galleryImage?.url} alt='' />
       </Gallery>
