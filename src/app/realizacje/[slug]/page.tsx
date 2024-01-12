@@ -45,11 +45,11 @@ const HeaderWithText = styled.div`
     width: 50%;
     font-size: 1.8rem;
     font-weight: 300;
+    line-height: 140%;
     ${({ theme }) => theme.maxWidth.lg} {
       width: 100%;
       font-size: 1.6rem;
       font-weight: 300;
-      line-height: 140%;
     }
   }
 `;
