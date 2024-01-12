@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: {
+      protocol: 'https',
+      hostname: 'images.ctfassets.net',
+      port: '',
+      pathname: '/dt7tqh8lehg1/**',
+    },
+  },
+};
 
 module.exports = nextConfig;
 

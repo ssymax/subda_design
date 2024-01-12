@@ -1,9 +1,9 @@
 'use client';
 
 import styled from 'styled-components';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { HomeRealizationItemProps } from '@/components/types';
+import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 
@@ -32,22 +32,24 @@ const Wrapper = styled.div`
 
 const Title = styled.h3`
   font-size: 2.4rem;
-  font-weight: 400;
+  font-weight: 600;
   ${({ theme }) => theme.maxWidth.lg} {
     font-size: 1.8rem;
   }
 `;
 
-export default function HomeRealizationItem({
-  id,
-  image,
+export default function RealizationItem({
+  mainImage,
   title,
   year,
   type,
-}: HomeRealizationItemProps) {
+  slug,
+}: RealizationItemProps) {
+  const { push } = useRouter();
+  const loader = mainImage;
   return (
     <Wrapper>
-      <Image src={image} alt={title} />
+      <Image loader={() => loader} src={mainImage} alt={title} width={800} height={600} />
       <div>
         <span>{type}</span>
         <span>{year}</span>
@@ -57,7 +59,7 @@ export default function HomeRealizationItem({
         <Button
           variant='primary'
           text='Zobacz'
-          onClick={() => redirect(`${routes.realizations}/${id}`)}
+          onClick={() => push(`${routes.realizations}/${slug}`)}
         />
       </div>
     </Wrapper>

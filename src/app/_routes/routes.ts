@@ -1,6 +1,6 @@
 export const routes = {
   home: '/',
-  about: '/o-nas',
+  about: '/o-mnie',
   realizations: '/realizacje',
   offer: '/oferta',
   blog: '/blog',

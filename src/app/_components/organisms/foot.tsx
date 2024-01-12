@@ -18,7 +18,7 @@ const Header = styled.h1`
   text-align: center;
   margin-bottom: 5rem;
   ${({ theme }) => theme.maxWidth.md} {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 300;
     width: 100%;
     text-align: left;

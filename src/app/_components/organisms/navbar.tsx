@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -46,6 +46,7 @@ const StyledLogo = styled(Logo)`
 `;
 
 export default function Headerbar() {
+  const { push } = useRouter();
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const largeScreen = useMediaQuery(minQuery.lg);
@@ -78,14 +79,6 @@ export default function Headerbar() {
     return () => ctx.revert();
   });
 
-  const contactButton = (
-    <Button
-      large
-      text='Porozmawiajmy'
-      variant='primary'
-      onClick={() => redirect(routes.contact)}
-    />
-  );
   const menuComponent = largeScreen ? (
     <Menu />
   ) : (
@@ -98,17 +91,22 @@ export default function Headerbar() {
         <StyledLogo
           role='button'
           tabIndex={0}
-          onClick={() => redirect(routes.home)}
+          onClick={() => push(routes.home)}
           onKeyDown={(e: KeyboardEvent<SVGSVGElement>) =>
-            e.key === 'Enter' && redirect(routes.home)
+            e.key === 'Enter' && push(routes.home)
           }
         />
         {menuComponent}
-        {largeScreen && contactButton}
+        {largeScreen && (
+          <Button
+            large
+            text='Porozmawiajmy'
+            variant='primary'
+            onClick={() => push(routes.contact)}
+          />
+        )}
       </Header>
-      <MenuMobile open={open} setOpen={setOpen}>
-        {contactButton}
-      </MenuMobile>
+      <MenuMobile open={open} setOpen={setOpen} />
     </>
   );
 }

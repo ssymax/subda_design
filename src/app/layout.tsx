@@ -7,6 +7,7 @@ import Providers from '@/providers/providers';
 import Navbar from '@/components/organisms/navbar';
 import Foot from '@/components/organisms/foot';
 import StyledComponentsRegistry from '../../lib/registry';
+import PaddingWrapper from '@/templates/paddingWrapper';
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700'],
@@ -23,26 +24,19 @@ const Divider = styled.div`
   }
 `;
 
-const PagesWrapper = styled.div`
-  padding: 0 5.5rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    padding: 0 2.4rem;
-  }
-`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='pl'>
-      <body>
+    <html lang='en'>
+      <body suppressHydrationWarning>
         <main className={raleway.className}>
           <StyledComponentsRegistry>
             <Providers>
               <Navbar />
               <Divider />
-              <PagesWrapper>
-                {children}
+              {children}
+              <PaddingWrapper>
                 <Foot />
-              </PagesWrapper>
+              </PaddingWrapper>
             </Providers>
           </StyledComponentsRegistry>
         </main>

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import Button from '@/components/atoms/button';
 import { HomeBlogCardProps } from '@/components/types';
@@ -14,10 +14,16 @@ const Card = styled.div`
 
   &:nth-child(2) {
     margin-top: 8%;
+    ${({ theme }) => theme.maxWidth.lg} {
+      margin-top: 0;
+    }
   }
 
   &:nth-child(3) {
     margin-top: 16%;
+    ${({ theme }) => theme.maxWidth.lg} {
+      margin-top: 0;
+    }
   }
 
   img {
@@ -41,6 +47,8 @@ const Card = styled.div`
 `;
 
 export default function HomeBlogCard({ id, title, image }: HomeBlogCardProps) {
+  const { push } = useRouter;
+
   return (
     <Card>
       <Image src={image} alt='' />
@@ -48,7 +56,7 @@ export default function HomeBlogCard({ id, title, image }: HomeBlogCardProps) {
       <Button
         variant='primary'
         text='Czytaj'
-        onClick={() => redirect(`${routes.blog}/${id}`)}
+        onClick={() => push(`${routes.blog}/${id}`)}
       />
     </Card>
   );
