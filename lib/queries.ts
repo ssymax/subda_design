@@ -45,6 +45,8 @@ export const REALIZATIONS_QUERY = `query realizationsCollectionQuery {
       description
       type
       year
+      area
+      location
       mainImage {
         url
       }

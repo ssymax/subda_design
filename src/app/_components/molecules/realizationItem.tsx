@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import Image, { ImageLoader } from 'next/image';
+import Image from 'next/image';
 import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';

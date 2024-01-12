@@ -14,7 +14,7 @@ export const simpleRealizationsConverter = (
     title: item.title,
     year: item.year ? item.year : '',
     type: item.type,
-    mainImage: item.mainImage.url,
+    mainImage: `${item.mainImage.url}?fm=webp`,
   }));
 
   return convertedData;
@@ -27,13 +27,15 @@ export const detailedRealizationsConverter = (
     id: item.sys.id,
     slug: item.slug,
     title: item.title,
+    location: item.location,
+    area: item.area,
     year: item.year ? item.year : '',
     type: item.type,
     description: item.description ? item.description : '',
     mainImage: item.mainImage.url,
     images: item.imagesCollection.items.map((img) => ({
       id: img.sys.id,
-      url: img.url,
+      url: `${img.url}?fm=webp`,
       width: img.width,
       height: img.height,
     })),

@@ -4,16 +4,19 @@ import HomeRealizations from '@/components/organisms/homeRealizations';
 import HomeOffer from '@/components/organisms/homeOffer';
 import HomeReferences from '@/components/organisms/homeReferences';
 import HomeBlog from '@/components/organisms/homeBlog';
+import PaddingWrapper from '@/templates/paddingWrapper';
 
 export default function Page() {
   return (
     <>
       <Hero />
-      <HomeAbout />
-      <HomeRealizations />
-      <HomeOffer />
-      <HomeReferences />
-      <HomeBlog />
+      <PaddingWrapper>
+        <HomeAbout />
+        <HomeRealizations />
+        <HomeOffer />
+        <HomeReferences />
+        <HomeBlog />
+      </PaddingWrapper>
     </>
   );
 }

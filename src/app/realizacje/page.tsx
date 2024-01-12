@@ -10,6 +10,7 @@ import { getSimpleRealizations } from '@/lib/api';
 import { SIMPLE_REALIZATIONS } from '@/lib/constants';
 import saloon from '../../../public/saloon.png';
 import { routes } from '../_routes/routes';
+import PaddingWrapper from '../_templates/paddingWrapper';
 
 const Section = styled.section`
   margin-top: 3rem;
@@ -24,21 +25,23 @@ export default function Realizations() {
   const { data, error, isLoading } = useSWR(SIMPLE_REALIZATIONS, getSimpleRealizations);
 
   return (
-    <Section>
-      <SimpleHeader $fontSize='8rem' $paddingBottom='2rem'>
-        {header}
-      </SimpleHeader>
-      <RealizationsContainer realizations={data} />
-      <RedirectInfo
-        header={redirectHeader}
-        text={text}
-        leftLabel='Oferta'
-        rightLabel='Porozmawiajmy'
-        onLeftClick={() => push(routes.offer)}
-        onRightClick={() => push(routes.contact)}
-        imageSrc={saloon}
-        inverse
-      />
-    </Section>
+    <PaddingWrapper>
+      <Section>
+        <SimpleHeader $fontSize='8rem' $paddingBottom='2rem'>
+          {header}
+        </SimpleHeader>
+        <RealizationsContainer realizations={data} />
+        <RedirectInfo
+          header={redirectHeader}
+          text={text}
+          leftLabel='Oferta'
+          rightLabel='Porozmawiajmy'
+          onLeftClick={() => push(routes.offer)}
+          onRightClick={() => push(routes.contact)}
+          imageSrc={saloon}
+          inverse
+        />
+      </Section>
+    </PaddingWrapper>
   );
 }

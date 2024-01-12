@@ -22,6 +22,9 @@ type ImageItem = {
 
 export interface RealizationsItemModel extends SimpleRealizationItemModel {
   description: string;
+  location: string;
+  area: string;
+  year: string;
   imagesCollection: {
     items: ImageItem[];
   };
@@ -57,4 +60,7 @@ export type DetailedImage = {
 export interface DetailedRealizationItem extends RealizationItem {
   mainImage: string;
   images: DetailedImage[];
+  area: string;
+  location: string;
+  description: string;
 }

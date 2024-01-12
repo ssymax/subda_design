@@ -7,7 +7,8 @@ import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import { routes } from '@/routes/routes';
 import useMediaQuery from '@/hooks/useMediaQuery';
-import { minQuery } from '@/styles/constants';
+import { maxQuery } from '@/styles/constants';
+import PaddingWrapper from '@/templates/paddingWrapper';
 import hero from '../../../../public/hero.png';
 import heroMobile from '../../../../public/hero_mobile.png';
 
@@ -24,11 +25,8 @@ const Section = styled.section`
     margin: 0 auto;
   }
   img {
-    width: calc(100% + 11rem);
+    width: 100%;
     height: auto;
-    ${({ theme }) => theme.maxWidth.lg} {
-      width: calc(100% + 4.8rem);
-    }
   }
 `;
 
@@ -60,26 +58,34 @@ const TextAndButtons = styled.div`
   }
 `;
 
+const StyledPaddingWrapper = styled(PaddingWrapper)`
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+`;
+
 export default function Hero() {
   const { push } = useRouter();
-  const largeScreen = useMediaQuery(minQuery.lg);
+  const largeScreen = useMediaQuery(maxQuery.lg);
 
   return (
     <Section>
-      <Image priority src={largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
-      <div>
-        <SimpleHeader>Sztuka życia</SimpleHeader>
-        <SimpleHeader>W pięknych wnętrzach</SimpleHeader>
-      </div>
-      <TextAndButtons>
-        <span>{text}</span>
-        <ButtonsGroup
-          leftLabel='kontakt'
-          rightLabel='oferta'
-          onLeftClick={() => push(routes.contact)}
-          onRightClick={() => push(routes.offer)}
-        />
-      </TextAndButtons>
+      <Image priority src={!largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
+      <StyledPaddingWrapper>
+        <div>
+          <SimpleHeader>Sztuka życia</SimpleHeader>
+          <SimpleHeader>W pięknych wnętrzach</SimpleHeader>
+        </div>
+        <TextAndButtons>
+          <span>{text}</span>
+          <ButtonsGroup
+            leftLabel='kontakt'
+            rightLabel='oferta'
+            onLeftClick={() => push(routes.contact)}
+            onRightClick={() => push(routes.offer)}
+          />
+        </TextAndButtons>
+      </StyledPaddingWrapper>
     </Section>
   );
 }

@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { Dispatch, ReactElement, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, ReactElement, SetStateAction } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -60,6 +60,8 @@ export interface RealizationItemProps {
   year: string;
   title: string;
   slug: string;
+  location: string;
+  area: string;
 }
 
 export interface HomeOfferItemProps {
@@ -125,4 +127,9 @@ export interface RedirectInfoProps {
   onLeftClick: () => void;
   onRightClick: () => void;
   inverse?: boolean;
+}
+
+export interface GalleryButtonsProps {
+  onNextClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onPrevClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
