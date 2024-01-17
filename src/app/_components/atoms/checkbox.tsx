@@ -5,16 +5,18 @@ import styled from 'styled-components';
 import { CheckboxProps } from '@/components/types';
 import CheckMark from '../../../../public/images/checkmark.svg';
 
-const CheckboxWrapper = styled.label`
+const CheckboxWrapper = styled.label<{ $dark?: boolean }>`
   display: flex;
   align-items: center;
   font-size: 1.4 rem;
   position: relative;
   column-gap: 1rem;
   user-select: none;
+  color: ${({ $dark, theme }) => ($dark ? theme.colors.secondary : theme.colors.primary)};
 `;
 
 const CheckboxInput = styled.input`
+  background-color: ${({ theme }) => theme.colors.secondary};
   appearance: none;
   width: 1.6rem;
   height: 1.6rem;
@@ -31,12 +33,12 @@ const CheckedIcon = styled.div`
   left: 0.1rem;
 `;
 
-export default function Checkbox({ label, checked, onChecked }: CheckboxProps) {
+export default function Checkbox({ label, checked, onChecked, dark }: CheckboxProps) {
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChecked(e.target.checked);
   };
   return (
-    <CheckboxWrapper>
+    <CheckboxWrapper $dark={dark}>
       <CheckboxInput type='checkbox' checked={checked} onChange={handleCheckboxChange} />
       {label}
       {checked && (

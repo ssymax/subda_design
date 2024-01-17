@@ -32,6 +32,12 @@ doboru kolorystyki, mebli i oświetlenia.`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  width: 100%;
+  padding: 5rem 7.5rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    padding: 5rem 2.4rem;
+  }
 `;
 
 const StyledLogo = styled(Logo)`

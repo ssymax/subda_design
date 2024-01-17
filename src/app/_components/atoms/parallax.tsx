@@ -17,6 +17,7 @@ const Section = styled.section`
   justify-content: center;
   border-radius: 1rem;
   overflow: hidden;
+  margin: 5rem 0;
   ${({ theme }) => theme.maxWidth.lg} {
     height: 20rem;
   }
@@ -53,7 +54,7 @@ export default function Parallax() {
 
       ScrollTrigger.create({
         animation,
-        trigger: wrapperRef.current.parentElement,
+        trigger: wrapperRef.current,
         scrub: 2,
         start: 'top bottom',
         end: 'bottom top',

@@ -12,6 +12,7 @@ import Pill from '@/components/atoms/pill';
 import { getRealization } from '@/lib/api';
 import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
+import Foot from '@/app/_components/organisms/foot';
 
 const Section = styled.section`
   display: flex;
@@ -216,51 +217,54 @@ export default function Realization({ params }: { params: { slug: string } }) {
   const gallerySrc = normalizedData?.images[activeIndex].url || '';
 
   return (
-    <Section>
-      <Image priority fill loader={() => src} src={src} alt={normalizedData?.title!} />
-      <PaddingWrapper>
-        <HeaderWithText>
-          <h1>{normalizedData?.title}</h1>
-          <span>{normalizedData?.description}</span>
-        </HeaderWithText>
-        <Line />
-        <PillsWrapper>
-          {normalizedData?.location && <Pill label={normalizedData.location} />}
-          {normalizedData?.area && <Pill label={`${normalizedData.area}`} withSup />}
-          {normalizedData?.year && <Pill label={normalizedData?.year} />}
-        </PillsWrapper>
-      </PaddingWrapper>
-      <ImagesContainer ref={containerRef}>
-        <Masonry>
-          {normalizedData?.images.map((image, index) => (
-            <Brick
-              key={image.id}
-              id={image.id}
-              tabIndex={0}
-              role='presentation'
-              onClick={() => onImageClick(image, index)}
-              onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
-              $even={index % 2 === 0}
-            >
-              <img src={image.url} alt={normalizedData?.title} />
-            </Brick>
-          ))}
-        </Masonry>
-        <Gallery
-          ref={galleryRef}
-          tabIndex={0}
-          role='presentation'
-          onClick={() => onGalleryClick()}
-          onKeyDown={(e) => e.key === 'Enter' && onGalleryClick()}
-        >
-          <img src={gallerySrc} alt='' />
-          <GalleryButtons
-            ref={galleryButtonsRef}
-            onNextClick={handleClickNext}
-            onPrevClick={handleClickPrev}
-          />
-        </Gallery>
-      </ImagesContainer>
-    </Section>
+    <>
+      <Section>
+        <Image priority fill loader={() => src} src={src} alt={normalizedData?.title!} />
+        <PaddingWrapper>
+          <HeaderWithText>
+            <h1>{normalizedData?.title}</h1>
+            <span>{normalizedData?.description}</span>
+          </HeaderWithText>
+          <Line />
+          <PillsWrapper>
+            {normalizedData?.location && <Pill label={normalizedData.location} />}
+            {normalizedData?.area && <Pill label={`${normalizedData.area}`} withSup />}
+            {normalizedData?.year && <Pill label={normalizedData?.year} />}
+          </PillsWrapper>
+        </PaddingWrapper>
+        <ImagesContainer ref={containerRef}>
+          <Masonry>
+            {normalizedData?.images.map((image, index) => (
+              <Brick
+                key={image.id}
+                id={image.id}
+                tabIndex={0}
+                role='presentation'
+                onClick={() => onImageClick(image, index)}
+                onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
+                $even={index % 2 === 0}
+              >
+                <img src={image.url} alt={normalizedData?.title} />
+              </Brick>
+            ))}
+          </Masonry>
+          <Gallery
+            ref={galleryRef}
+            tabIndex={0}
+            role='presentation'
+            onClick={() => onGalleryClick()}
+            onKeyDown={(e) => e.key === 'Enter' && onGalleryClick()}
+          >
+            <img src={gallerySrc} alt='' />
+            <GalleryButtons
+              ref={galleryButtonsRef}
+              onNextClick={handleClickNext}
+              onPrevClick={handleClickPrev}
+            />
+          </Gallery>
+        </ImagesContainer>
+      </Section>
+      <Foot />
+    </>
   );
 }

@@ -64,3 +64,14 @@ export const REALIZATIONS_QUERY = `query realizationsCollectionQuery {
   }
 }
 `;
+
+export const ABOUT_QUERY = `query aboutEntryQuery {
+  about(id: "1AcwW4b4H7pAwv7yg6NgPW") {
+  	image {
+      url
+      title
+    }
+    info
+    skills
+  }
+}`;

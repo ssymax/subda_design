@@ -1,5 +1,6 @@
+import { RealizationItem } from '@/lib/types';
 import { StaticImageData } from 'next/image';
-import { Dispatch, MouseEvent, ReactElement, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -17,12 +18,14 @@ export interface InputProps {
   placeholder: string;
   width?: string;
   name: string;
+  dark?: boolean;
 }
 
 export interface CheckboxProps {
   label: ReactElement;
   checked: boolean;
   onChecked: (isChecked: boolean) => void;
+  dark?: boolean;
 }
 
 export interface MenuProps {
@@ -59,9 +62,9 @@ export interface RealizationItemProps {
   type: string;
   year: string;
   title: string;
-  slug: string;
-  location: string;
-  area: string;
+  slug?: string;
+  location?: string;
+  area?: string;
 }
 
 export interface HomeOfferItemProps {
@@ -115,7 +118,7 @@ export interface HomeOfferItemMobileProps {
 }
 
 export interface RealizationsContainerProps {
-  realizations: RealizationItemProps[];
+  realizations: RealizationItem[];
 }
 
 export interface RedirectInfoProps {
@@ -132,4 +135,14 @@ export interface RedirectInfoProps {
 export interface GalleryButtonsProps {
   onNextClick: (e: MouseEvent<HTMLButtonElement>) => void;
   onPrevClick: (e: MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface FootProps {
+  header?: string;
+  children?: ReactNode;
+  dark?: boolean;
+}
+
+export interface FormProps {
+  dark?: boolean;
 }

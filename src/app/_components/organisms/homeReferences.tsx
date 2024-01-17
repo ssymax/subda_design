@@ -57,10 +57,6 @@ const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
     $rotated ? 'rotate(180deg) translateY(50%)' : 'translateY(-50%)'};
 `;
 
-const StyledLine = styled(Line)`
-  margin-bottom: 5rem;
-`;
-
 export default function HomeReferences() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -99,7 +95,7 @@ export default function HomeReferences() {
           <StyledArrowIcon />
         </IconWrapper>
       </Wrapper>
-      <StyledLine />
+      <Line />
       <Parallax />
     </section>
   );

@@ -10,7 +10,7 @@ export const routes = {
 export const routesArr = (contact?: boolean) => {
   const defaultRoutes = [
     { route: routes.home, text: 'home' },
-    { route: routes.about, text: 'o nas' },
+    { route: routes.about, text: 'o mnie' },
     { route: routes.realizations, text: 'realizacje' },
     { route: routes.offer, text: 'oferta' },
     { route: routes.blog, text: 'blog' },

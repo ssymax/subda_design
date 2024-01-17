@@ -48,6 +48,7 @@ export interface RealizationItem {
   title: string;
   type: string;
   year: string;
+  mainImage: string;
 }
 
 export type DetailedImage = {
@@ -58,9 +59,21 @@ export type DetailedImage = {
 };
 
 export interface DetailedRealizationItem extends RealizationItem {
-  mainImage: string;
   images: DetailedImage[];
   area: string;
   location: string;
   description: string;
+}
+
+type Info = {
+  header: string;
+  text: string;
+};
+export interface AboutMeType {
+  info: Info[];
+  image: {
+    url: string;
+    title: string;
+  };
+  skills: string[];
 }

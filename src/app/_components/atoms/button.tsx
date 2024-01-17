@@ -13,7 +13,7 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
   column-gap: 1rem;
   transition: all 0.15s ease-in-out;
   font-size: 1.6rem;
-  padding: ${({ $large }) => ($large ? '1rem 4rem' : '0.5rem 2.5rem')};
+  padding: ${({ $large }) => ($large ? '1rem 4rem' : '0.7rem 2.5rem')};
   white-space: nowrap;
   height: fit-content;
   width: fit-content;

@@ -5,6 +5,7 @@ import HomeOffer from '@/components/organisms/homeOffer';
 import HomeReferences from '@/components/organisms/homeReferences';
 import HomeBlog from '@/components/organisms/homeBlog';
 import PaddingWrapper from '@/templates/paddingWrapper';
+import Foot from '@/components/organisms/foot';
 
 export default function Page() {
   return (
@@ -17,6 +18,7 @@ export default function Page() {
         <HomeReferences />
         <HomeBlog />
       </PaddingWrapper>
+      <Foot />
     </>
   );
 }
