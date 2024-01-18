@@ -1,17 +1,18 @@
 'use client';
 
 import styled from 'styled-components';
+import PaddingWrapper from '@/templates/paddingWrapper';
 import Form from '@/components/molecules/form';
 import FooterInfo from '@/components/molecules/footerInfo';
 import Line from '@/components/atoms/line';
 import { FootProps } from '../types';
-import PaddingWrapper from '@/app/_templates/paddingWrapper';
 
 const Footer = styled.footer<{ $dark?: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme, $dark }) =>
     $dark ? theme.colors.primary : theme.colors.secondary};
+  margin-top: 3rem;
 `;
 
 const Header = styled.h1<{ $dark?: boolean }>`
@@ -27,6 +28,7 @@ const Header = styled.h1<{ $dark?: boolean }>`
     font-weight: 300;
     width: 100%;
     text-align: left;
+    padding-left: 2.4rem;
   }
 `;
 
@@ -89,19 +91,21 @@ export default function Foot({ header, children, dark }: FootProps) {
         <FooterInfo />
       </FormAndInfo>
       <WhiteWrap>
-        <StyledLine />
-        <RightsAndPolicy>
-          <span>{copyright} Wszelkie prawa zastrzeżone</span>
-          <div>
-            <ActiveSpan {...spanProps} onClick={() => {}}>
-              Polityka prywatności
-            </ActiveSpan>
-            {` / `}
-            <ActiveSpan {...spanProps} onClick={() => {}}>
-              Polityka cookies
-            </ActiveSpan>
-          </div>
-        </RightsAndPolicy>
+        <PaddingWrapper>
+          <StyledLine />
+          <RightsAndPolicy>
+            <span>{copyright} Wszelkie prawa zastrzeżone</span>
+            <div>
+              <ActiveSpan {...spanProps} onClick={() => {}}>
+                Polityka prywatności
+              </ActiveSpan>
+              {` / `}
+              <ActiveSpan {...spanProps} onClick={() => {}}>
+                Polityka cookies
+              </ActiveSpan>
+            </div>
+          </RightsAndPolicy>
+        </PaddingWrapper>
       </WhiteWrap>
     </Footer>
   );

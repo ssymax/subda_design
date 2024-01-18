@@ -29,6 +29,11 @@ const HeaderWithText = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 6rem 0;
+  column-gap: 3rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    flex-direction: column;
+    row-gap: 6rem;
+  }
   h1 {
     width: 50%;
     text-transform: uppercase;
@@ -73,6 +78,15 @@ const Masonry = styled.div`
   padding: 0 10%;
   position: relative;
 
+  ${({ theme }) => theme.minWidth.md} {
+    :nth-child(odd) {
+      margin-top: 10%;
+    }
+    :nth-child(even) {
+      margin-top: 20%;
+    }
+  }
+
   ${({ theme }) => theme.maxWidth.md} {
     column-count: 1;
   }
@@ -82,8 +96,9 @@ const Brick = styled.div<{ $even: boolean }>`
   break-inside: avoid;
   counter-increment: brick-counter;
   position: relative;
-  margin-top: ${({ $even }) => ($even ? '38%' : '19%')};
-
+  ${({ theme }) => theme.maxWidth.md} {
+    margin-top: 10%;
+  }
   img {
     width: 100%;
     height: auto;

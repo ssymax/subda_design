@@ -40,7 +40,6 @@ export default function Parallax() {
   useGSAP(
     () => {
       if (!wrapperRef.current) return;
-
       const animation = gsap.fromTo(
         wrapperRef.current,
         {
@@ -52,13 +51,15 @@ export default function Parallax() {
         },
       );
 
-      ScrollTrigger.create({
-        animation,
-        trigger: wrapperRef.current,
-        scrub: 2,
-        start: 'top bottom',
-        end: 'bottom top',
-      });
+      setTimeout(() => {
+        ScrollTrigger.create({
+          animation,
+          trigger: wrapperRef.current,
+          scrub: 2,
+          start: 'top bottom',
+          end: 'bottom top',
+        });
+      }, 1000);
     },
     { scope: wrapperRef },
   );

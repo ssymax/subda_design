@@ -73,5 +73,11 @@ export const ABOUT_QUERY = `query aboutEntryQuery {
     }
     info
     skills
+    imagesCollection {
+      items {
+        url
+        title
+      }
+    }
   }
 }`;

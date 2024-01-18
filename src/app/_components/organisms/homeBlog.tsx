@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   column-gap: 6rem;
+  margin-bottom: 3rem;
   ${({ theme }) => theme.maxWidth.lg} {
     row-gap: 3rem;
     flex-direction: column;

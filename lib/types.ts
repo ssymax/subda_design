@@ -69,11 +69,16 @@ type Info = {
   header: string;
   text: string;
 };
+
+type Image = {
+  url: string;
+  title: string;
+};
 export interface AboutMeType {
   info: Info[];
-  image: {
-    url: string;
-    title: string;
-  };
+  image: Image;
   skills: string[];
+  imagesCollection: {
+    items: Image[];
+  };
 }
