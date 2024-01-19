@@ -7,6 +7,7 @@ import HomeReferenceCard from '@/components/molecules/homeReferenceCard';
 import Line from '@/components/atoms/line';
 import Parallax from '@/components/atoms/parallax';
 import ArrowIcon from '../../../../public/images/arrow.svg';
+import bathroom from '../../../../public/bathroom.jpg';
 
 const dummyData = [
   {
@@ -96,7 +97,7 @@ export default function HomeReferences() {
         </IconWrapper>
       </Wrapper>
       <Line />
-      <Parallax />
+      <Parallax src={bathroom} />
     </section>
   );
 }

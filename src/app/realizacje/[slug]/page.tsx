@@ -12,14 +12,14 @@ import Pill from '@/components/atoms/pill';
 import { getRealization } from '@/lib/api';
 import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
-import Foot from '@/app/_components/organisms/foot';
+import Foot from '@/components/organisms/foot';
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
   img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     position: relative !important;
   }
@@ -92,7 +92,7 @@ const Masonry = styled.div`
   }
 `;
 
-const Brick = styled.div<{ $even: boolean }>`
+const Brick = styled.div`
   break-inside: avoid;
   counter-increment: brick-counter;
   position: relative;
@@ -234,7 +234,14 @@ export default function Realization({ params }: { params: { slug: string } }) {
   return (
     <>
       <Section>
-        <Image priority fill loader={() => src} src={src} alt={normalizedData?.title!} />
+        <Image
+          priority
+          sizes='100vw'
+          fill
+          loader={() => src}
+          src={src}
+          alt={normalizedData?.title!}
+        />
         <PaddingWrapper>
           <HeaderWithText>
             <h1>{normalizedData?.title}</h1>
@@ -257,7 +264,6 @@ export default function Realization({ params }: { params: { slug: string } }) {
                 role='presentation'
                 onClick={() => onImageClick(image, index)}
                 onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
-                $even={index % 2 === 0}
               >
                 <img src={image.url} alt={normalizedData?.title} />
               </Brick>

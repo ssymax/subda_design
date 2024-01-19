@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import bathroom from '../../../../public/bathroom.jpg';
+import { ParallaxProps } from '@/components/types';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,7 +34,7 @@ const StyledImage = styled(Image)`
   }
 `;
 
-export default function Parallax() {
+export default function Parallax({ src }: ParallaxProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
@@ -54,20 +54,20 @@ export default function Parallax() {
       setTimeout(() => {
         ScrollTrigger.create({
           animation,
-          trigger: wrapperRef.current,
+          trigger: wrapperRef.current?.parentElement,
           scrub: 2,
           start: 'top bottom',
           end: 'bottom top',
         });
       }, 1000);
     },
-    { scope: wrapperRef },
+    { scope: wrapperRef, revertOnUpdate: true },
   );
 
   return (
     <Section>
       <div ref={wrapperRef}>
-        <StyledImage src={bathroom} alt='' />
+        <StyledImage src={src} alt='' />
       </div>
     </Section>
   );

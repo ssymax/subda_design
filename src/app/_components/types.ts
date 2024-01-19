@@ -146,3 +146,7 @@ export interface FootProps {
 export interface FormProps {
   dark?: boolean;
 }
+
+export interface ParallaxProps {
+  src: StaticImageData;
+}

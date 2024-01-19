@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { CSSProperties } from 'react';
 import Image from 'next/image';
 import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
@@ -14,6 +15,9 @@ import { routes } from '@/routes/routes';
 import SmallHeader from '@/components/atoms/smallHeader';
 import Parallax from '@/components/atoms/parallax';
 import Foot from '@/components/organisms/foot';
+import { minQuery } from '@/styles/constants';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import kitchen2 from '../../../public/kitchen2.jpg';
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -40,6 +44,7 @@ const LeftWrapper = styled.div`
 const RightWrapper = styled.div`
   width: 50%;
   padding: 0 5.5rem;
+  position: relative;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
@@ -101,6 +106,9 @@ const Skill = styled.div`
   border-bottom: 0.5px solid ${({ theme }) => theme.colors.grey};
   padding: 2rem 0;
   position: relative;
+  ${({ theme }) => theme.maxWidth.lg} {
+    font-size: 2rem;
+  }
 `;
 
 const TextWrap = styled.div`
@@ -112,6 +120,7 @@ const TextWrap = styled.div`
 
 export default function AboutMe() {
   const { push } = useRouter();
+  const largeScreen = useMediaQuery(minQuery.lg);
   const { data, isLoading, error } = useSWR<AboutMeType>('about-me', getAboutMe);
 
   const src = `${data?.image.url}?fm=webp` || '';
@@ -124,6 +133,22 @@ export default function AboutMe() {
   const loader = (url?: string) => {
     return url || '';
   };
+
+  const imagePositions: CSSProperties[] = [
+    { left: '55%' },
+    { right: '4%', top: '18%' },
+    { left: '60%', top: '40%' },
+    { left: '40%', top: '60%' },
+    { right: '10%', bottom: '0' },
+  ];
+
+  const imagesSizes = [
+    { width: 200, height: 120 },
+    { width: 200, height: 130 },
+    { width: 200, height: 130 },
+    { width: 200, height: 130 },
+    { width: 150, height: 200 },
+  ];
 
   return (
     <>
@@ -147,57 +172,35 @@ export default function AboutMe() {
               />
             </LeftWrapper>
             <RightWrapper>
-              <Image
-                priority
-                fill
-                loader={() => loader(src)}
-                src={data?.image.url || ''}
-                alt={data?.image.title || ''}
-              />
+              {data?.image.url && (
+                <Image
+                  priority
+                  fill
+                  loader={() => loader(src)}
+                  src={data.image.url}
+                  alt={data?.image.title || ''}
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                />
+              )}
             </RightWrapper>
           </InfoWrapper>
           <SmallHeader>Umiejętności</SmallHeader>
           <SkillsWrapper>
-            <Image
-              width={200}
-              height={120}
-              loader={() => loader(aboutImages?.[0].url)}
-              src={aboutImages?.[0].url || ''}
-              alt={aboutImages?.[0].title!}
-              style={{ left: '50%' }}
-            />
-            <Image
-              width={200}
-              height={130}
-              loader={() => loader(aboutImages?.[1].url)}
-              src={aboutImages?.[1].url || ''}
-              alt={aboutImages?.[1].title!}
-              style={{ left: '80%', top: '10%' }}
-            />
-            <Image
-              width={200}
-              height={130}
-              loader={() => loader(aboutImages?.[2].url)}
-              src={aboutImages?.[2].url || ''}
-              alt={aboutImages?.[2].title!}
-              style={{ left: '60%', top: '40%' }}
-            />
-            <Image
-              width={200}
-              height={130}
-              loader={() => loader(aboutImages?.[3].url)}
-              src={aboutImages?.[3].url || ''}
-              alt={aboutImages?.[3].title!}
-              style={{ left: '40%', top: '50%' }}
-            />
-            <Image
-              width={150}
-              height={200}
-              loader={() => loader(aboutImages?.[4].url)}
-              src={aboutImages?.[4].url || ''}
-              alt={aboutImages?.[4].title!}
-              style={{ left: '80%', top: '60%' }}
-            />
+            {aboutImages?.map((image, index) => (
+              <Image
+                key={image.url}
+                unoptimized
+                width={
+                  largeScreen ? imagesSizes[index].width : imagesSizes[index].width / 2
+                }
+                height={
+                  largeScreen ? imagesSizes[index].height : imagesSizes[index].height / 2
+                }
+                src={image.url}
+                alt=''
+                style={imagePositions[index]}
+              />
+            ))}
             {data?.skills.map((s) => <Skill key={s}>{s}</Skill>)}
           </SkillsWrapper>
         </PaddingWrapper>
@@ -207,7 +210,7 @@ export default function AboutMe() {
         </TextWrap>
       </section>
       <Foot>
-        <Parallax />
+        <Parallax src={kitchen2} />
       </Foot>
     </>
   );

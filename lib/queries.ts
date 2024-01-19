@@ -1,5 +1,5 @@
 export const HOME_REALIZATIONS_QUERY = `query realizationsCollectionQuery {
-  realizationsCollection (order: sys_publishedAt_DESC, limit: 4) {
+  realizationsCollection (order: year_DESC, limit: 4) {
     items {
       sys {
         id
@@ -17,7 +17,7 @@ export const HOME_REALIZATIONS_QUERY = `query realizationsCollectionQuery {
 `;
 
 export const SIMPLE_REALIZATIONS_QUERY = `query realizationsCollectionQuery {
-  realizationsCollection (order: sys_publishedAt_DESC) {
+  realizationsCollection (order: year_DESC) {
     items {
       sys {
         id
@@ -35,7 +35,7 @@ export const SIMPLE_REALIZATIONS_QUERY = `query realizationsCollectionQuery {
 `;
 
 export const REALIZATIONS_QUERY = `query realizationsCollectionQuery {
-  realizationsCollection (order: sys_publishedAt_DESC) {
+  realizationsCollection (order: year_DESC) {
     items {
       sys {
         id
