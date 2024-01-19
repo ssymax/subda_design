@@ -3,8 +3,9 @@ import {
   REALIZATIONS_QUERY,
   HOME_REALIZATIONS_QUERY,
   SIMPLE_REALIZATIONS_QUERY,
+  ABOUT_QUERY,
 } from './queries';
-import { DetailedRealizationItem, RealizationItem } from './types';
+import { AboutMeType, DetailedRealizationItem, RealizationItem } from './types';
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
@@ -78,18 +79,7 @@ export async function getRealization(slug: string): Promise<DetailedRealizationI
   return detailedRealizationsConverter(realization.data);
 }
 
-export default function contentfulLoader({
-  src,
-  width,
-  quality,
-}: {
-  src: string;
-  width: number;
-  quality: number;
-}) {
-  const url = new URL(`${src}`);
-  url.searchParams.set('fm', 'webp');
-  url.searchParams.set('w', width.toString());
-  url.searchParams.set('q', (quality || 75).toString());
-  return url.href;
+export async function getAboutMe(): Promise<AboutMeType> {
+  const aboutMe = await fetchGraphQL(ABOUT_QUERY, false);
+  return aboutMe.data.about;
 }

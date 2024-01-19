@@ -70,7 +70,12 @@ export default function Hero() {
 
   return (
     <Section>
-      <Image priority src={!largeScreen ? hero : heroMobile} alt='Dom w Gryźlinach' />
+      <Image
+        priority
+        src={!largeScreen ? hero : heroMobile}
+        alt='Dom w Gryźlinach'
+        placeholder='blur'
+      />
       <StyledPaddingWrapper>
         <div>
           <SimpleHeader>Sztuka życia</SimpleHeader>

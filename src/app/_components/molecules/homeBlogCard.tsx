@@ -47,7 +47,7 @@ const Card = styled.div`
 `;
 
 export default function HomeBlogCard({ id, title, image }: HomeBlogCardProps) {
-  const { push } = useRouter;
+  const { push } = useRouter();
 
   return (
     <Card>

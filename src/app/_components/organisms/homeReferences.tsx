@@ -7,6 +7,7 @@ import HomeReferenceCard from '@/components/molecules/homeReferenceCard';
 import Line from '@/components/atoms/line';
 import Parallax from '@/components/atoms/parallax';
 import ArrowIcon from '../../../../public/images/arrow.svg';
+import bathroom from '../../../../public/bathroom.jpg';
 
 const dummyData = [
   {
@@ -57,10 +58,6 @@ const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
     $rotated ? 'rotate(180deg) translateY(50%)' : 'translateY(-50%)'};
 `;
 
-const StyledLine = styled(Line)`
-  margin-bottom: 5rem;
-`;
-
 export default function HomeReferences() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -99,8 +96,8 @@ export default function HomeReferences() {
           <StyledArrowIcon />
         </IconWrapper>
       </Wrapper>
-      <StyledLine />
-      <Parallax />
+      <Line />
+      <Parallax src={bathroom} />
     </section>
   );
 }

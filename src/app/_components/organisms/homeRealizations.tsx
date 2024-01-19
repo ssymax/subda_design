@@ -23,11 +23,9 @@ const ButtonWrapper = styled.div`
 
 export default function HomeRealizations() {
   const { push } = useRouter();
-  const {
-    data: realizations,
-    error,
-    isLoading,
-  } = useSWR(HOME_REALIZATIONS, getHomeRealizations);
+  const { data, error, isLoading } = useSWR(HOME_REALIZATIONS, getHomeRealizations);
+
+  const realizations = data || [];
 
   return (
     <section>

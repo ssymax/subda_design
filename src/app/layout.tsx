@@ -5,9 +5,7 @@ import styled from 'styled-components';
 import { Raleway } from 'next/font/google';
 import Providers from '@/providers/providers';
 import Navbar from '@/components/organisms/navbar';
-import Foot from '@/components/organisms/foot';
 import StyledComponentsRegistry from '../../lib/registry';
-import PaddingWrapper from '@/templates/paddingWrapper';
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700'],
@@ -34,9 +32,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
               <Divider />
               {children}
-              <PaddingWrapper>
-                <Foot />
-              </PaddingWrapper>
             </Providers>
           </StyledComponentsRegistry>
         </main>

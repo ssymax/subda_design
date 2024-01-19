@@ -12,13 +12,14 @@ import Pill from '@/components/atoms/pill';
 import { getRealization } from '@/lib/api';
 import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
+import Foot from '@/components/organisms/foot';
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
   img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     position: relative !important;
   }
@@ -28,6 +29,11 @@ const HeaderWithText = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 6rem 0;
+  column-gap: 3rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    flex-direction: column;
+    row-gap: 6rem;
+  }
   h1 {
     width: 50%;
     text-transform: uppercase;
@@ -45,11 +51,11 @@ const HeaderWithText = styled.div`
     width: 50%;
     font-size: 1.8rem;
     font-weight: 300;
+    line-height: 140%;
     ${({ theme }) => theme.maxWidth.lg} {
       width: 100%;
       font-size: 1.6rem;
       font-weight: 300;
-      line-height: 140%;
     }
   }
 `;
@@ -72,17 +78,27 @@ const Masonry = styled.div`
   padding: 0 10%;
   position: relative;
 
+  ${({ theme }) => theme.minWidth.md} {
+    :nth-child(odd) {
+      margin-top: 10%;
+    }
+    :nth-child(even) {
+      margin-top: 20%;
+    }
+  }
+
   ${({ theme }) => theme.maxWidth.md} {
     column-count: 1;
   }
 `;
 
-const Brick = styled.div<{ $even: boolean }>`
+const Brick = styled.div`
   break-inside: avoid;
   counter-increment: brick-counter;
   position: relative;
-  margin-top: ${({ $even }) => ($even ? '38%' : '19%')};
-
+  ${({ theme }) => theme.maxWidth.md} {
+    margin-top: 10%;
+  }
   img {
     width: 100%;
     height: auto;
@@ -216,51 +232,60 @@ export default function Realization({ params }: { params: { slug: string } }) {
   const gallerySrc = normalizedData?.images[activeIndex].url || '';
 
   return (
-    <Section>
-      <Image priority fill loader={() => src} src={src} alt={normalizedData?.title!} />
-      <PaddingWrapper>
-        <HeaderWithText>
-          <h1>{normalizedData?.title}</h1>
-          <span>{normalizedData?.description}</span>
-        </HeaderWithText>
-        <Line />
-        <PillsWrapper>
-          {normalizedData?.location && <Pill label={normalizedData.location} />}
-          {normalizedData?.area && <Pill label={`${normalizedData.area}`} withSup />}
-          {normalizedData?.year && <Pill label={normalizedData?.year} />}
-        </PillsWrapper>
-      </PaddingWrapper>
-      <ImagesContainer ref={containerRef}>
-        <Masonry>
-          {normalizedData?.images.map((image, index) => (
-            <Brick
-              key={image.id}
-              id={image.id}
-              tabIndex={0}
-              role='presentation'
-              onClick={() => onImageClick(image, index)}
-              onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
-              $even={index % 2 === 0}
-            >
-              <img src={image.url} alt={normalizedData?.title} />
-            </Brick>
-          ))}
-        </Masonry>
-        <Gallery
-          ref={galleryRef}
-          tabIndex={0}
-          role='presentation'
-          onClick={() => onGalleryClick()}
-          onKeyDown={(e) => e.key === 'Enter' && onGalleryClick()}
-        >
-          <img src={gallerySrc} alt='' />
-          <GalleryButtons
-            ref={galleryButtonsRef}
-            onNextClick={handleClickNext}
-            onPrevClick={handleClickPrev}
-          />
-        </Gallery>
-      </ImagesContainer>
-    </Section>
+    <>
+      <Section>
+        <Image
+          priority
+          sizes='100vw'
+          fill
+          loader={() => src}
+          src={src}
+          alt={normalizedData?.title!}
+        />
+        <PaddingWrapper>
+          <HeaderWithText>
+            <h1>{normalizedData?.title}</h1>
+            <span>{normalizedData?.description}</span>
+          </HeaderWithText>
+          <Line />
+          <PillsWrapper>
+            {normalizedData?.location && <Pill label={normalizedData.location} />}
+            {normalizedData?.area && <Pill label={`${normalizedData.area}`} withSup />}
+            {normalizedData?.year && <Pill label={normalizedData?.year} />}
+          </PillsWrapper>
+        </PaddingWrapper>
+        <ImagesContainer ref={containerRef}>
+          <Masonry>
+            {normalizedData?.images.map((image, index) => (
+              <Brick
+                key={image.id}
+                id={image.id}
+                tabIndex={0}
+                role='presentation'
+                onClick={() => onImageClick(image, index)}
+                onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
+              >
+                <img src={image.url} alt={normalizedData?.title} />
+              </Brick>
+            ))}
+          </Masonry>
+          <Gallery
+            ref={galleryRef}
+            tabIndex={0}
+            role='presentation'
+            onClick={() => onGalleryClick()}
+            onKeyDown={(e) => e.key === 'Enter' && onGalleryClick()}
+          >
+            <img src={gallerySrc} alt='' />
+            <GalleryButtons
+              ref={galleryButtonsRef}
+              onNextClick={handleClickNext}
+              onPrevClick={handleClickPrev}
+            />
+          </Gallery>
+        </ImagesContainer>
+      </Section>
+      <Foot />
+    </>
   );
 }

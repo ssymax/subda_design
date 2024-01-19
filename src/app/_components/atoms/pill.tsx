@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   padding: 1rem 3rem;
   color: ${({ theme }) => theme.colors.grey};
+  font-weight: 600;
 `;
 
 export default function Pill({ label, withSup }: { label: string; withSup?: boolean }) {

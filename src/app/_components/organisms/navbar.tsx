@@ -28,11 +28,12 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem 0 2rem;
+  padding: 0 5.5rem;
   z-index: ${({ theme }) => theme.zIndex.level8};
 
   ${({ theme }) => theme.maxWidth.lg} {
     height: 6rem;
+    padding: 0 2.4rem;
   }
 `;
 
