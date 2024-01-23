@@ -5,7 +5,7 @@ const SimpleHeader = styled.h1<{ $fontSize?: string; $paddingBottom?: string }>`
   padding-bottom: ${({ $paddingBottom }) => $paddingBottom || 0};
   text-transform: uppercase;
   line-height: 100%;
-  font-weight: 700;
+  font-weight: 800;
   ${({ theme }) => theme.maxWidth.lg} {
     font-weight: 700;
     font-size: 5rem;

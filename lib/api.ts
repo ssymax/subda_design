@@ -4,8 +4,14 @@ import {
   HOME_REALIZATIONS_QUERY,
   SIMPLE_REALIZATIONS_QUERY,
   ABOUT_QUERY,
+  OFFER_QUERY,
 } from './queries';
-import { AboutMeType, DetailedRealizationItem, RealizationItem } from './types';
+import {
+  AboutMeType,
+  DetailedRealizationItem,
+  OfferType,
+  RealizationItem,
+} from './types';
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
@@ -82,4 +88,9 @@ export async function getRealization(slug: string): Promise<DetailedRealizationI
 export async function getAboutMe(): Promise<AboutMeType> {
   const aboutMe = await fetchGraphQL(ABOUT_QUERY, false);
   return aboutMe.data.about;
+}
+
+export async function getOffer(): Promise<OfferType> {
+  const offer = await fetchGraphQL(OFFER_QUERY, false);
+  return offer.data.offer;
 }

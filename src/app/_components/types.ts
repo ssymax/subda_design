@@ -150,3 +150,9 @@ export interface FormProps {
 export interface ParallaxProps {
   src: StaticImageData;
 }
+
+export interface OfferCardProps {
+  url: string;
+  title: string;
+  description: string;
+}

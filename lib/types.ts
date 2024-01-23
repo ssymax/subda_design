@@ -82,3 +82,22 @@ export interface AboutMeType {
     items: Image[];
   };
 }
+
+type Step = {
+  header: string;
+  title: string;
+  description: string;
+};
+
+type OfferImage = {
+  url: string;
+  title: string;
+  description: string;
+};
+export interface OfferType {
+  steps: Step[];
+  approachesCollection: {
+    items: OfferImage[];
+  };
+  stepsDescription: string;
+}
