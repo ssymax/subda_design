@@ -87,19 +87,55 @@ const Step = styled.div`
 
 const StickyWrapper = styled.div`
   width: 100%;
+  position: relative;
+  margin-top: 10rem;
+  overflow: hidden;
   img {
     max-width: 100%;
     height: auto;
+    position: relative !important;
+    z-index: -2;
+  }
+`;
+
+const Sticky = styled.div`
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  top: 0;
+  z-index: -1;
+  right: 0;
+  width: 30%;
+  border-radius: 1rem;
+  display: flex;
+  padding: 4rem;
+  flex-direction: column;
+  row-gap: 3rem;
+  right: 10rem;
+
+  h4 {
+    text-transform: uppercase;
+  }
+
+  span {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 140%;
   }
 `;
 
 export default function Offer() {
   const cardWrapRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, error } = useSWR<OfferType>('offer', getOffer);
   const { push } = useRouter();
 
   const approaches = data?.approachesCollection.items;
   const steps = data?.steps;
+  const info = data?.info;
 
   useGSAP(
     () => {
@@ -130,6 +166,31 @@ export default function Offer() {
     },
 
     { scope: cardWrapRef, revertOnUpdate: true, dependencies: approaches },
+  );
+
+  useGSAP(
+    () => {
+      if (!stickyRef.current) return;
+
+      gsap.fromTo(
+        stickyRef.current,
+        {
+          yPercent: -100,
+        },
+        {
+          yPercent: 50,
+          scrollTrigger: {
+            trigger: stickyRef.current.parentElement,
+            start: 'top center',
+            end: 'center center',
+            scrub: 1,
+          },
+        },
+      );
+    },
+    {
+      scope: stickyRef,
+    },
   );
 
   return (
@@ -168,6 +229,12 @@ export default function Offer() {
           </SplitedWrapper>
         </PaddingWrapper>
         <StickyWrapper>
+          <Sticky ref={stickyRef}>
+            <h4>{info?.header}</h4>
+            <span>{info?.subheader}</span>
+            <p>{info?.paragraphOne}</p>
+            <p>{info?.paragraphTwo}</p>
+          </Sticky>
           <Image src={offerBg} alt='' />
         </StickyWrapper>
       </section>

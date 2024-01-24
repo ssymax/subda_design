@@ -79,8 +79,7 @@ export const ABOUT_QUERY = `query aboutEntryQuery {
         title
       }
     }
-    stepsDescription
-  }
+    }
 }`;
 
 export const OFFER_QUERY = `query offerEntryQuery {
@@ -94,5 +93,6 @@ export const OFFER_QUERY = `query offerEntryQuery {
   }
     steps
     stepsDescription
+    info
   }
 }`;

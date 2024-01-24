@@ -100,4 +100,10 @@ export interface OfferType {
     items: OfferImage[];
   };
   stepsDescription: string;
+  info: {
+    header: string;
+    subheader: string;
+    paragraphOne: string;
+    paragraphTwo: string;
+  };
 }
