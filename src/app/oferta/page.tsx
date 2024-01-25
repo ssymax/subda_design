@@ -18,6 +18,8 @@ import Foot from '@/components/organisms/foot';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import offerSaloon from '../../../public/offer-saloon.jpg';
+import OfferStep from '../_components/molecules/offerStep';
+import OfferSlide from '../_components/molecules/slide';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +42,8 @@ const CardWrapper = styled.div`
 const SplitedWrapper = styled.div`
   display: flex;
   column-gap: 5.5rem;
-  margin-top: 8rem;
+  margin: 8rem 0;
+  align-items: center;
 `;
 
 const LeftWrapper = styled.div`
@@ -72,78 +75,12 @@ const Steps = styled.div`
   height: fit-content;
 `;
 
-const Step = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  line-height: 140%;
-
-  span {
-    font-weight: 600;
-    font-size: 2.2rem;
-  }
-`;
-
 const Slides = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
   position: relative;
   z-index: 1;
-`;
-
-const ParallaxBackground = styled.div<{ $url?: string }>`
-  background-image: ${({ $url }) => $url && `url(${$url})`};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-position: center;
-  will-change: transform;
-  background-size: cover;
-`;
-
-const Slide = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10rem;
-`;
-
-const Content = styled.div<{ $even: boolean }>`
-  aspect-ratio: 1 / 1;
-  background-color: ${({ theme, $even }) => ($even ? theme.colors.secondary : '#1b1b1b')};
-  color: ${({ theme, $even }) => ($even ? theme.colors.primary : theme.colors.secondary)};
-  width: 30%;
-  border-radius: 1rem;
-  display: flex;
-  padding: 4rem;
-  flex-direction: column;
-  row-gap: 3rem;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-
-  h4 {
-    text-transform: uppercase;
-  }
-
-  span {
-    font-size: 3rem;
-    font-weight: 600;
-  }
-
-  p {
-    line-height: 140%;
-  }
 `;
 
 const List = styled.div`
@@ -165,28 +102,16 @@ export default function Offer() {
   useGSAP(
     () => {
       if (!cardWrapRef.current) return;
-      const cards = gsap.utils.toArray(cardWrapRef?.current.children);
+      const cards = gsap.utils.toArray(cardWrapRef?.current.children) as HTMLElement[];
 
       gsap.from(cards, {
         autoAlpha: 0,
-        y: 100,
+        marginTop: 0,
+        duration: 1,
         stagger: {
           amount: 0.2,
           from: 'random',
         },
-      });
-
-      const animation = gsap.from(cards, {
-        marginTop: 0,
-        duration: 2,
-        ease: 'expo.out',
-      });
-
-      ScrollTrigger.create({
-        animation,
-        trigger: cardWrapRef.current,
-        start: 'top top+=120px',
-        scrub: 1,
       });
     },
 
@@ -195,7 +120,7 @@ export default function Offer() {
 
   useGSAP(
     () => {
-      const slides = gsap.utils.toArray('.slide');
+      const slides = gsap.utils.toArray('.slide') as HTMLElement[];
       const getRatio = (el: HTMLElement) =>
         window.innerHeight / (window.innerHeight + el.offsetHeight);
 
@@ -267,12 +192,7 @@ export default function Offer() {
             </LeftWrapper>
             <Steps>
               {steps?.map((s, i) => (
-                <Step key={s.title}>
-                  <h4>{s.header}</h4>
-                  <span>{s.title}</span>
-                  <p>{s.description}</p>
-                  {i !== steps.length - 1 && <Line />}
-                </Step>
+                <OfferStep key={s.title} step={s} index={i} stepsLength={steps.length} />
               ))}
             </Steps>
           </SplitedWrapper>
@@ -281,18 +201,12 @@ export default function Offer() {
         <Slides>
           <List>
             {info?.map((item, i) => (
-              <Slide className='slide'>
-                <ParallaxBackground
-                  className='background'
-                  $url={parallaxImages?.[i]?.url}
-                />
-                <Content $even={i % 2 === 0} className='content'>
-                  <h4>{item.header}</h4>
-                  <span>{item.subheader}</span>
-                  <p>{item.paragraphOne}</p>
-                  <p>{item.paragraphTwo}</p>
-                </Content>
-              </Slide>
+              <OfferSlide
+                key={item.id}
+                info={item}
+                parallaxImages={parallaxImages || []}
+                index={i}
+              />
             ))}
           </List>
         </Slides>
