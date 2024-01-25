@@ -5,29 +5,8 @@ import Socials from '@/components/atoms/socials';
 import Menu from '@/components/molecules/menu';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { minQuery } from '@/styles/constants';
+import { contactData, contactTexts, socials } from '@/lib/constants';
 import Logo from '../../../../public/images/logo.svg';
-
-const data = {
-  street: 'Jarosława Iwaszkiewicza 30/24',
-  city: '10-089 Olsztyn',
-  mail: 'mail: info@subdadesign.pl',
-  phone: 'tel: 600 047 360',
-};
-
-export const socials = [
-  { id: 1, name: 'Facebook', href: '' },
-  { id: 2, name: 'Instagram', href: '' },
-  { id: 3, name: 'Linkedin', href: '' },
-  { id: 4, name: 'Pinterest', href: '' },
-];
-
-export const text = `Projektowanie i aranżaca wnętrz w Warszawie, 
-Olsztynie i Lublinie. Od stylu minimalistycznego 
-przez boho po luksusowy, dopracowywane 
-z największą dbałością o detale, łącząc 
-funkcjonalność, komfort i estetykę. Oferuję 
-indywidualne konsultacje, projektowanie 3D, 
-doboru kolorystyki, mebli i oświetlenia.`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -100,20 +79,20 @@ export default function FooterInfo() {
       <MoreInfo>
         <Personal>
           <div>
-            <span>{data.street}</span>
-            <span>{data.city}</span>
+            <span>{contactData.street}</span>
+            <span>{contactData.city}</span>
           </div>
           <div>
-            <span>{data.mail}</span>
-            <span>{data.phone}</span>
+            <span>{contactData.mail}</span>
+            <span>{contactData.phone}</span>
           </div>
         </Personal>
         <LinksAndDescription>
           <Menu vertical dark contact />
           <Socials socials={socials} />
-          {largeScreen && <Info>{text}</Info>}
+          {largeScreen && <Info>{contactTexts.footer}</Info>}
         </LinksAndDescription>
-        {!largeScreen && <Info>{text}</Info>}
+        {!largeScreen && <Info>{contactTexts.footer}</Info>}
       </MoreInfo>
     </Wrapper>
   );

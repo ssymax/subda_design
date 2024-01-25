@@ -1,4 +1,4 @@
-import { RealizationItem, Step } from '@/lib/types';
+import { OfferInfo, RealizationItem, Step } from '@/lib/types';
 import { StaticImageData } from 'next/image';
 import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react';
 
@@ -9,8 +9,9 @@ export interface ButtonProps {
   variant: ButtonVariant;
   large?: boolean;
   Icon?: ReactElement;
-  onClick: () => void;
+  onClick: (e?: MouseEvent<HTMLButtonElement>) => void;
   tabIndex?: number;
+  withArrow?: boolean;
 }
 
 export interface InputProps {
@@ -38,6 +39,7 @@ type Social = {
   id: number;
   name: string;
   href: string;
+  shortcut: string;
 };
 export interface SocialProps {
   socials: Social[];
@@ -168,5 +170,12 @@ export interface OfferSlideProps {
     url: string;
   }[];
   index: number;
-  info: OfferInfo[];
+  info: OfferInfo;
+}
+
+export interface InfoItemProps {
+  header: string;
+  text?: string;
+  children?: ReactNode;
+  horizontal?: boolean;
 }

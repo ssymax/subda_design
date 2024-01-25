@@ -11,7 +11,7 @@ const Footer = styled.footer<{ $dark?: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme, $dark }) =>
-    $dark ? theme.colors.primary : theme.colors.secondary};
+    $dark ? theme.colors.dark : theme.colors.secondary};
   margin-top: 3rem;
 `;
 
@@ -82,7 +82,7 @@ const spanProps = {
 export default function Foot({ header, children, dark }: FootProps) {
   return (
     <Footer $dark={dark}>
-      <Header $dark={dark}>{`Bądźmy w kontakcie` || header}</Header>
+      <Header $dark={dark}>{header || `Bądźmy w kontakcie`}</Header>
       <FormAndInfo>
         <PaddingWrapper>
           <Form dark={dark} />

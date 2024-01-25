@@ -1,5 +1,3 @@
-'use client';
-
 import styled from 'styled-components';
 import { OfferSlideProps } from '@/components/types';
 
@@ -31,7 +29,8 @@ const ParallaxBackground = styled.div<{ $url?: string }>`
 
 const Content = styled.div<{ $even: boolean }>`
   aspect-ratio: 1 / 1;
-  background-color: ${({ theme, $even }) => ($even ? theme.colors.secondary : '#1b1b1b')};
+  background-color: ${({ theme, $even }) =>
+    $even ? theme.colors.secondary : theme.colors.dark};
   color: ${({ theme, $even }) => ($even ? theme.colors.primary : theme.colors.secondary)};
   width: 30%;
   border-radius: 1rem;
@@ -60,7 +59,10 @@ const Content = styled.div<{ $even: boolean }>`
 export default function OfferSlide({ info, index, parallaxImages }: OfferSlideProps) {
   return (
     <Slide className='slide'>
-      <ParallaxBackground className='background' $url={parallaxImages?.[index]?.url} />
+      <ParallaxBackground
+        className='background'
+        $url={`${parallaxImages?.[index]?.url}?fm=webp`}
+      />
       <Content $even={index % 2 === 0} className='content'>
         <h4>{info.header}</h4>
         <span>{info.subheader}</span>
