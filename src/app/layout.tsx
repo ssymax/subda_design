@@ -8,7 +8,7 @@ import Navbar from '@/components/organisms/navbar';
 import StyledComponentsRegistry from '../../lib/registry';
 
 const raleway = Raleway({
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   style: ['normal'],
   subsets: ['latin'],
   display: 'swap',

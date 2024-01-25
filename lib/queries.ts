@@ -79,5 +79,25 @@ export const ABOUT_QUERY = `query aboutEntryQuery {
         title
       }
     }
+    }
+}`;
+
+export const OFFER_QUERY = `query offerEntryQuery {
+  offer(id: "7lu5msf5VRzYTxgvhwNfBi") {
+   approachesCollection {
+    items {
+      url
+      title
+      description
+    }
+  }
+    steps
+    stepsDescription
+    info
+    parallaxCollection {
+      items {
+        url
+      }
+    }
   }
 }`;

@@ -1,4 +1,4 @@
-import { RealizationItem } from '@/lib/types';
+import { RealizationItem, Step } from '@/lib/types';
 import { StaticImageData } from 'next/image';
 import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react';
 
@@ -149,4 +149,24 @@ export interface FormProps {
 
 export interface ParallaxProps {
   src: StaticImageData;
+}
+
+export interface OfferCardProps {
+  url: string;
+  title: string;
+  description: string;
+}
+
+export interface OfferStepProps {
+  step: Step;
+  index: number;
+  stepsLength: number;
+}
+
+export interface OfferSlideProps {
+  parallaxImages: {
+    url: string;
+  }[];
+  index: number;
+  info: OfferInfo[];
 }
