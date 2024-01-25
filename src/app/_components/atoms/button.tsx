@@ -28,17 +28,17 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
   ${({ $variant }) =>
     $variant === 'primary' &&
     css`
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.dark};
       background-color: ${({ theme }) => theme.colors.secondary};
-      border: 1px solid ${({ theme }) => theme.colors.primary};
+      border: 1px solid ${({ theme }) => theme.colors.dark};
 
       svg {
-        fill: ${({ theme }) => theme.colors.primary};
+        fill: ${({ theme }) => theme.colors.dark};
       }
 
       &:hover {
         color: ${({ theme }) => theme.colors.secondary};
-        background-color: ${({ theme }) => theme.colors.primary};
+        background-color: ${({ theme }) => theme.colors.dark};
         border: 1px solid ${({ theme }) => theme.colors.secondary};
         svg {
           fill: ${({ theme }) => theme.colors.secondary};
@@ -50,19 +50,19 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
     $variant === 'secondary' &&
     css`
       color: ${({ theme }) => theme.colors.secondary};
-      background-color: ${({ theme }) => theme.colors.primary};
-      border: 1px solid ${({ theme }) => theme.colors.primary};
+      background-color: ${({ theme }) => theme.colors.dark};
+      border: 1px solid ${({ theme }) => theme.colors.dark};
 
       svg {
         fill: ${({ theme }) => theme.colors.secondary};
       }
 
       &:hover {
-        color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.dark};
         background-color: ${({ theme }) => theme.colors.secondary};
-        border: 1px solid ${({ theme }) => theme.colors.primary};
+        border: 1px solid ${({ theme }) => theme.colors.dark};
         svg {
-          fill: ${({ theme }) => theme.colors.primary};
+          fill: ${({ theme }) => theme.colors.dark};
         }
       }
     `};
@@ -75,11 +75,12 @@ export default function Button({
   Icon,
   onClick,
   tabIndex,
+  withArrow = true,
 }: ButtonProps) {
   return (
     <Btn $variant={variant} $large={large} onClick={onClick} tabIndex={tabIndex || 0}>
       {text}
-      {Icon || <ArrowIcon />}
+      {Icon || (withArrow && <ArrowIcon />)}
     </Btn>
   );
 }

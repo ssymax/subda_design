@@ -24,7 +24,7 @@ const Header = styled.header`
   left: 0;
   right: 0;
   height: 7rem;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.dark};
   display: flex;
   justify-content: space-between;
   align-items: center;

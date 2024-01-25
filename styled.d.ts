@@ -22,6 +22,7 @@ declare module 'styled-components' {
       secondary: string;
       beige: string;
       grey: string;
+      dark: string;
     };
     zIndex: {
       level1: '1000';

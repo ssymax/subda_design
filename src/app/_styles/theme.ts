@@ -15,6 +15,7 @@ export const colors = {
   beige: '#fcf8f8',
   grey: '#666',
   mobile: '#EAC696',
+  dark: '#1b1b1b',
 };
 
 export const maxWidth = Object.keys(breakpoints).reduce((acc, breakpoint) => {

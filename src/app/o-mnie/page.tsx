@@ -15,6 +15,7 @@ import { routes } from '@/routes/routes';
 import SmallHeader from '@/components/atoms/smallHeader';
 import Parallax from '@/components/atoms/parallax';
 import Foot from '@/components/organisms/foot';
+import InfoItem from '@/components/atoms/infoItem';
 import { minQuery } from '@/styles/constants';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import kitchen2 from '../../../public/kitchen2.jpg';
@@ -54,28 +55,6 @@ const RightWrapper = styled.div`
     position: relative !important;
     width: auto;
     height: auto;
-  }
-`;
-
-const InfoItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  h4 {
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.2rem;
-  }
-
-  span {
-    font-weight: 300;
-    line-height: 140%;
-    font-size: 2.2rem;
-    ${({ theme }) => theme.maxWidth.lg} {
-      font-size: 1.6rem;
-      line-height: 140%;
-      margin-bottom: 5rem;
-    }
   }
 `;
 
@@ -159,10 +138,7 @@ export default function AboutMe() {
           <InfoWrapper>
             <LeftWrapper>
               {data?.info.map((item) => (
-                <InfoItem key={item.header}>
-                  <h4>{item.header}</h4>
-                  <span>{item.text}</span>
-                </InfoItem>
+                <InfoItem key={item.header} header={item.header} text={item.text} />
               ))}
               <ButtonsGroup
                 leftLabel='Oferta'
