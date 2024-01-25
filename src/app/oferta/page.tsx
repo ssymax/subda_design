@@ -18,7 +18,6 @@ import Foot from '@/components/organisms/foot';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import offerSaloon from '../../../public/offer-saloon.jpg';
-import offerBg from '../../../public/offer-bg.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,33 +84,53 @@ const Step = styled.div`
   }
 `;
 
-const StickyWrapper = styled.div`
+const Slides = styled.section`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   position: relative;
-  margin-top: 10rem;
-  overflow: hidden;
-  img {
-    max-width: 100%;
-    height: auto;
-    position: relative !important;
-    z-index: -2;
-  }
+  z-index: 1;
 `;
 
-const Sticky = styled.div`
-  aspect-ratio: 1 / 1;
+const ParallaxBackground = styled.div<{ $url?: string }>`
+  background-image: ${({ $url }) => $url && `url(${$url})`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  left: 0;
   top: 0;
-  z-index: -1;
-  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  will-change: transform;
+  background-size: cover;
+`;
+
+const Slide = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10rem;
+`;
+
+const Content = styled.div<{ $even: boolean }>`
+  aspect-ratio: 1 / 1;
+  background-color: ${({ theme, $even }) => ($even ? theme.colors.secondary : '#1b1b1b')};
+  color: ${({ theme, $even }) => ($even ? theme.colors.primary : theme.colors.secondary)};
   width: 30%;
   border-radius: 1rem;
   display: flex;
   padding: 4rem;
   flex-direction: column;
   row-gap: 3rem;
-  right: 10rem;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
 
   h4 {
     text-transform: uppercase;
@@ -127,15 +146,21 @@ const Sticky = styled.div`
   }
 `;
 
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export default function Offer() {
   const cardWrapRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, error } = useSWR<OfferType>('offer', getOffer);
   const { push } = useRouter();
 
   const approaches = data?.approachesCollection.items;
   const steps = data?.steps;
   const info = data?.info;
+  const parallaxImages = data?.parallaxCollection?.items;
 
   useGSAP(
     () => {
@@ -170,26 +195,50 @@ export default function Offer() {
 
   useGSAP(
     () => {
-      if (!stickyRef.current) return;
+      const slides = gsap.utils.toArray('.slide');
+      const getRatio = (el: HTMLElement) =>
+        window.innerHeight / (window.innerHeight + el.offsetHeight);
 
-      gsap.fromTo(
-        stickyRef.current,
-        {
-          yPercent: -100,
-        },
-        {
-          yPercent: 50,
+      slides.forEach((slide, i) => {
+        const bg = slide.querySelector('.background');
+        const content = slide.querySelector('.content');
+        const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: stickyRef.current.parentElement,
-            start: 'top center',
-            end: 'center center',
-            scrub: 1,
+            trigger: slide,
+            start: () => (i ? 'top bottom' : 'top top'),
+            end: 'bottom top',
+            scrub: true,
+            invalidateOnRefresh: true,
           },
-        },
-      );
+        });
+
+        tl.fromTo(
+          bg,
+          {
+            y: () => (i ? -window.innerHeight * getRatio(slide as HTMLElement) : 0),
+          },
+          {
+            y: () => window.innerHeight * (1 - getRatio(slide as HTMLElement)),
+            ease: 'none',
+          },
+        );
+        tl.fromTo(
+          content,
+          {
+            y: () => (i ? window.innerHeight * -getRatio(slide as HTMLElement) * 2 : 0),
+          },
+          {
+            y: () => window.innerHeight * getRatio(slide as HTMLElement) * 2,
+            ease: 'none',
+          },
+          0,
+        );
+      });
     },
+
     {
-      scope: stickyRef,
+      revertOnUpdate: true,
+      dependencies: parallaxImages,
     },
   );
 
@@ -214,7 +263,7 @@ export default function Offer() {
                 text='Porozmawiajmy o państwa projekcie'
                 onClick={() => push(routes.contact)}
               />
-              <Image src={offerSaloon} alt='' />
+              <Image priority src={offerSaloon} alt='' />
             </LeftWrapper>
             <Steps>
               {steps?.map((s, i) => (
@@ -228,15 +277,25 @@ export default function Offer() {
             </Steps>
           </SplitedWrapper>
         </PaddingWrapper>
-        <StickyWrapper>
-          <Sticky ref={stickyRef}>
-            <h4>{info?.header}</h4>
-            <span>{info?.subheader}</span>
-            <p>{info?.paragraphOne}</p>
-            <p>{info?.paragraphTwo}</p>
-          </Sticky>
-          <Image src={offerBg} alt='' />
-        </StickyWrapper>
+
+        <Slides>
+          <List>
+            {info?.map((item, i) => (
+              <Slide className='slide'>
+                <ParallaxBackground
+                  className='background'
+                  $url={parallaxImages?.[i]?.url}
+                />
+                <Content $even={i % 2 === 0} className='content'>
+                  <h4>{item.header}</h4>
+                  <span>{item.subheader}</span>
+                  <p>{item.paragraphOne}</p>
+                  <p>{item.paragraphTwo}</p>
+                </Content>
+              </Slide>
+            ))}
+          </List>
+        </Slides>
       </section>
       <Foot />
     </>

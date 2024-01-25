@@ -94,5 +94,10 @@ export const OFFER_QUERY = `query offerEntryQuery {
     steps
     stepsDescription
     info
+    parallaxCollection {
+      items {
+        url
+      }
+    }
   }
 }`;

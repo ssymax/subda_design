@@ -94,6 +94,7 @@ type OfferImage = {
   title: string;
   description: string;
 };
+
 export interface OfferType {
   steps: Step[];
   approachesCollection: {
@@ -101,9 +102,15 @@ export interface OfferType {
   };
   stepsDescription: string;
   info: {
+    id: number;
     header: string;
     subheader: string;
     paragraphOne: string;
     paragraphTwo: string;
+  }[];
+  parallaxCollection: {
+    items: {
+      url: string;
+    }[];
   };
 }
