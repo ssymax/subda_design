@@ -6,15 +6,22 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 2.5rem;
+  flex: 1;
+  margin-top: 3rem;
 
-  &:nth-child(2) {
-    margin-top: 15rem;
-  }
-  &:nth-child(3) {
-    margin-top: 7rem;
-  }
-  &:nth-child(4) {
-    margin-top: 25rem;
+  ${({ theme }) => theme.minWidth.md} {
+    &:nth-child(1) {
+      margin-top: 0;
+    }
+    &:nth-child(2) {
+      margin-top: 15rem;
+    }
+    &:nth-child(3) {
+      margin-top: 7rem;
+    }
+    &:nth-child(4) {
+      margin-top: 25rem;
+    }
   }
 
   img {

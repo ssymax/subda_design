@@ -29,14 +29,18 @@ const StyledSimpleHeader = styled(SimpleHeader)`
 `;
 
 const CardWrapper = styled.div`
-  display: grid;
+  display: flex;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  grid-auto-flow: row;
   column-gap: 6rem;
   margin: 3rem auto;
   padding: 0 5rem;
   min-height: 80rem;
+
+  ${({ theme }) => theme.maxWidth.xl} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-auto-flow: row;
+  }
 `;
 
 const SplitedWrapper = styled.div`
@@ -44,6 +48,9 @@ const SplitedWrapper = styled.div`
   column-gap: 5.5rem;
   margin: 8rem 0;
   align-items: center;
+  ${({ theme }) => theme.maxWidth.xl} {
+    flex-direction: column;
+  }
 `;
 
 const LeftWrapper = styled.div`
@@ -52,7 +59,9 @@ const LeftWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   row-gap: 3rem;
-
+  ${({ theme }) => theme.maxWidth.xl} {
+    width: 100%;
+  }
   span {
     line-height: 140%;
   }
@@ -73,6 +82,10 @@ const Steps = styled.div`
   flex-direction: column;
   row-gap: 2rem;
   height: fit-content;
+  ${({ theme }) => theme.maxWidth.xl} {
+    width: 100%;
+    margin-top: 8rem;
+  }
 `;
 
 const Slides = styled.section`

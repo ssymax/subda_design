@@ -9,7 +9,11 @@ const Slide = styled.div`
   overflow: hidden;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 10rem;
+  padding-right: 11rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    justify-content: center;
+    padding-right: 0;
+  }
 `;
 
 const ParallaxBackground = styled.div<{ $url?: string }>`
@@ -32,7 +36,7 @@ const Content = styled.div<{ $even: boolean }>`
   background-color: ${({ theme, $even }) =>
     $even ? theme.colors.secondary : theme.colors.dark};
   color: ${({ theme, $even }) => ($even ? theme.colors.primary : theme.colors.secondary)};
-  width: 30%;
+  width: 30vw;
   border-radius: 1rem;
   display: flex;
   padding: 4rem;
@@ -41,6 +45,24 @@ const Content = styled.div<{ $even: boolean }>`
   position: sticky;
   top: 0;
   overflow: hidden;
+  ${({ theme }) => theme.maxWidth.xxl} {
+    width: 35vw;
+  }
+  ${({ theme }) => theme.maxWidth.xl} {
+    width: 42vw;
+  }
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 80%;
+    row-gap: 2rem;
+    height: auto;
+    span {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+  }
 
   h4 {
     text-transform: uppercase;
