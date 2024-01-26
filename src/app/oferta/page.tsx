@@ -11,22 +11,16 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { OfferType } from '@/lib/types';
 import SimpleHeader from '@/components/atoms/simpleHeader';
-import Line from '@/components/atoms/line';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import OfferCard from '@/components/molecules/offerCard';
 import Foot from '@/components/organisms/foot';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
+import OfferStep from '@/components/molecules/offerStep';
+import OfferSlide from '@/components/molecules/slide';
 import offerSaloon from '../../../public/offer-saloon.jpg';
-import OfferStep from '../_components/molecules/offerStep';
-import OfferSlide from '../_components/molecules/slide';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const StyledSimpleHeader = styled(SimpleHeader)`
-  text-align: center;
-  margin: 4rem 0;
-`;
 
 const CardWrapper = styled.div`
   display: flex;
@@ -184,16 +178,15 @@ export default function Offer() {
     <>
       <section>
         <PaddingWrapper>
-          <StyledSimpleHeader>Oferta</StyledSimpleHeader>
-          <Line />
+          <SimpleHeader isPageHeader header='Oferta' />
           <CardWrapper ref={cardWrapRef}>
             {approaches?.map((a) => <OfferCard key={a.url} {...a} />)}
           </CardWrapper>
           <SplitedWrapper>
             <LeftWrapper>
               <div>
-                <SimpleHeader>Prosta droga</SimpleHeader>
-                <SimpleHeader>ku wymarzonym wnętrzom</SimpleHeader>
+                <SimpleHeader header='Prosta droga' />
+                <SimpleHeader header='ku wymarzonym wnętrzom' />
               </div>
               <span>{data?.stepsDescription}</span>
               <Button

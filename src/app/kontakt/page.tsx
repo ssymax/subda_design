@@ -15,6 +15,7 @@ const Headers = styled.div`
 
 const Container = styled.div`
   display: flex;
+  column-gap: 3rem;
 `;
 
 const Info = styled.div`
@@ -58,18 +59,17 @@ const A = styled.a`
 
 const ImageWrapper = styled.div`
   width: 50%;
-  padding: 0 5.5rem;
-  position: relative;
+  padding: 0 5%;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
+
   img {
-    max-width: 60rem;
+    max-width: 100%;
     height: auto;
     border-radius: 1rem;
-    position: absolute;
-    top: -12rem;
-    right: 10rem;
+    margin-top: -15%;
+    margin-bottom: -30%;
   }
 `;
 
@@ -77,8 +77,22 @@ const Empty = styled.div`
   background-color: ${({ theme }) => theme.colors.dark};
   height: 20rem;
   margin-bottom: -3rem;
-  margin-top: 10rem;
+  margin-top: 5%;
 `;
+
+const Iframe = styled.iframe`
+  border: 0;
+  width: 100%;
+  height: 50rem;
+  margin: 5rem 0;
+  border-radius: 1rem;
+  filter: grayscale(100);
+  ${({ theme }) => theme.maxWidth.lg} {
+    height: 20rem;
+  }
+`;
+
+const mapSrc = `https://www.google.com/maps/embed/v1/place?q=Subda%20Design&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS}`;
 
 export default function Contact() {
   return (
@@ -86,8 +100,8 @@ export default function Contact() {
       <section>
         <PaddingWrapper>
           <Headers>
-            <SimpleHeader>{contactData.mail}</SimpleHeader>
-            <SimpleHeader>{contactData.phone}</SimpleHeader>
+            <SimpleHeader header={contactData.mail} />
+            <SimpleHeader header={contactData.phone} />
           </Headers>
           <Container>
             <Info>
@@ -121,7 +135,9 @@ export default function Contact() {
         </PaddingWrapper>
       </section>
       <Empty />
-      <Foot dark header='Jedna wiadomość zaczyna każdy projekt'></Foot>
+      <Foot dark header='Jedna wiadomość zaczyna każdy projekt'>
+        <Iframe loading='lazy' allowFullScreen src={mapSrc} />
+      </Foot>
     </>
   );
 }
