@@ -44,23 +44,17 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
   width: 50%;
-  padding: 0 5.5rem;
   position: relative;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
+  padding: 0 5%;
+
   img {
-    object-fit: contain;
     border-radius: 1rem;
-    position: relative !important;
-    width: auto;
+    width: 100%;
     height: auto;
   }
-`;
-
-const StyledSimpleHeader = styled(SimpleHeader)`
-  text-align: center;
-  margin: 4rem 0;
 `;
 
 const SkillsWrapper = styled.div`
@@ -132,9 +126,8 @@ export default function AboutMe() {
   return (
     <>
       <section>
-        <StyledSimpleHeader>O mnie</StyledSimpleHeader>
-        <Line />
         <PaddingWrapper>
+          <SimpleHeader isPageHeader header='O mnie' />
           <InfoWrapper>
             <LeftWrapper>
               {data?.info.map((item) => (
@@ -151,11 +144,12 @@ export default function AboutMe() {
               {data?.image.url && (
                 <Image
                   priority
-                  fill
                   loader={() => loader(src)}
                   src={data.image.url}
                   alt={data?.image.title || ''}
-                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                  sizes='100vw'
+                  width={500}
+                  height={300}
                 />
               )}
             </RightWrapper>
@@ -181,8 +175,8 @@ export default function AboutMe() {
           </SkillsWrapper>
         </PaddingWrapper>
         <TextWrap>
-          <SimpleHeader>Pasja do piękna,</SimpleHeader>
-          <SimpleHeader>Miłość do komfortu</SimpleHeader>
+          <SimpleHeader header='Pasja do piękna' />
+          <SimpleHeader header='Miłość do komfortu' />
         </TextWrap>
       </section>
       <Foot>

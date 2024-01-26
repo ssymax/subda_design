@@ -33,9 +33,7 @@ export default function Realizations() {
     <>
       <PaddingWrapper>
         <Section>
-          <SimpleHeader $fontSize='8rem' $paddingBottom='2rem'>
-            {header}
-          </SimpleHeader>
+          <SimpleHeader isPageHeader header={header} />
           <RealizationsContainer realizations={data || []} />
           <RedirectInfo
             header={redirectHeader}

@@ -179,3 +179,10 @@ export interface InfoItemProps {
   children?: ReactNode;
   horizontal?: boolean;
 }
+
+export interface SimpleHeaderProps {
+  header: string;
+  isPageHeader?: boolean;
+  fontSize?: string;
+  paddingBottom?: string;
+}

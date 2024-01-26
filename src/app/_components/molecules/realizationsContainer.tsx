@@ -22,9 +22,6 @@ export default function RealizationsContainer({
   realizations,
 }: RealizationsContainerProps) {
   return (
-    <>
-      <Line />
-      <Wrapper>{realizations?.map((r) => <RealizationItem key={r.id} {...r} />)}</Wrapper>
-    </>
+    <Wrapper>{realizations?.map((r) => <RealizationItem key={r.id} {...r} />)}</Wrapper>
   );
 }
