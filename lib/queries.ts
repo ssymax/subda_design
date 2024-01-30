@@ -101,3 +101,50 @@ export const OFFER_QUERY = `query offerEntryQuery {
     }
   }
 }`;
+
+export const HOME_BLOG_QUERY = `query blogCollectionQuery {
+  blogCollection (order: date_DESC, limit: 3) {
+    items {
+      sys {
+        id
+      }
+      title
+  		slug
+      image {
+        url
+        title
+      }
+    }
+  }
+}
+`;
+
+export const BLOG_POSTS_QUERY = `query blogCollectionQuery {
+  blogCollection (order: date_DESC) {
+    items {
+      sys {
+        id
+      }
+      slug
+      title
+      introduction
+      image {
+        sys {
+          id
+        }
+        url
+        title
+      }
+      underIntro
+      date
+      header1st
+      text1st
+      header2nd
+      text2nd
+      header3rd
+      text3rd
+      header4th
+      text4th
+    }
+  }
+}`;

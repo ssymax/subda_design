@@ -116,3 +116,20 @@ export interface OfferType {
     }[];
   };
 }
+
+export enum Order {
+  ASC = 'date_ASC',
+  DESC = 'date_DESC',
+}
+
+export interface HomeBlogItemModel {
+  sys: {
+    id: string;
+  };
+  slug: string;
+  title: string;
+  image: {
+    url: string;
+    title: string;
+  };
+}

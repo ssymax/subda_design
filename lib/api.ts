@@ -5,11 +5,14 @@ import {
   SIMPLE_REALIZATIONS_QUERY,
   ABOUT_QUERY,
   OFFER_QUERY,
+  HOME_BLOG_QUERY,
 } from './queries';
 import {
   AboutMeType,
   DetailedRealizationItem,
+  HomeBlogItemModel,
   OfferType,
+  Order,
   RealizationItem,
 } from './types';
 
@@ -93,4 +96,9 @@ export async function getAboutMe(): Promise<AboutMeType> {
 export async function getOffer(): Promise<OfferType> {
   const offer = await fetchGraphQL(OFFER_QUERY, false);
   return offer.data.offer;
+}
+
+export async function getHomeBlog(): Promise<HomeBlogItemModel[]> {
+  const homeBlog = await fetchGraphQL(HOME_BLOG_QUERY, false);
+  return homeBlog.data.blogCollection.items;
 }

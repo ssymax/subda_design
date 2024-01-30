@@ -11,6 +11,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
+  flex: 1;
 
   &:nth-child(2) {
     margin-top: 8%;
@@ -26,13 +27,21 @@ const Card = styled.div`
     }
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
+  div {
+    position: relative;
+    height: 70rem;
+    overflow: hidden;
     border-radius: 1rem;
-    border: 0.5px solid ${({ theme }) => theme.colors.primary};
-    align-self: center;
+    display: flex;
+    justify-content: center;
   }
+
+  img {
+    width: auto;
+    height: 100%;
+    position: absolute;
+  }
+
   span {
     width: 80%;
     font-size: 2rem;
@@ -46,17 +55,26 @@ const Card = styled.div`
   }
 `;
 
-export default function HomeBlogCard({ id, title, image }: HomeBlogCardProps) {
+export default function BlogCard({ slug, title, url }: HomeBlogCardProps) {
   const { push } = useRouter();
 
   return (
     <Card>
-      <Image src={image} alt='' />
+      <div>
+        <Image
+          loader={() => url}
+          src={url}
+          alt={title}
+          sizes='100vw'
+          width={500}
+          height={300}
+        />
+      </div>
       <span>{title}</span>
       <Button
         variant='primary'
         text='Czytaj'
-        onClick={() => push(`${routes.blog}/${id}`)}
+        onClick={() => push(`${routes.blog}/${slug}`)}
       />
     </Card>
   );

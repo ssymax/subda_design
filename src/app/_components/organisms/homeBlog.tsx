@@ -1,9 +1,13 @@
 'use client';
 
 import styled from 'styled-components';
+import useSWR from 'swr';
 import HomeHeader from '@/components/atoms/homeHeader';
-import HomeBlogCard from '@/components/molecules/homeBlogCard';
+import BlogCard from '@/components/molecules/blogCard';
 import chairs from '../../../../public/chairs.png';
+import { HOME_BLOG } from '@/lib/constants';
+import { getHomeBlog } from '@/lib/api';
+import { HomeBlogItemModel } from '@/lib/types';
 
 const description = `Przygotowałam dla Państwa artykuły, mogące pomóc w wielu 
 aspektach urządzania mieszkań i innych przestrzeni.`;
@@ -42,6 +46,8 @@ const Wrapper = styled.div`
 `;
 
 export default function HomeBlog() {
+  const { data, error, isLoading } = useSWR<HomeBlogItemModel[]>(HOME_BLOG, getHomeBlog);
+
   return (
     <section>
       <HomeHeader
@@ -50,8 +56,8 @@ export default function HomeBlog() {
         description={description}
       />
       <Wrapper>
-        {dummyData.map((d) => (
-          <HomeBlogCard key={d.id} {...d} />
+        {data?.map((d) => (
+          <BlogCard key={d.sys.id} slug={d.slug} url={d.image.url} title={d.title} />
         ))}
       </Wrapper>
     </section>
