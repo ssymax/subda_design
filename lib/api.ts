@@ -6,17 +6,24 @@ import {
   ABOUT_QUERY,
   OFFER_QUERY,
   HOME_BLOG_QUERY,
+  TOTAL_BLOG_POSTS_QUERY,
 } from './queries';
 import {
   AboutMeType,
+  BlogPostsType,
   DetailedRealizationItem,
   HomeBlogItemModel,
   OfferType,
   Order,
   RealizationItem,
+  TotalPosts,
 } from './types';
 
-async function fetchGraphQL(query: string, preview = false): Promise<any> {
+async function fetchGraphQL(
+  query: string,
+  preview = false,
+  variables?: Record<string, any>,
+): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`,
     {
@@ -29,7 +36,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
             : process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
         }`,
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables }),
     },
   ).then((response) => response.json());
 }
@@ -101,4 +108,37 @@ export async function getOffer(): Promise<OfferType> {
 export async function getHomeBlog(): Promise<HomeBlogItemModel[]> {
   const homeBlog = await fetchGraphQL(HOME_BLOG_QUERY, false);
   return homeBlog.data.blogCollection.items;
+}
+
+export async function getTotalBlogsNumber(): Promise<TotalPosts> {
+  const blogPosts = await fetchGraphQL(TOTAL_BLOG_POSTS_QUERY, false);
+  return blogPosts.blogCollection;
+}
+
+export async function getBlogPosts(
+  limit: number,
+  order: Order,
+  search: string,
+): Promise<HomeBlogItemModel[]> {
+  const blogPosts = await fetchGraphQL(
+    `query blogCollectionQuery($limit: Int, $order: [BlogOrder], $search: String) {
+      blogCollection( limit: $limit, order: $order, where: { title_contains: $search }) {
+        items {
+          sys {
+            id
+          }
+          title
+          slug
+          image {
+            url
+            title
+          }
+        }
+      }
+    }`,
+    false,
+    { limit, order, search },
+  );
+
+  return blogPosts.data.blogCollection.items;
 }

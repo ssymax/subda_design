@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
@@ -13,15 +14,15 @@ const Card = styled.div`
   row-gap: 3rem;
   flex: 1;
 
-  &:nth-child(2) {
-    margin-top: 8%;
+  &:nth-child(3n + 2) {
+    margin-top: 12rem;
     ${({ theme }) => theme.maxWidth.lg} {
       margin-top: 0;
     }
   }
 
-  &:nth-child(3) {
-    margin-top: 16%;
+  &:nth-child(3n) {
+    margin-top: 26rem;
     ${({ theme }) => theme.maxWidth.lg} {
       margin-top: 0;
     }
@@ -40,6 +41,7 @@ const Card = styled.div`
     width: auto;
     height: 100%;
     position: absolute;
+    border-radius: 1rem;
   }
 
   span {
@@ -55,11 +57,11 @@ const Card = styled.div`
   }
 `;
 
-export default function BlogCard({ slug, title, url }: HomeBlogCardProps) {
+function BlogCard({ id, slug, title, url }: HomeBlogCardProps) {
   const { push } = useRouter();
 
   return (
-    <Card>
+    <Card id={id}>
       <div>
         <Image
           loader={() => url}
@@ -79,3 +81,5 @@ export default function BlogCard({ slug, title, url }: HomeBlogCardProps) {
     </Card>
   );
 }
+
+export default memo(BlogCard);

@@ -128,6 +128,7 @@ export default function AboutMe() {
       <section>
         <PaddingWrapper>
           <SimpleHeader isPageHeader header='O mnie' />
+          {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <InfoWrapper>
             <LeftWrapper>
               {data?.info.map((item) => (

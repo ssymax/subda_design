@@ -117,10 +117,7 @@ export interface OfferType {
   };
 }
 
-export enum Order {
-  ASC = 'date_ASC',
-  DESC = 'date_DESC',
-}
+export type Order = 'date_ASC' | 'date_DESC';
 
 export interface HomeBlogItemModel {
   sys: {
@@ -132,4 +129,8 @@ export interface HomeBlogItemModel {
     url: string;
     title: string;
   };
+}
+
+export interface TotalPosts {
+  total: number;
 }

@@ -92,9 +92,11 @@ export interface HomeReferenceCardProps {
 }
 
 export interface HomeBlogCardProps {
+  id?: string;
   slug: string;
   title: string;
   url: string;
+  index?: number;
 }
 
 export interface BurgerProps {

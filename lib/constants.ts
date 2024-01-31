@@ -2,6 +2,9 @@ export const SIMPLE_REALIZATIONS = 'Simple realizations';
 export const HOME_REALIZATIONS = 'Home realizations';
 export const DETAILED_REALIZATIONS = 'Detailed realizations';
 export const HOME_BLOG = 'Home blog';
+export const BLOG_POSTS = 'Blog posts';
+export const DATE_DESC = 'date_DESC';
+export const DATE_ASC = 'date_ASC';
 
 export const socials = [
   {
