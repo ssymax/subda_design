@@ -1,4 +1,8 @@
-import { detailedRealizationsConverter, simpleRealizationsConverter } from './converters';
+import {
+  blogPostsConverter,
+  detailedRealizationsConverter,
+  simpleRealizationsConverter,
+} from './converters';
 import {
   REALIZATIONS_QUERY,
   HOME_REALIZATIONS_QUERY,
@@ -10,11 +14,10 @@ import {
 } from './queries';
 import {
   AboutMeType,
-  BlogPostsType,
   DetailedRealizationItem,
+  HomeBlogItem,
   HomeBlogItemModel,
   OfferType,
-  Order,
   RealizationItem,
   TotalPosts,
 } from './types';
@@ -115,14 +118,10 @@ export async function getTotalBlogsNumber(): Promise<TotalPosts> {
   return blogPosts.blogCollection;
 }
 
-export async function getBlogPosts(
-  limit: number,
-  order: Order,
-  search: string,
-): Promise<HomeBlogItemModel[]> {
+export async function getBlogPosts(limit: number): Promise<HomeBlogItem[]> {
   const blogPosts = await fetchGraphQL(
-    `query blogCollectionQuery($limit: Int, $order: [BlogOrder], $search: String) {
-      blogCollection( limit: $limit, order: $order, where: { title_contains: $search }) {
+    `query blogCollectionQuery($limit: Int) {
+      blogCollection( limit: $limit, order: date_DESC) {
         items {
           sys {
             id
@@ -133,12 +132,13 @@ export async function getBlogPosts(
             url
             title
           }
+          date
         }
       }
     }`,
     false,
-    { limit, order, search },
+    { limit },
   );
 
-  return blogPosts.data.blogCollection.items;
+  return blogPostsConverter(blogPosts.data.blogCollection.items);
 }

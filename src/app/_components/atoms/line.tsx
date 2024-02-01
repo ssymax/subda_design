@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 const Line = styled.hr`
-  border-top: 1px solid ${({ theme }) => theme.colors.primary};
+  border-top: 1px solid ${({ theme }) => theme.colors.dark};
   width: 100%;
 `;
 

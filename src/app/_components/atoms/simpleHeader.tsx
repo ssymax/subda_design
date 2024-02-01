@@ -7,6 +7,7 @@ const Header = styled.h1<{
   $paddingBottom?: string;
   $isPageHeader?: boolean;
 }>`
+  position: relative;
   font-size: ${({ $fontSize }) => $fontSize || '9.6rem'};
   padding-bottom: ${({ $paddingBottom }) => $paddingBottom || 0};
   text-transform: uppercase;

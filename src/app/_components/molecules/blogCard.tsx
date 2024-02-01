@@ -42,6 +42,7 @@ const Card = styled.div`
     height: 100%;
     position: absolute;
     border-radius: 1rem;
+    user-select: none;
   }
 
   span {

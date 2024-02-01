@@ -1,8 +1,11 @@
+import dayjs from 'dayjs';
 import {
   DetailedRealizationItem,
   RealizationItem,
   RealizationsModel,
   SimpleRealizationsModel,
+  HomeBlogItemModel,
+  HomeBlogItem,
 } from './types';
 
 export const simpleRealizationsConverter = (
@@ -41,5 +44,19 @@ export const detailedRealizationsConverter = (
     })),
   }));
 
+  return convertedData;
+};
+
+export const blogPostsConverter = (items: HomeBlogItemModel[]): HomeBlogItem[] => {
+  const convertedData = items.map((item) => ({
+    id: item.sys.id,
+    slug: item.slug,
+    title: item.title,
+    image: {
+      url: `${item.image.url}?fm=webp`,
+      title: item.image.title,
+    },
+    date: dayjs(item.date),
+  }));
   return convertedData;
 };

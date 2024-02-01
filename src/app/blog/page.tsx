@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -10,9 +10,11 @@ import PaddingWrapper from '@/templates/paddingWrapper';
 import BlogCard from '@/components/molecules/blogCard';
 import Foot from '@/components/organisms/foot';
 import SimpleHeader from '@/components/atoms/simpleHeader';
-import { BLOG_POSTS, DATE_DESC } from '@/lib/constants';
-import { HomeBlogItemModel, Order, TotalPosts } from '@/lib/types';
+import Sorter from '@/components/atoms/sorter';
+import { BLOG_POSTS, DATE_ASC, DATE_DESC } from '@/lib/constants';
+import { HomeBlogItem, HomeBlogItemModel, Order, TotalPosts } from '@/lib/types';
 import { getBlogPosts, getTotalBlogsNumber } from '@/lib/api';
+import { sortBlogPostByDate } from '../_utils/utils';
 
 gsap.registerPlugin(scrollTrigger);
 
@@ -33,51 +35,52 @@ const PostsContainer = styled.div`
   }
 `;
 
+const ActionWrapper = styled.div`
+  position: absolute;
+  right: 5.5rem;
+  top: 22rem;
+  z-index: ${({ theme }) => theme.zIndex.level1};
+`;
+
 export default function Blog() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [order, setOrder] = useState<Order>(DATE_DESC);
   const [search, setSearch] = useState('');
+  const [posts, setPosts] = useState<HomeBlogItem[]>([]);
 
   const { data: quantity } = useSWR<TotalPosts>('total', getTotalBlogsNumber);
 
-  const { data, error, isLoading } = useSWR<HomeBlogItemModel[]>(
-    [BLOG_POSTS, quantity?.total, order, search],
-    () => getBlogPosts(quantity?.total ? quantity.total : 0, order, search),
+  const { data, error, isLoading } = useSWR<HomeBlogItem[]>(
+    [BLOG_POSTS, quantity?.total],
+    () => getBlogPosts(quantity?.total ? quantity.total : 0),
   );
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
-      const childs = gsap.utils.toArray(containerRef.current.children) as HTMLElement[];
-      childs.forEach((ch) =>
-        gsap.from(ch, {
-          marginTop: 0,
-          autoAlpha: 0,
-          scrollTrigger: {
-            trigger: ch,
-            start: 'top center',
-          },
-        }),
-      );
-    },
-    { scope: containerRef, dependencies: [data?.length] },
-  );
+  useEffect(() => data && setPosts(data), [data]);
+
+  const handleOrderClick = () =>
+    setOrder((prev) => (prev === DATE_DESC ? DATE_ASC : DATE_DESC));
+
+  useEffect(() => {
+    setPosts((prev) => prev && sortBlogPostByDate(prev, order));
+  }, [order]);
 
   return (
     <>
       <section>
         <PaddingWrapper>
           <SimpleHeader isPageHeader header='Blog' />
+          <ActionWrapper>
+            <Sorter onClick={handleOrderClick} />
+          </ActionWrapper>
           {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <PostsContainer ref={containerRef}>
-            {data?.map((p, index) => (
+            {posts?.map((p) => (
               <BlogCard
-                key={p.sys.id}
-                id={p.sys.id}
+                key={p.id}
+                id={p.id}
                 slug={p.slug}
                 url={p.image.url}
                 title={p.title}
-                index={index}
               />
             ))}
           </PostsContainer>

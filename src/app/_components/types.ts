@@ -96,7 +96,6 @@ export interface HomeBlogCardProps {
   slug: string;
   title: string;
   url: string;
-  index?: number;
 }
 
 export interface BurgerProps {
@@ -187,4 +186,8 @@ export interface SimpleHeaderProps {
   isPageHeader?: boolean;
   fontSize?: string;
   paddingBottom?: string;
+}
+
+export interface SorterProps {
+  onClick: () => void;
 }

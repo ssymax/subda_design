@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export interface SimpleRealizationItemModel {
   sys: {
     id: string;
@@ -129,6 +131,18 @@ export interface HomeBlogItemModel {
     url: string;
     title: string;
   };
+  date: string;
+}
+
+export interface HomeBlogItem {
+  id: string;
+  slug: string;
+  title: string;
+  image: {
+    url: string;
+    title: string;
+  };
+  date: Dayjs;
 }
 
 export interface TotalPosts {
