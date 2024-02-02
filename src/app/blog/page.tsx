@@ -3,20 +3,15 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import scrollTrigger from 'gsap/ScrollTrigger';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import BlogCard from '@/components/molecules/blogCard';
 import Foot from '@/components/organisms/foot';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import Sorter from '@/components/atoms/sorter';
 import { BLOG_POSTS, DATE_ASC, DATE_DESC } from '@/lib/constants';
-import { HomeBlogItem, HomeBlogItemModel, Order, TotalPosts } from '@/lib/types';
+import { HomeBlogItem, Order, TotalPosts } from '@/lib/types';
 import { getBlogPosts, getTotalBlogsNumber } from '@/lib/api';
 import { sortBlogPostByDate } from '../_utils/utils';
-
-gsap.registerPlugin(scrollTrigger);
 
 const PostsContainer = styled.div`
   display: grid;
@@ -60,10 +55,6 @@ export default function Blog() {
   const handleOrderClick = () =>
     setOrder((prev) => (prev === DATE_DESC ? DATE_ASC : DATE_DESC));
 
-  useEffect(() => {
-    setPosts((prev) => prev && sortBlogPostByDate(prev, order));
-  }, [order]);
-
   return (
     <>
       <section>
@@ -74,7 +65,7 @@ export default function Blog() {
           </ActionWrapper>
           {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <PostsContainer ref={containerRef}>
-            {posts?.map((p) => (
+            {sortBlogPostByDate(posts, order)?.map((p) => (
               <BlogCard
                 key={p.id}
                 id={p.id}
