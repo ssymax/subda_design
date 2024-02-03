@@ -1,7 +1,6 @@
 'use client';
 
-import { MouseEvent, memo } from 'react';
-import gsap from 'gsap';
+import { memo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
@@ -75,19 +74,8 @@ const Card = styled.div`
 function BlogCard({ id, slug, title, url }: HomeBlogCardProps) {
   const { push } = useRouter();
 
-  const handleCardMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const { width, height } = e.currentTarget.getBoundingClientRect();
-    const x = e.pageX - e.currentTarget.offsetLeft;
-    const y = e.pageY - e.currentTarget.offsetTop;
-    gsap.to(e.currentTarget.children[0].children[0], {
-      duration: 1,
-      x: ((x - width / 2) / width) * 1,
-      y: ((y - height / 2) / height) * 1,
-    });
-  };
-
   return (
-    <Card id={id} onMouseMove={handleCardMouseMove}>
+    <Card id={id}>
       <div>
         <Image
           loader={() => url}

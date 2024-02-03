@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { ChangeEvent, createRef, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import BlogCard from '@/components/molecules/blogCard';
@@ -47,7 +47,6 @@ const ActionWrapper = styled.div`
 `;
 
 export default function Blog() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState<HomeBlogItem[]>([]);
@@ -77,7 +76,7 @@ export default function Blog() {
             <SearchInput onChange={handleChange} value={search} placeholder='Szukaj' />
           </ActionWrapper>
           {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
-          <PostsContainer ref={containerRef}>
+          <PostsContainer>
             {sortedPosts?.map((p) => (
               <BlogCard
                 key={p.id}

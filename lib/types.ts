@@ -148,3 +148,28 @@ export interface HomeBlogItem {
 export interface TotalPosts {
   total: number;
 }
+
+export interface BlogPost {
+  sys: {
+    id: string;
+  };
+  slug: string;
+  title: string;
+  date: string;
+  introduction: string;
+  underIntro: string;
+  image: {
+    url: string;
+    title: string;
+    width: number;
+    height: number;
+  };
+  header1st: string;
+  text1st: string;
+  header2nd: string;
+  text2nd: string;
+  header3rd: string;
+  text3rd: string;
+  header4th: string;
+  text4th: string;
+}

@@ -14,6 +14,7 @@ import {
 } from './queries';
 import {
   AboutMeType,
+  BlogPost,
   DetailedRealizationItem,
   HomeBlogItem,
   HomeBlogItemModel,
@@ -141,4 +142,36 @@ export async function getBlogPosts(limit: number): Promise<HomeBlogItem[]> {
   );
 
   return blogPostsConverter(blogPosts.data.blogCollection.items);
+}
+
+export async function getPost(slug: string): Promise<BlogPost[]> {
+  const post = await fetchGraphQL(`query {
+    blogCollection (where: {slug: "${slug}"}) {
+      items {
+        sys {
+          id
+        }
+        slug
+        title
+        date
+        introduction
+        underIntro
+        image {
+          url
+          title
+          width
+          height
+        }
+        header1st
+        text1st
+        header2nd
+        text2nd
+        header3rd
+        text3rd
+        header4th
+        text4th
+      }
+    }
+  }`);
+  return post.data.blogCollection.items;
 }
