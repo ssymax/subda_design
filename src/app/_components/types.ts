@@ -1,6 +1,13 @@
-import { OfferInfo, RealizationItem, Step } from '@/lib/types';
+import { OfferInfo, Order, RealizationItem, Step } from '@/lib/types';
 import { StaticImageData } from 'next/image';
-import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -190,4 +197,11 @@ export interface SimpleHeaderProps {
 
 export interface SorterProps {
   onClick: () => void;
+  order: Order;
+}
+
+export interface SearchInputProps {
+  value: string;
+  placeholder: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

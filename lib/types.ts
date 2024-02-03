@@ -119,7 +119,7 @@ export interface OfferType {
   };
 }
 
-export type Order = 'date_ASC' | 'date_DESC';
+export type Order = 'asc' | 'desc';
 
 export interface HomeBlogItemModel {
   sys: {

@@ -3,8 +3,8 @@ export const HOME_REALIZATIONS = 'Home realizations';
 export const DETAILED_REALIZATIONS = 'Detailed realizations';
 export const HOME_BLOG = 'Home blog';
 export const BLOG_POSTS = 'Blog posts';
-export const DATE_DESC = 'date_DESC';
-export const DATE_ASC = 'date_ASC';
+export const DESC = 'desc';
+export const ASC = 'asc';
 
 export const socials = [
   {

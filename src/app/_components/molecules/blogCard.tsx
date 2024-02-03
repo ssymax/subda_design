@@ -1,18 +1,32 @@
 'use client';
 
-import { memo } from 'react';
+import { MouseEvent, memo } from 'react';
+import gsap from 'gsap';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Button from '@/components/atoms/button';
 import { HomeBlogCardProps } from '@/components/types';
 import { routes } from '@/routes/routes';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
   flex: 1;
+  animation: ${fadeIn} 0.3s ease-out;
+  position: relative;
 
   &:nth-child(3n + 2) {
     margin-top: 12rem;
@@ -61,8 +75,19 @@ const Card = styled.div`
 function BlogCard({ id, slug, title, url }: HomeBlogCardProps) {
   const { push } = useRouter();
 
+  const handleCardMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const { width, height } = e.currentTarget.getBoundingClientRect();
+    const x = e.pageX - e.currentTarget.offsetLeft;
+    const y = e.pageY - e.currentTarget.offsetTop;
+    gsap.to(e.currentTarget.children[0].children[0], {
+      duration: 1,
+      x: ((x - width / 2) / width) * 1,
+      y: ((y - height / 2) / height) * 1,
+    });
+  };
+
   return (
-    <Card id={id}>
+    <Card id={id} onMouseMove={handleCardMouseMove}>
       <div>
         <Image
           loader={() => url}

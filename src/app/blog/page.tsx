@@ -1,17 +1,18 @@
 'use client';
 
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, createRef, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import BlogCard from '@/components/molecules/blogCard';
 import Foot from '@/components/organisms/foot';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import Sorter from '@/components/atoms/sorter';
-import { BLOG_POSTS, DATE_ASC, DATE_DESC } from '@/lib/constants';
+import SearchInput from '@/components/atoms/searchInput';
+import { BLOG_POSTS, ASC, DESC } from '@/lib/constants';
 import { HomeBlogItem, Order, TotalPosts } from '@/lib/types';
 import { getBlogPosts, getTotalBlogsNumber } from '@/lib/api';
-import { sortBlogPostByDate } from '../_utils/utils';
+import { sortAndFilterBlogPosts } from '../_utils/utils';
 
 const PostsContainer = styled.div`
   display: grid;
@@ -19,6 +20,7 @@ const PostsContainer = styled.div`
   column-gap: 5.5rem;
   margin-top: 3rem;
   grid-auto-flow: row;
+
   ${({ theme }) => theme.maxWidth.xl} {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 5.5rem;
@@ -33,13 +35,20 @@ const PostsContainer = styled.div`
 const ActionWrapper = styled.div`
   position: absolute;
   right: 5.5rem;
-  top: 22rem;
+  top: 22.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
   z-index: ${({ theme }) => theme.zIndex.level1};
+  ${({ theme }) => theme.maxWidth.lg} {
+    top: 17rem;
+    right: 2.4rem;
+  }
 `;
 
 export default function Blog() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [order, setOrder] = useState<Order>(DATE_DESC);
+  const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState<HomeBlogItem[]>([]);
 
@@ -52,8 +61,11 @@ export default function Blog() {
 
   useEffect(() => data && setPosts(data), [data]);
 
-  const handleOrderClick = () =>
-    setOrder((prev) => (prev === DATE_DESC ? DATE_ASC : DATE_DESC));
+  const handleOrderClick = () => setOrder((prev) => (prev === DESC ? ASC : DESC));
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+
+  const sortedPosts = sortAndFilterBlogPosts(posts, order, search);
 
   return (
     <>
@@ -61,11 +73,12 @@ export default function Blog() {
         <PaddingWrapper>
           <SimpleHeader isPageHeader header='Blog' />
           <ActionWrapper>
-            <Sorter onClick={handleOrderClick} />
+            <Sorter order={order} onClick={handleOrderClick} />
+            <SearchInput onChange={handleChange} value={search} placeholder='Szukaj' />
           </ActionWrapper>
           {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <PostsContainer ref={containerRef}>
-            {sortBlogPostByDate(posts, order)?.map((p) => (
+            {sortedPosts?.map((p) => (
               <BlogCard
                 key={p.id}
                 id={p.id}

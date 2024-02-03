@@ -1,4 +1,4 @@
-import { DATE_ASC, DATE_DESC } from '@/lib/constants';
+import { ASC, DESC } from '@/lib/constants';
 import { HomeBlogItem, Order } from '@/lib/types';
 
 export function setBodyOverflow(value: 'hidden' | 'auto'): void {
@@ -6,9 +6,22 @@ export function setBodyOverflow(value: 'hidden' | 'auto'): void {
   if (body) body.style.overflowY = value;
   else console.error('Document body not found.');
 }
+export function sortAndFilterBlogPosts(
+  posts: HomeBlogItem[],
+  order: Order,
+  value: string,
+) {
+  const trimmedValue = value.trim().toLowerCase();
 
-export function sortBlogPostByDate(posts: HomeBlogItem[], order: Order) {
-  if (order === DATE_ASC) return posts.sort((a, b) => a.date.diff(b.date));
-  if (order === DATE_DESC) return posts.sort((a, b) => b.date.diff(a.date));
-  return posts;
+  const filteredPosts =
+    trimmedValue.length > 0
+      ? posts.filter((post) => post.title.toLowerCase().includes(trimmedValue))
+      : posts;
+
+  // eslint-disable-next-line no-nested-ternary
+  return order === ASC
+    ? filteredPosts.sort((a, b) => a.date.diff(b.date))
+    : order === DESC
+      ? filteredPosts.sort((a, b) => b.date.diff(a.date))
+      : filteredPosts;
 }
