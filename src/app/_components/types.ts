@@ -193,6 +193,8 @@ export interface SimpleHeaderProps {
   isPageHeader?: boolean;
   fontSize?: string;
   paddingBottom?: string;
+  textAlign?: string;
+  lineHeight?: string;
 }
 
 export interface SorterProps {

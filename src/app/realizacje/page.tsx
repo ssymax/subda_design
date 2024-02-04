@@ -33,7 +33,7 @@ export default function Realizations() {
     <>
       <PaddingWrapper>
         <Section>
-          <SimpleHeader isPageHeader header={header} />
+          <SimpleHeader isPageHeader header={header} textAlign='left' fontSize='8rem' />
           {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <RealizationsContainer realizations={data || []} />
           <RedirectInfo
