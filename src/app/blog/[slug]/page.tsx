@@ -53,7 +53,7 @@ const Header = styled.h4`
 
 const Paragraph = styled.p`
   font-weight: 300;
-  line-height: 150%;
+  line-height: 15 0%;
 `;
 
 export default function Post({ params }: { params: { slug: string } }) {
