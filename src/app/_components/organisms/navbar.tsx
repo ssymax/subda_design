@@ -8,15 +8,16 @@ import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Menu from '@/components/molecules/menu';
 import Button from '@/components/atoms/button';
-import { minQuery } from '@/styles/constants';
 import MenuMobile from '@/components/molecules/menuMobile';
 import Burger from '@/components/atoms/burger';
 import { routes } from '@/routes/routes';
 import { setBodyOverflow } from '@/utils/utils';
-import useMediaQuery from '@/hooks/useMediaQuery';
 import Logo from '../../../../public/images/logo.svg';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ limitCallbacks: true });
+}
 
 const Header = styled.header`
   position: fixed;
@@ -46,11 +47,16 @@ const StyledLogo = styled(Logo)`
   cursor: pointer;
 `;
 
+const ButtonWrap = styled.div`
+  ${({ theme }) => theme.maxWidth.lg} {
+    display: none;
+  }
+`;
+
 export default function Headerbar() {
   const { push } = useRouter();
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
-  const largeScreen = useMediaQuery(minQuery.lg);
   const handleToggle = () => {
     setOpen((prev) => !prev);
   };
@@ -80,12 +86,6 @@ export default function Headerbar() {
     return () => ctx.revert();
   });
 
-  const menuComponent = largeScreen ? (
-    <Menu />
-  ) : (
-    <Burger open={open} toggleOpen={handleToggle} />
-  );
-
   return (
     <>
       <Header ref={headerRef}>
@@ -97,15 +97,16 @@ export default function Headerbar() {
             e.key === 'Enter' && push(routes.home)
           }
         />
-        {menuComponent}
-        {largeScreen && (
+        <Menu />
+        <Burger open={open} toggleOpen={handleToggle} />
+        <ButtonWrap>
           <Button
             large
             text='Porozmawiajmy'
             variant='primary'
             onClick={() => push(routes.contact)}
           />
-        )}
+        </ButtonWrap>
       </Header>
       <MenuMobile open={open} setOpen={setOpen} />
     </>

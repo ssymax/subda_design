@@ -12,12 +12,13 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
   text-transform: uppercase;
   column-gap: 1rem;
   transition: all 0.15s ease-in-out;
-  font-size: 1.6rem;
-  padding: ${({ $large }) => ($large ? '1rem 4rem' : '0.7rem 2.5rem')};
+  font-size: ${({ $large }) => ($large ? '1.6rem' : '1.4rem')};
+  padding: ${({ $large }) => ($large ? '1rem 4rem' : '0.7rem 2rem')};
   white-space: nowrap;
   height: fit-content;
   width: fit-content;
   line-height: normal;
+  letter-spacing: 1px;
 
   svg {
     width: auto;

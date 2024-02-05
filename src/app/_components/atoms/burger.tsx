@@ -13,6 +13,9 @@ const Wrapper = styled.div<{ $open: boolean }>`
   justify-content: space-between;
   z-index: ${({ theme }) => theme.zIndex.level10};
   transition: height 0.2s ease;
+  ${({ theme }) => theme.minWidth.lg} {
+    display: none;
+  }
   div {
     height: 0.2rem;
     background-color: ${({ theme }) => theme.colors.secondary};

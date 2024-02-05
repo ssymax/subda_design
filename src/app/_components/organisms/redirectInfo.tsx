@@ -28,7 +28,7 @@ const InnerWrapper = styled.div<{ $inverse?: boolean }>`
 
   p {
     font-size: 2.2rem;
-    line-height: 120%;
+    line-height: 140%;
     font-weight: 300;
     margin-bottom: 8rem;
 

@@ -1,6 +1,13 @@
-import { OfferInfo, RealizationItem, Step } from '@/lib/types';
+import { OfferInfo, Order, RealizationItem, Step } from '@/lib/types';
 import { StaticImageData } from 'next/image';
-import { Dispatch, MouseEvent, ReactElement, ReactNode, SetStateAction } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -92,9 +99,10 @@ export interface HomeReferenceCardProps {
 }
 
 export interface HomeBlogCardProps {
-  id: string;
+  id?: string;
+  slug: string;
   title: string;
-  image: StaticImageData;
+  url: string;
 }
 
 export interface BurgerProps {
@@ -185,4 +193,17 @@ export interface SimpleHeaderProps {
   isPageHeader?: boolean;
   fontSize?: string;
   paddingBottom?: string;
+  textAlign?: string;
+  lineHeight?: string;
+}
+
+export interface SorterProps {
+  onClick: () => void;
+  order: Order;
+}
+
+export interface SearchInputProps {
+  value: string;
+  placeholder: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

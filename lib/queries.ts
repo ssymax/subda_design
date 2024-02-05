@@ -101,3 +101,26 @@ export const OFFER_QUERY = `query offerEntryQuery {
     }
   }
 }`;
+
+export const HOME_BLOG_QUERY = `query blogCollectionQuery {
+  blogCollection (order: date_DESC, limit: 3) {
+    items {
+      sys {
+        id
+      }
+      title
+  		slug
+      image {
+        url
+        title
+      }
+    }
+  }
+}
+`;
+
+export const TOTAL_BLOG_POSTS_QUERY = `query blogCollectionQuery {
+  blogCollection {
+    total
+  }
+}`;

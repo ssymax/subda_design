@@ -108,7 +108,7 @@ export default function AboutMe() {
   };
 
   const imagePositions: CSSProperties[] = [
-    { left: '55%' },
+    { left: largeScreen ? '55%' : '73%' },
     { right: '4%', top: '18%' },
     { left: '60%', top: '40%' },
     { left: '40%', top: '60%' },
@@ -128,6 +128,7 @@ export default function AboutMe() {
       <section>
         <PaddingWrapper>
           <SimpleHeader isPageHeader header='O mnie' />
+          {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <InfoWrapper>
             <LeftWrapper>
               {data?.info.map((item) => (

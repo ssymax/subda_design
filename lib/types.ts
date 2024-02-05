@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export interface SimpleRealizationItemModel {
   sys: {
     id: string;
@@ -115,4 +117,59 @@ export interface OfferType {
       url: string;
     }[];
   };
+}
+
+export type Order = 'asc' | 'desc';
+
+export interface HomeBlogItemModel {
+  sys: {
+    id: string;
+  };
+  slug: string;
+  title: string;
+  image: {
+    url: string;
+    title: string;
+  };
+  date: string;
+}
+
+export interface HomeBlogItem {
+  id: string;
+  slug: string;
+  title: string;
+  image: {
+    url: string;
+    title: string;
+  };
+  date: Dayjs;
+}
+
+export interface TotalPosts {
+  total: number;
+}
+
+export interface BlogPost {
+  sys: {
+    id: string;
+  };
+  slug: string;
+  title: string;
+  date: string;
+  introduction: string;
+  underIntro: string;
+  image: {
+    url: string;
+    title: string;
+    width: number;
+    height: number;
+  };
+  header1st: string;
+  text1st: string;
+  header2nd: string;
+  text2nd: string;
+  header3rd: string;
+  text3rd: string;
+  header4th: string;
+  text4th: string;
 }

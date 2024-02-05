@@ -47,6 +47,7 @@ export default function RealizationItem({
 }: RealizationItemProps) {
   const { push } = useRouter();
   const loader = mainImage;
+
   return (
     <Wrapper>
       <Image loader={() => loader} src={mainImage} alt={title} width={800} height={600} />

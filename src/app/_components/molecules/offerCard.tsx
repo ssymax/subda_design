@@ -5,6 +5,7 @@ import Image from 'next/image';
 const Card = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 2.5rem;
   flex: 1;
   margin-top: 3rem;
@@ -58,7 +59,7 @@ export default function OfferCard({ url, title, description }: OfferCardProps) {
         width={300}
         height={391}
         style={{
-          width: '100%',
+          maxWidth: '100%',
           height: 'auto',
         }}
       />

@@ -51,18 +51,6 @@ const Content = styled.div<{ $even: boolean }>`
   ${({ theme }) => theme.maxWidth.xl} {
     width: 42vw;
   }
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 80%;
-    row-gap: 2rem;
-    height: auto;
-    span {
-      font-size: 2rem;
-      font-weight: 600;
-    }
-    p {
-      font-size: 1.4rem;
-    }
-  }
 
   h4 {
     text-transform: uppercase;
@@ -75,6 +63,28 @@ const Content = styled.div<{ $even: boolean }>`
 
   p {
     line-height: 140%;
+  }
+
+  ${({ theme }) => theme.maxWidth.lg} {
+    width: 50vw;
+    row-gap: 2rem;
+    height: auto;
+    padding: 2rem;
+    span {
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+  }
+
+  ${({ theme }) => theme.maxWidth.md} {
+    width: 80%;
+    min-height: 60vh;
+    aspect-ratio: auto;
+    span {
+      font-size: 1.6rem;
+    }
   }
 `;
 

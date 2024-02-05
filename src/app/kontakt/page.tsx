@@ -24,6 +24,10 @@ const SingleHeader = styled.h1`
     font-weight: 700;
     font-size: 3.6rem;
   }
+  ${({ theme }) => theme.maxWidth.md} {
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
 `;
 
 const Container = styled.div`
@@ -72,7 +76,7 @@ const A = styled.a`
   color: ${({ theme }) => theme.colors.primary};
   font-weight: 500;
   border: 1px solid ${({ theme }) => theme.colors.primary};
-  width: 8rem;
+  min-width: 6rem;
   text-align: center;
   border-radius: 2rem;
   padding: 0.2rem 0;

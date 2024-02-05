@@ -3,8 +3,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Raleway } from 'next/font/google';
-import Providers from '@/providers/providers';
 import Navbar from '@/components/organisms/navbar';
+import Providers from '@/providers/providers';
 import StyledComponentsRegistry from '../../lib/registry';
 
 const raleway = Raleway({
@@ -16,7 +16,7 @@ const raleway = Raleway({
 
 const Divider = styled.div`
   height: 7rem;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.dark};
   ${({ theme }) => theme.maxWidth.lg} {
     height: 6rem;
   }
