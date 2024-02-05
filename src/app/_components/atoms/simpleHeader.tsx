@@ -60,7 +60,7 @@ export default function SimpleHeader({
         },
       });
     },
-    { scope: headerRef, revertOnUpdate: true },
+    { scope: headerRef },
   );
 
   return (
@@ -75,7 +75,7 @@ export default function SimpleHeader({
       >
         {header}
       </Header>
-      {isPageHeader && <Line />}
+      {isPageHeader && <Line className='line' />}
     </div>
   );
 }

@@ -20,6 +20,7 @@ const PostsContainer = styled.div`
   column-gap: 5.5rem;
   margin-top: 3rem;
   grid-auto-flow: row;
+  min-height: 100vh;
 
   ${({ theme }) => theme.maxWidth.xl} {
     grid-template-columns: repeat(2, 1fr);
@@ -41,7 +42,7 @@ const ActionWrapper = styled.div`
   column-gap: 2rem;
   z-index: ${({ theme }) => theme.zIndex.level1};
   ${({ theme }) => theme.maxWidth.lg} {
-    top: 17rem;
+    top: 16rem;
     right: 2.4rem;
   }
 `;
@@ -75,7 +76,6 @@ export default function Blog() {
             <Sorter order={order} onClick={handleOrderClick} />
             <SearchInput onChange={handleChange} value={search} placeholder='Szukaj' />
           </ActionWrapper>
-          {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
           <PostsContainer>
             {sortedPosts?.map((p) => (
               <BlogCard

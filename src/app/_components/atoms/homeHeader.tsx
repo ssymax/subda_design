@@ -42,11 +42,11 @@ const Description = styled.span`
   width: 30%;
   font-size: 1.8rem;
   font-weight: 500;
+  line-height: 140%;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
     font-size: 1.6rem;
     font-weight: 300;
-    line-height: 140%;
   }
 `;
 

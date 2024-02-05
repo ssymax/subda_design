@@ -48,6 +48,9 @@ const Card = styled.div`
     border-radius: 1rem;
     display: flex;
     justify-content: center;
+    ${({ theme }) => theme.maxWidth.lg} {
+      height: 50rem;
+    }
   }
 
   img {

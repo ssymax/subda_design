@@ -54,12 +54,12 @@ const TextAndButtons = styled.div`
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
-
   span {
     font-size: 3rem;
+    line-height: 140%;
+
     ${({ theme }) => theme.maxWidth.lg} {
       font-size: 1.8rem;
-      line-height: 150%;
     }
   }
   div {

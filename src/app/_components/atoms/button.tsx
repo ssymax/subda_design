@@ -18,6 +18,7 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
   height: fit-content;
   width: fit-content;
   line-height: normal;
+  letter-spacing: 1px;
 
   svg {
     width: auto;
