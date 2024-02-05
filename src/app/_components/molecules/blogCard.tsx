@@ -1,12 +1,12 @@
 'use client';
 
 import { memo } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import Button from '@/components/atoms/button';
 import { HomeBlogCardProps } from '@/components/types';
 import { routes } from '@/routes/routes';
+import ContentfulImage from '@/lib/contentfulImage';
 
 const fadeIn = keyframes`
   from {
@@ -80,14 +80,7 @@ function BlogCard({ id, slug, title, url }: HomeBlogCardProps) {
   return (
     <Card id={id}>
       <div>
-        <Image
-          loader={() => url}
-          src={url}
-          alt={title}
-          sizes='100vw'
-          width={500}
-          height={300}
-        />
+        <ContentfulImage src={url} alt={title} sizes='100vw' width={500} height={300} />
       </div>
       <span>{title}</span>
       <Button

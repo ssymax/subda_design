@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { OfferCardProps } from '@/components/types';
-import Image from 'next/image';
+import ContentfulImage from '@/lib/contentfulImage';
 
 const Card = styled.div`
   display: flex;
@@ -51,8 +51,8 @@ const Card = styled.div`
 export default function OfferCard({ url, title, description }: OfferCardProps) {
   return (
     <Card>
-      <Image
-        loader={() => url}
+      <ContentfulImage
+        priority
         src={url}
         alt={title}
         sizes='100vw'

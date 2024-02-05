@@ -1,52 +1,28 @@
-'use client';
-
-import styled from 'styled-components';
-import useSWR from 'swr';
-import { useRouter } from 'next/navigation';
+import { Metadata } from 'next';
 import Foot from '@/components/organisms/foot';
-import SimpleHeader from '@/components/atoms/simpleHeader';
-import RealizationsContainer from '@/components/molecules/realizationsContainer';
-import RedirectInfo from '@/components/organisms/redirectInfo';
-import { getSimpleRealizations } from '@/lib/api';
-import { SIMPLE_REALIZATIONS } from '@/lib/constants';
-import { routes } from '@/routes/routes';
 import PaddingWrapper from '@/templates/paddingWrapper';
-import { RealizationItem } from '@/lib/types';
-import saloon from '../../../public/saloon.png';
+import Realizations from '@/components/organisms/realizations';
+import SimpleHeader from '@/components/atoms/simpleHeader';
+import { head, realizations } from '@/lib/constants';
 
-const Section = styled.section`
-  margin-top: 3rem;
-`;
+export const metadata: Metadata = {
+  title: `Realizacje - ${head.title}`,
+  description: head.description,
+};
 
-const header = 'Zobacz najnowsze realizacje moich projektów';
-const redirectHeader = 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz. ';
-const text = `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i inny`;
-
-export default function Realizations() {
-  const { push } = useRouter();
-  const { data, error, isLoading } = useSWR<RealizationItem[]>(
-    SIMPLE_REALIZATIONS,
-    getSimpleRealizations,
-  );
-
+export default function Page() {
   return (
     <>
       <PaddingWrapper>
-        <Section>
-          <SimpleHeader isPageHeader header={header} textAlign='left' fontSize='8rem' />
-          {isLoading && <div style={{ width: '100%', height: '100vh' }} />}
-          <RealizationsContainer realizations={data || []} />
-          <RedirectInfo
-            header={redirectHeader}
-            text={text}
-            leftLabel='Oferta'
-            rightLabel='Porozmawiajmy'
-            onLeftClick={() => push(routes.offer)}
-            onRightClick={() => push(routes.contact)}
-            imageSrc={saloon}
-            inverse
+        <section style={{ marginTop: '3rem' }}>
+          <SimpleHeader
+            isPageHeader
+            header={realizations.header}
+            textAlign='left'
+            fontSize='8rem'
           />
-        </Section>
+          <Realizations />
+        </section>
       </PaddingWrapper>
       <Foot />
     </>

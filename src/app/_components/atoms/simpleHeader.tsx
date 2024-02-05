@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 import styled from 'styled-components';
 import Line from '@/components/atoms/line';
@@ -51,9 +53,9 @@ export default function SimpleHeader({
       const { words } = text;
       gsap.from(words, {
         yPercent: 200,
-        ease: 'ease.out',
+        duration: 0.8,
+        ease: 'power2.out',
         stagger: 0.05,
-        autoAlpha: 0,
         scrollTrigger: {
           trigger: headerRef.current.parentElement,
           start: 'top-=200px center',

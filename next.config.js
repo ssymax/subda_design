@@ -4,13 +4,8 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
+    loader: 'custom',
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: {
-      protocol: 'https',
-      hostname: 'images.ctfassets.net',
-      port: '',
-      pathname: '/dt7tqh8lehg1/**',
-    },
   },
 };
 

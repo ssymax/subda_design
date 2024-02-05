@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import styled from 'styled-components';
-import Image from 'next/image';
 import useSWR from 'swr';
 import dayjs from 'dayjs';
 import gsap from 'gsap';
@@ -13,6 +12,7 @@ import { BlogPost } from '@/lib/types';
 import SimpleHeader from '@/app/_components/atoms/simpleHeader';
 import Foot from '@/app/_components/organisms/foot';
 import PaddingWrapper from '@/app/_templates/paddingWrapper';
+import ContentfulImage from '@/lib/contentfulImage';
 import CalendarIcon from '../../../../public/images/calendar.svg';
 
 if (typeof window !== 'undefined') {
@@ -97,8 +97,6 @@ export default function Post({ params }: { params: { slug: string } }) {
 
   const date = dayjs(postData?.date).format('DD.MM.YYYY');
 
-  const loader = postData?.image.url || '';
-
   const postElements: { id: string; header?: string; text?: string }[] = [
     { id: '1', header: postData?.header1st, text: postData?.text1st },
     { id: '2', header: postData?.header2nd, text: postData?.text2nd },
@@ -146,8 +144,7 @@ export default function Post({ params }: { params: { slug: string } }) {
           <Content>
             {postData?.introduction && <Intro>{postData.introduction}</Intro>}
             {postData?.underIntro && <Paragraph>{postData.underIntro}</Paragraph>}
-            <Image
-              loader={() => loader}
+            <ContentfulImage
               src={postData?.image.url || ''}
               alt={postData?.image.title || ''}
               sizes='100vw'

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
+import ContentfulImage from '@/lib/contentfulImage';
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,11 +47,10 @@ export default function RealizationItem({
   slug,
 }: RealizationItemProps) {
   const { push } = useRouter();
-  const loader = mainImage;
 
   return (
     <Wrapper>
-      <Image loader={() => loader} src={mainImage} alt={title} width={800} height={600} />
+      <ContentfulImage src={mainImage} alt={title} width={800} height={600} />
       <div>
         <span>{type}</span>
         <span>{year}</span>
