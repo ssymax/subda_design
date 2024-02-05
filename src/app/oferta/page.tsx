@@ -20,14 +20,15 @@ import OfferStep from '@/components/molecules/offerStep';
 import OfferSlide from '@/components/molecules/slide';
 import offerSaloon from '../../../public/offer-saloon.jpg';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const CardWrapper = styled.div`
   display: flex;
   justify-items: center;
   column-gap: 6rem;
   margin: 3rem auto;
-  padding: 0 5rem;
   min-height: 80rem;
 
   ${({ theme }) => theme.maxWidth.xl} {
@@ -191,7 +192,7 @@ export default function Offer() {
               <span>{data?.stepsDescription}</span>
               <Button
                 variant='primary'
-                text='Porozmawiajmy o państwa projekcie'
+                text='Porozmawiajmy o projekcie'
                 onClick={() => push(routes.contact)}
               />
               <Image priority src={offerSaloon} alt='' />

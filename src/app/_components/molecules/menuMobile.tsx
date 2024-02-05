@@ -23,7 +23,7 @@ const Container = styled.div<{ $open: boolean }>`
 `;
 
 const HalfWrapper = styled.div<{ $open?: boolean }>`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.dark};
   position: relative;
   height: 100%;
   width: 50%;

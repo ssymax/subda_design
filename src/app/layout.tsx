@@ -1,11 +1,15 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import { Raleway } from 'next/font/google';
 import Providers from '@/providers/providers';
-import Navbar from '@/components/organisms/navbar';
 import StyledComponentsRegistry from '../../lib/registry';
+
+const DynamicNavbar = dynamic(() => import('@/components/organisms/navbar'), {
+  ssr: false,
+});
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -16,7 +20,7 @@ const raleway = Raleway({
 
 const Divider = styled.div`
   height: 7rem;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.dark};
   ${({ theme }) => theme.maxWidth.lg} {
     height: 6rem;
   }
@@ -29,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className={raleway.className}>
           <StyledComponentsRegistry>
             <Providers>
-              <Navbar />
+              <DynamicNavbar />
               <Divider />
               {children}
             </Providers>

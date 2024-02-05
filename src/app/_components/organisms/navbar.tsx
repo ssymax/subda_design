@@ -16,7 +16,10 @@ import { setBodyOverflow } from '@/utils/utils';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Logo from '../../../../public/images/logo.svg';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ limitCallbacks: true });
+}
 
 const Header = styled.header`
   position: fixed;
