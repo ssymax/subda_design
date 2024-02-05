@@ -11,6 +11,9 @@ const MenuWrap = styled.nav<{ $vertical?: boolean }>`
   flex-direction: ${({ $vertical }) => ($vertical ? 'column' : 'row')};
   align-items: ${({ $vertical }) => ($vertical ? 'flex-start' : 'center')};
   column-gap: 3rem;
+  ${({ theme }) => theme.maxWidth.lg} {
+    display: none;
+  }
 `;
 
 const Span = styled.span<{ $dark?: boolean; $vertical?: boolean }>`

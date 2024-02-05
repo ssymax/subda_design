@@ -6,8 +6,6 @@ import Image from 'next/image';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import { routes } from '@/routes/routes';
-import useMediaQuery from '@/hooks/useMediaQuery';
-import { maxQuery } from '@/styles/constants';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import hero from '../../../../public/hero.png';
 import heroMobile from '../../../../public/hero_mobile.png';
@@ -20,10 +18,24 @@ const Section = styled.section`
   flex-direction: column;
   row-gap: 4rem;
   align-items: center;
+
+  .mobile {
+    ${({ theme }) => theme.minWidth.lg} {
+      display: none;
+    }
+  }
+
+  .desktop {
+    ${({ theme }) => theme.maxWidth.lg} {
+      display: none;
+    }
+  }
+
   ${({ theme }) => theme.maxWidth.lg} {
     row-gap: 2rem;
     margin: 0 auto;
   }
+
   img {
     width: 100%;
     height: auto;
@@ -66,13 +78,20 @@ const StyledPaddingWrapper = styled(PaddingWrapper)`
 
 export default function Hero() {
   const { push } = useRouter();
-  const largeScreen = useMediaQuery(maxQuery.lg);
 
   return (
     <Section>
       <Image
         priority
-        src={!largeScreen ? hero : heroMobile}
+        className='mobile'
+        src={heroMobile}
+        alt='Dom w Gryźlinach'
+        placeholder='blur'
+      />
+      <Image
+        priority
+        className='desktop'
+        src={hero}
         alt='Dom w Gryźlinach'
         placeholder='blur'
       />

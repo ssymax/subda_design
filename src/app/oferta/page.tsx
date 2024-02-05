@@ -17,6 +17,7 @@ import Foot from '@/components/organisms/foot';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import OfferStep from '@/components/molecules/offerStep';
+import { minQuery } from '@/styles/constants';
 import OfferSlide from '@/components/molecules/slide';
 import offerSaloon from '../../../public/offer-saloon.jpg';
 
@@ -132,6 +133,8 @@ export default function Offer() {
       const getRatio = (el: HTMLElement) =>
         window.innerHeight / (window.innerHeight + el.offsetHeight);
 
+      const mm = gsap.matchMedia();
+
       slides.forEach((slide, i) => {
         const bg = slide.querySelector('.background');
         const content = slide.querySelector('.content');
@@ -155,17 +158,20 @@ export default function Offer() {
             ease: 'none',
           },
         );
-        tl.fromTo(
-          content,
-          {
-            y: () => (i ? window.innerHeight * -getRatio(slide as HTMLElement) * 2 : 0),
-          },
-          {
-            y: () => window.innerHeight * getRatio(slide as HTMLElement) * 2,
-            ease: 'none',
-          },
-          0,
-        );
+
+        mm.add(minQuery.md, () => {
+          tl.fromTo(
+            content,
+            {
+              y: () => (i ? window.innerHeight * -getRatio(slide as HTMLElement) * 2 : 0),
+            },
+            {
+              y: () => window.innerHeight * getRatio(slide as HTMLElement) * 2,
+              ease: 'none',
+            },
+            0,
+          );
+        });
       });
     },
 
