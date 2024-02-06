@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 import styled from 'styled-components';
 import Line from '@/components/atoms/line';
@@ -18,6 +20,7 @@ const Header = styled.h1<{
   $isPageHeader?: boolean;
   $textAlign?: string;
   $lineHeight?: string;
+  $mobileFont?: boolean;
 }>`
   overflow: hidden;
   font-size: ${({ $fontSize }) => $fontSize || '9.6rem'};
@@ -32,6 +35,9 @@ const Header = styled.h1<{
     font-weight: 700;
     font-size: 4rem;
   }
+  ${({ theme }) => theme.maxWidth.md} {
+    font-size: ${({ $mobileFont }) => $mobileFont && '2.5rem;'};
+  }
 `;
 
 export default function SimpleHeader({
@@ -41,6 +47,7 @@ export default function SimpleHeader({
   paddingBottom,
   textAlign,
   lineHeight,
+  mobileFont,
 }: SimpleHeaderProps) {
   const headerRef = useRef<HTMLHeadingElement>(null);
 
@@ -51,9 +58,9 @@ export default function SimpleHeader({
       const { words } = text;
       gsap.from(words, {
         yPercent: 200,
-        ease: 'ease.out',
+        duration: 0.8,
+        ease: 'power2.out',
         stagger: 0.05,
-        autoAlpha: 0,
         scrollTrigger: {
           trigger: headerRef.current.parentElement,
           start: 'top-=200px center',
@@ -72,6 +79,7 @@ export default function SimpleHeader({
         $isPageHeader={isPageHeader}
         $textAlign={textAlign}
         $lineHeight={lineHeight}
+        $mobileFont={mobileFont}
       >
         {header}
       </Header>

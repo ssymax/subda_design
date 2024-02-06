@@ -1,5 +1,6 @@
 import { ASC, DESC } from '@/lib/constants';
 import { HomeBlogItem, Order } from '@/lib/types';
+import dayjs from 'dayjs';
 
 export function setBodyOverflow(value: 'hidden' | 'auto'): void {
   const { body } = document;
@@ -20,8 +21,8 @@ export function sortAndFilterBlogPosts(
 
   // eslint-disable-next-line no-nested-ternary
   return order === ASC
-    ? filteredPosts.sort((a, b) => a.date.diff(b.date))
+    ? filteredPosts.sort((a, b) => dayjs(a.date).diff(dayjs(b.date)))
     : order === DESC
-      ? filteredPosts.sort((a, b) => b.date.diff(a.date))
+      ? filteredPosts.sort((a, b) => dayjs(b.date).diff(dayjs(a?.date)))
       : filteredPosts;
 }

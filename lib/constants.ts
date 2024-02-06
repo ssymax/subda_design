@@ -1,8 +1,3 @@
-export const SIMPLE_REALIZATIONS = 'Simple realizations';
-export const HOME_REALIZATIONS = 'Home realizations';
-export const DETAILED_REALIZATIONS = 'Detailed realizations';
-export const HOME_BLOG = 'Home blog';
-export const BLOG_POSTS = 'Blog posts';
 export const DESC = 'desc';
 export const ASC = 'asc';
 
@@ -42,13 +37,17 @@ export const contactData = {
 
 export const contactTexts = {
   invite: `Chętnie opowiem Państwu jak wygląda proces pracy nad projektem, od pomysłu do jego wykonania. Możemy omówić Państwa potrzeby telefonicznie, mailowo, poprzez telekonferencje lub osobiście. Nacześciej spotkać mnie można Olsztynie. Warszawie i Lublinie, ale zachęcam do kontaku z każdego miejsca.`,
-  footer: `
-Projektowanie i aranżaca wnętrz w Warszawie, 
-  Olsztynie i Lublinie. Od stylu minimalistycznego 
-  przez boho po luksusowy, dopracowywane 
-  z największą dbałością o detale, łącząc 
-  funkcjonalność, komfort i estetykę. Oferuję 
-  indywidualne konsultacje, projektowanie 3D, 
-  doboru kolorystyki, mebli i oświetlenia.
+  footer: `Projektowanie i aranżaca wnętrz w Warszawie, Olsztynie i Lublinie. Od stylu minimalistycznego przez boho po luksusowy, dopracowywane z największą dbałością o detale, łącząc funkcjonalność, komfort i estetykę. Oferuję indywidualne konsultacje, projektowanie 3D, doboru kolorystyki, mebli i oświetlenia.
   `,
+};
+
+export const head = {
+  title: 'Subda Design - projektant wnętrz Olsztyn, Warszawa, Lublin',
+  description: contactTexts.footer,
+};
+
+export const realizations = {
+  header: 'Zobacz najnowsze realizacje moich projektów',
+  redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz. ',
+  text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i inny`,
 };

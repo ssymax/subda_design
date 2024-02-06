@@ -1,17 +1,28 @@
 'use client';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
+import ContentfulImage from '@/lib/contentfulImage';
+
+const fadeIn = keyframes`
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
   text-transform: uppercase;
+  animation: ${fadeIn} 0.8s ease-in-out;
   img {
     width: 100%;
     height: auto;
@@ -46,11 +57,10 @@ export default function RealizationItem({
   slug,
 }: RealizationItemProps) {
   const { push } = useRouter();
-  const loader = mainImage;
 
   return (
     <Wrapper>
-      <Image loader={() => loader} src={mainImage} alt={title} width={800} height={600} />
+      <ContentfulImage src={mainImage} alt={title} width={800} height={600} />
       <div>
         <span>{type}</span>
         <span>{year}</span>

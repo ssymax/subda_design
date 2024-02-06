@@ -1,12 +1,12 @@
 'use client';
 
 import { memo } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
 import Button from '@/components/atoms/button';
 import { HomeBlogCardProps } from '@/components/types';
 import { routes } from '@/routes/routes';
+import ContentfulImage from '@/lib/contentfulImage';
 
 const fadeIn = keyframes`
   from {
@@ -24,7 +24,7 @@ const Card = styled.div`
   flex-direction: column;
   row-gap: 3rem;
   flex: 1;
-  animation: ${fadeIn} 0.3s ease-out;
+  animation: ${fadeIn} 0.8s ease-in-out;
   position: relative;
 
   &:nth-child(3n + 2) {
@@ -80,14 +80,7 @@ function BlogCard({ id, slug, title, url }: HomeBlogCardProps) {
   return (
     <Card id={id}>
       <div>
-        <Image
-          loader={() => url}
-          src={url}
-          alt={title}
-          sizes='100vw'
-          width={500}
-          height={300}
-        />
+        <ContentfulImage src={url} alt={title} sizes='100vw' width={500} height={300} />
       </div>
       <span>{title}</span>
       <Button

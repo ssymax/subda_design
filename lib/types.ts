@@ -142,7 +142,7 @@ export interface HomeBlogItem {
     url: string;
     title: string;
   };
-  date: Dayjs;
+  date: string;
 }
 
 export interface TotalPosts {
