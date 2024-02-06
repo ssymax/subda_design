@@ -24,7 +24,7 @@ const Card = styled.div`
   flex-direction: column;
   row-gap: 3rem;
   flex: 1;
-  animation: ${fadeIn} 0.3s ease-out;
+  animation: ${fadeIn} 0.8s ease-in-out;
   position: relative;
 
   &:nth-child(3n + 2) {

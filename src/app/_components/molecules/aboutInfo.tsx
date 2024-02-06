@@ -1,4 +1,9 @@
+'use client';
+
+import { useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { useRouter } from 'next/navigation';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import InfoItem from '@/components/atoms/infoItem';
@@ -11,6 +16,7 @@ const AboutWrapper = styled.div`
   margin-top: 3rem;
   column-gap: 10rem;
   margin-bottom: 10rem;
+  min-height: 100vh;
   ${({ theme }) => theme.maxWidth.lg} {
     flex-direction: column-reverse;
     row-gap: 5rem;
@@ -44,11 +50,33 @@ const RightWrapper = styled.div`
 `;
 
 export default function AboutInfo({ data }: { data?: AboutMeType }) {
+  const aboutRef = useRef<HTMLDivElement>(null);
   const { push } = useRouter();
 
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      const texts = document.querySelector('.left');
+      if (!texts) return;
+      const elements = gsap.utils.toArray(texts?.children);
+
+      tl.from('.right', {
+        autoAlpha: 0,
+        scale: 1.05,
+        duration: 0.8,
+        ease: 'power2.out',
+      }).from(
+        elements,
+        { x: -100, autoAlpha: 0, ease: 'power2.out', stagger: 0.05, duration: 0.8 },
+        '<>',
+      );
+    },
+    { scope: aboutRef, revertOnUpdate: true, dependencies: [data] },
+  );
+
   return (
-    <AboutWrapper>
-      <LeftWrapper>
+    <AboutWrapper ref={aboutRef}>
+      <LeftWrapper className='left'>
         {data?.info.map((item) => (
           <InfoItem key={item.header} header={item.header} text={item.text} />
         ))}
@@ -59,7 +87,7 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
           onRightClick={() => push(routes.contact)}
         />
       </LeftWrapper>
-      <RightWrapper>
+      <RightWrapper className='right'>
         {data?.image.url && (
           <ContentfulImage
             priority

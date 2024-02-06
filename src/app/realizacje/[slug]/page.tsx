@@ -16,10 +16,12 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: string } }) {
+  const realizationData = await getRealization(params.slug);
+
   return (
     <>
-      <RealizationContent slug={params.slug} />
+      <RealizationContent realizationData={realizationData[0]} />
       <Foot />
     </>
   );

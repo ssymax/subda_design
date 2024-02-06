@@ -1,3 +1,5 @@
+'use client';
+
 import styled, { CSSProperties } from 'styled-components';
 import { AboutMeType } from '@/lib/types';
 import { minQuery } from '@/styles/constants';
@@ -59,6 +61,7 @@ export default function AboutSkills({ data }: { data?: AboutMeType }) {
     <SkillsWrapper>
       {aboutImages?.map((image, index) => (
         <ContentfulImage
+          className='skill-image'
           key={image.url}
           width={largeScreen ? imagesSizes[index].width : imagesSizes[index].width / 2}
           height={largeScreen ? imagesSizes[index].height : imagesSizes[index].height / 2}

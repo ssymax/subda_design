@@ -1,15 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
+
 'use client';
 
 import { MouseEvent, useRef, useState } from 'react';
-import Image from 'next/image';
-import useSWR from 'swr';
 import { useGSAP } from '@gsap/react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import GalleryButtons from '@/components/molecules/galleryButtons';
 import Line from '@/components/atoms/line';
 import Pill from '@/components/atoms/pill';
-import { getRealization } from '@/lib/api';
 import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
@@ -130,12 +129,15 @@ const Gallery = styled.div`
   }
 `;
 
-export default function RealizationContent({ slug }: { slug: string }) {
+export default function RealizationContent({
+  realizationData,
+}: {
+  realizationData: DetailedRealizationItem;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const galleryButtonsRef = useRef<HTMLDivElement>(null);
 
-  const { data } = useSWR<DetailedRealizationItem[], Error>(slug, getRealization);
   const initialState = {
     id: '',
     url: '',
@@ -144,8 +146,6 @@ export default function RealizationContent({ slug }: { slug: string }) {
   };
   const [galleryImage, setGalleryImage] = useState<DetailedImage>(initialState);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const normalizedData = data?.[0];
 
   const animation = gsap.timeline();
 
@@ -193,7 +193,7 @@ export default function RealizationContent({ slug }: { slug: string }) {
   };
 
   const onGalleryClick = contextSafe(() => {
-    const element = document.getElementById(normalizedData?.images?.[activeIndex].id!);
+    const element = document.getElementById(realizationData?.images?.[activeIndex].id!);
     const elementRect = element?.children[0].getBoundingClientRect();
     animation
       .to(galleryButtonsRef.current, { duration: 0.1, autoAlpha: 0 })
@@ -213,45 +213,46 @@ export default function RealizationContent({ slug }: { slug: string }) {
 
   const handleClickNext = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    if (!normalizedData?.images.length) return;
-    const length = normalizedData?.images.length;
+    if (!realizationData?.images.length) return;
+    const length = realizationData?.images.length;
     if (activeIndex === length - 1) setActiveIndex(0);
     else setActiveIndex(activeIndex + 1);
   };
 
   const handleClickPrev = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    if (!normalizedData?.images.length) return;
-    const { length } = normalizedData.images;
+    if (!realizationData?.images.length) return;
+    const { length } = realizationData.images;
     if (activeIndex === 0) setActiveIndex(length - 1);
     else setActiveIndex(activeIndex - 1);
   };
 
-  const gallerySrc = normalizedData?.images[activeIndex].url || '';
+  const gallerySrc = realizationData?.images[activeIndex].url || '';
 
   return (
     <Section>
       <ContentfulImage
+        priority
         fill
         sizes='100vw'
-        src={normalizedData?.mainImage || ''}
-        alt={normalizedData?.title || ''}
+        src={realizationData?.mainImage || ''}
+        alt={realizationData?.title || ''}
       />
       <PaddingWrapper>
         <HeaderWithText>
-          <h1>{normalizedData?.title}</h1>
-          <span>{normalizedData?.description}</span>
+          <h1>{realizationData?.title}</h1>
+          <span>{realizationData?.description}</span>
         </HeaderWithText>
         <Line />
         <PillsWrapper>
-          {normalizedData?.location && <Pill label={normalizedData.location} />}
-          {normalizedData?.area && <Pill label={`${normalizedData.area}`} withSup />}
-          {normalizedData?.year && <Pill label={normalizedData?.year} />}
+          {realizationData?.location && <Pill label={realizationData.location} />}
+          {realizationData?.area && <Pill label={`${realizationData.area}`} withSup />}
+          {realizationData?.year && <Pill label={realizationData?.year} />}
         </PillsWrapper>
       </PaddingWrapper>
       <ImagesContainer ref={containerRef}>
         <Masonry>
-          {normalizedData?.images.map((image, index) => (
+          {realizationData?.images.map((image, index) => (
             <Brick
               key={image.id}
               id={image.id}
@@ -260,7 +261,7 @@ export default function RealizationContent({ slug }: { slug: string }) {
               onClick={() => onImageClick(image, index)}
               onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
             >
-              <img src={image.url} alt={normalizedData?.title} />
+              <img src={image.url} alt={realizationData?.title} />
             </Brick>
           ))}
         </Masonry>

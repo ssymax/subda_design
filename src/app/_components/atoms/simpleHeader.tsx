@@ -20,6 +20,7 @@ const Header = styled.h1<{
   $isPageHeader?: boolean;
   $textAlign?: string;
   $lineHeight?: string;
+  $mobileFont?: boolean;
 }>`
   overflow: hidden;
   font-size: ${({ $fontSize }) => $fontSize || '9.6rem'};
@@ -34,6 +35,9 @@ const Header = styled.h1<{
     font-weight: 700;
     font-size: 4rem;
   }
+  ${({ theme }) => theme.maxWidth.md} {
+    font-size: ${({ $mobileFont }) => $mobileFont && '2.5rem;'};
+  }
 `;
 
 export default function SimpleHeader({
@@ -43,6 +47,7 @@ export default function SimpleHeader({
   paddingBottom,
   textAlign,
   lineHeight,
+  mobileFont,
 }: SimpleHeaderProps) {
   const headerRef = useRef<HTMLHeadingElement>(null);
 
@@ -74,6 +79,7 @@ export default function SimpleHeader({
         $isPageHeader={isPageHeader}
         $textAlign={textAlign}
         $lineHeight={lineHeight}
+        $mobileFont={mobileFont}
       >
         {header}
       </Header>

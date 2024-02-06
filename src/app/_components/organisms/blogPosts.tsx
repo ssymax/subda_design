@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import BlogCard from '@/components/molecules/blogCard';
 import Sorter from '@/components/atoms/sorter';

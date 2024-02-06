@@ -1,15 +1,13 @@
 'use client';
 
 import styled from 'styled-components';
-import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
 import HomeHeader from '@/components/atoms/homeHeader';
 import Line from '@/components/atoms/line';
 import RealizationsContainer from '@/components/molecules/realizationsContainer';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
-import { getHomeRealizations } from '@/lib/api';
-import { HOME_REALIZATIONS } from '../../../../lib/constants';
+import { RealizationItem } from '@/lib/types';
 
 const description = `Każdy projekt jest wynikiem dokładnego zbadania potrzeb 
 i dodania indywidualnego charakteru Państwa wnętrzom.`;
@@ -21,11 +19,12 @@ const ButtonWrapper = styled.div`
   margin-top: 3rem;
 `;
 
-export default function HomeRealizations() {
+export default function HomeRealizations({
+  realizations,
+}: {
+  realizations: RealizationItem[];
+}) {
   const { push } = useRouter();
-  const { data, error, isLoading } = useSWR(HOME_REALIZATIONS, getHomeRealizations);
-
-  const realizations = data || [];
 
   return (
     <section>

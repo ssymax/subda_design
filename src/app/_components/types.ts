@@ -195,6 +195,7 @@ export interface SimpleHeaderProps {
   paddingBottom?: string;
   textAlign?: string;
   lineHeight?: string;
+  mobileFont?: boolean;
 }
 
 export interface SorterProps {

@@ -2,10 +2,8 @@
 
 import { useRef } from 'react';
 import styled from 'styled-components';
-import useSWR from 'swr';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { getOffer } from '@/lib/api';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -97,9 +95,8 @@ const List = styled.div`
   width: 100%;
 `;
 
-export default function Offer() {
+export default function Offer({ data }: { data: OfferType }) {
   const cardWrapRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, error } = useSWR<OfferType>('offer', getOffer);
   const { push } = useRouter();
 
   const approaches = data?.approachesCollection.items;
