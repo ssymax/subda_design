@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import RealizationItem from '@/components/molecules/realizationItem';
-import Line from '@/components/atoms/line';
 import { RealizationsContainerProps } from '../types';
 
 const Wrapper = styled.div`

@@ -3,6 +3,7 @@ import { StaticImageData } from 'next/image';
 import {
   ChangeEvent,
   Dispatch,
+  FocusEvent,
   MouseEvent,
   ReactElement,
   ReactNode,
@@ -27,6 +28,10 @@ export interface InputProps {
   width?: string;
   name: string;
   dark?: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void;
+  error?: string;
+  value: string;
 }
 
 export interface CheckboxProps {
@@ -34,6 +39,8 @@ export interface CheckboxProps {
   checked: boolean;
   onChecked: (isChecked: boolean) => void;
   dark?: boolean;
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 export interface MenuProps {

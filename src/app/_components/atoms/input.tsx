@@ -1,15 +1,19 @@
 'use client';
 
+import { forwardRef } from 'react';
 import styled from 'styled-components';
-import { InputProps } from '../types';
+import { InputProps } from '@/components/types';
 
-const Wrapper = styled.div<{ $width?: string; $dark?: boolean }>`
+const Wrapper = styled.div<{ $width?: string; $dark?: boolean; $error?: boolean }>`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid
-    ${({ theme, $dark }) => ($dark ? theme.colors.secondary : theme.colors.primary)};
+    ${({ theme, $dark, $error }) =>
+      // eslint-disable-next-line no-nested-ternary
+      $error ? 'red' : $dark ? theme.colors.secondary : theme.colors.primary};
   width: ${({ $width }) => $width || '100%'};
   row-gap: 2rem;
+  position: relative;
 `;
 
 const Label = styled.label<{ $dark?: boolean }>`
@@ -37,19 +41,41 @@ const StyledInput = styled.input<{ $dark?: boolean }>`
   }
 `;
 
-export default function Input({ label, placeholder, width, name, dark }: InputProps) {
-  return (
-    <Wrapper $dark={dark} $width={width}>
-      <Label $dark={dark} htmlFor={name}>
-        {label}
-      </Label>
-      <StyledInput
-        $dark={dark}
-        type='text'
-        placeholder={placeholder}
-        width={width}
-        name={name}
-      />
-    </Wrapper>
-  );
-}
+const Error = styled.span`
+  position: absolute;
+  font-weight: 500;
+  color: red;
+  font-size: 1.2rem;
+  left: 0.5rem;
+  bottom: -2.2rem;
+`;
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { label, placeholder, width, name, dark, onChange, onBlur, error, value }: InputProps,
+    ref,
+  ) => {
+    return (
+      <Wrapper $dark={dark} $width={width} $error={!!error}>
+        <Label $dark={dark} htmlFor={name}>
+          {label}
+        </Label>
+        <StyledInput
+          id={name}
+          ref={ref}
+          $dark={dark}
+          type='text'
+          placeholder={placeholder}
+          width={width}
+          name={name}
+          onChange={onChange}
+          onBlur={onBlur}
+          value={value}
+        />
+        {error && <Error>{error}</Error>}
+      </Wrapper>
+    );
+  },
+);
+
+export default Input;
