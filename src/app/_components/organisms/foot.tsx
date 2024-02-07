@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import Form from '@/components/molecules/form';
 import FooterInfo from '@/components/molecules/footerInfo';
@@ -80,6 +81,8 @@ const spanProps = {
 };
 
 export default function Foot({ header, children, dark }: FootProps) {
+  const { push } = useRouter();
+
   return (
     <Footer $dark={dark}>
       <Header $dark={dark}>{header || `Bądźmy w kontakcie`}</Header>
@@ -96,12 +99,8 @@ export default function Foot({ header, children, dark }: FootProps) {
           <RightsAndPolicy>
             <span>{copyright} Wszelkie prawa zastrzeżone</span>
             <div>
-              <ActiveSpan {...spanProps} onClick={() => {}}>
+              <ActiveSpan {...spanProps} onClick={() => push('?modal=true')}>
                 Polityka prywatności
-              </ActiveSpan>
-              {` / `}
-              <ActiveSpan {...spanProps} onClick={() => {}}>
-                Polityka cookies
               </ActiveSpan>
             </div>
           </RightsAndPolicy>

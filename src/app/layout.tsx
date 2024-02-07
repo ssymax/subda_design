@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Raleway } from 'next/font/google';
 import Navbar from '@/components/organisms/navbar';
+import Modal from '@/components/molecules/modal';
 import Providers from '@/providers/providers';
 import StyledComponentsRegistry from '../../lib/registry';
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
               <Divider />
               {children}
+              <Modal />
             </Providers>
           </StyledComponentsRegistry>
         </main>
