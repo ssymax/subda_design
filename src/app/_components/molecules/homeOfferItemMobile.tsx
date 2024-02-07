@@ -1,11 +1,11 @@
 'use client';
 
 import styled from 'styled-components';
-import Image from 'next/image';
 import Button from '@/components/atoms/button';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/routes/routes';
-import { HomeOfferItemMobileProps } from '../types';
+import ContentfulImage from '@/lib/contentfulImage';
+import { HomeOfferItemMobileProps } from '@/components/types';
 
 const Wrap = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ const Accordion = styled.div<{ $open: boolean; $isFirst: boolean; $isLast: boole
 `;
 
 const ContentWrap = styled.div<{ $open: boolean; $isLast: boolean; $isFirst: boolean }>`
-  height: ${({ $open }) => ($open ? 'calc(80rem - 32rem)' : 0)};
+  height: ${({ $open }) => ($open ? 'calc(93rem - 32rem)' : 0)};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -49,10 +49,19 @@ const ContentWrap = styled.div<{ $open: boolean; $isLast: boolean; $isFirst: boo
     $open && $isLast && `0.5px solid ${theme.colors.primary}`};
   border-bottom-left-radius: ${({ $isLast }) => $isLast && '1rem'};
   border-bottom-right-radius: ${({ $isLast }) => $isLast && '1rem'};
+
+  div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    line-height: 140%;
+    font-size: 1.4rem;
+  }
   img {
     max-width: 100%;
     height: auto;
     align-self: center;
+    border-radius: 1rem;
   }
 `;
 
@@ -60,7 +69,8 @@ export default function HomeOfferItemMobile({
   id,
   onClick,
   openId,
-  text,
+  text1st,
+  text2nd,
   image,
   title,
   accordionNumber,
@@ -83,14 +93,18 @@ export default function HomeOfferItemMobile({
         <span>{title}</span> <span>{accordionNumber}</span>
       </Accordion>
       <ContentWrap $isLast={isLast} $open={id === openId} $isFirst={isFirst}>
-        <span>{text}</span>
+        <div>
+          <span>{text1st}</span>
+          <span>{text2nd}</span>
+        </div>
+
         <Button
           tabIndex={openId !== id ? -1 : 0}
           variant='primary'
           text='Porozmawiajmy'
           onClick={() => push(routes.contact)}
         />
-        <Image src={image} alt={title} />
+        <ContentfulImage width={600} height={400} src={image} alt={title} sizes='100vw' />
       </ContentWrap>
     </Wrap>
   );
