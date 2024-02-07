@@ -33,19 +33,41 @@ const CheckedIcon = styled.div`
   left: 0.1rem;
 `;
 
-export default function Checkbox({ label, checked, onChecked, dark }: CheckboxProps) {
+const Error = styled.span`
+  position: absolute;
+  font-weight: 500;
+  color: red;
+  font-size: 1.2rem;
+  left: 0.5rem;
+  bottom: -2.2rem;
+`;
+
+export default function Checkbox({
+  label,
+  checked,
+  onChecked,
+  dark,
+  onBlur,
+  error,
+}: CheckboxProps) {
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChecked(e.target.checked);
   };
   return (
     <CheckboxWrapper $dark={dark}>
-      <CheckboxInput type='checkbox' checked={checked} onChange={handleCheckboxChange} />
+      <CheckboxInput
+        type='checkbox'
+        checked={checked}
+        onChange={handleCheckboxChange}
+        onBlur={onBlur}
+      />
       {label}
       {checked && (
         <CheckedIcon>
           <CheckMark />
         </CheckedIcon>
       )}
+      {error && <Error>{error}</Error>}
     </CheckboxWrapper>
   );
 }

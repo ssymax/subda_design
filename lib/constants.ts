@@ -51,3 +51,10 @@ export const realizations = {
   redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz. ',
   text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i inny`,
 };
+
+export const defaultFormValues = {
+  name: '',
+  phone: '',
+  message: '',
+  policy: false,
+};
