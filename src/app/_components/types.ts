@@ -88,8 +88,9 @@ export interface HomeOfferItemProps {
   openId: string;
   onClick: () => void;
   accordionNumber: string;
-  text: string;
-  image: StaticImageData;
+  text1st: string;
+  text2nd: string;
+  image: string;
   title: string;
   containerWidth?: number;
   itemsQuantity: number;
@@ -126,8 +127,9 @@ export interface HomeOfferItemMobileProps {
   id: string;
   onClick: () => void;
   openId: string;
-  text: string;
-  image: StaticImageData;
+  text1st: string;
+  text2nd: string;
+  image: string;
   title: string;
   accordionNumber: string;
   index: number;

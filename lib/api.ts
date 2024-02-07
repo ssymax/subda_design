@@ -11,6 +11,7 @@ import {
   OFFER_QUERY,
   HOME_BLOG_QUERY,
   TOTAL_BLOG_POSTS_QUERY,
+  HOME_OFFER_QUERY,
 } from './queries';
 import {
   AboutMeType,
@@ -18,6 +19,7 @@ import {
   DetailedRealizationItem,
   HomeBlogItem,
   HomeBlogItemModel,
+  HomeOfferType,
   OfferType,
   RealizationItem,
   TotalPosts,
@@ -107,6 +109,11 @@ export async function getAboutMe(): Promise<AboutMeType> {
 export async function getOffer(): Promise<OfferType> {
   const offer = await fetchGraphQL(OFFER_QUERY, false);
   return offer.data.offer;
+}
+
+export async function getHomeOffer(): Promise<HomeOfferType[]> {
+  const homeOffer = await fetchGraphQL(HOME_OFFER_QUERY, false);
+  return homeOffer.data.homeOffferCollection.items;
 }
 
 export async function getHomeBlog(): Promise<HomeBlogItemModel[]> {

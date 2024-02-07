@@ -1,11 +1,11 @@
 'use client';
 
 import styled from 'styled-components';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/routes/routes';
 import { HomeOfferItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
+import ContentfulImage from '@/lib/contentfulImage';
 
 const Wrap = styled.div`
   display: flex;
@@ -21,12 +21,12 @@ const Accordion = styled.div<{
   display: flex;
   color: ${({ theme }) => theme.colors.primary};
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   text-transform: uppercase;
   cursor: pointer;
   pointer-events: ${({ $open }) => $open && 'none'};
-  padding: 1rem;
+  padding: 1rem 0 2rem 0;
   width: ${({ $accordionWidth }) => `${$accordionWidth}px`};
   position: relative;
   border-top-right-radius: ${({ $open, $isLast, $isFirst }) =>
@@ -46,11 +46,10 @@ const Accordion = styled.div<{
     font-size: 4rem;
   }
   :last-child {
-    display: inline;
-    position: absolute;
-    bottom: 4rem;
-    transform: rotate(-90deg);
     white-space: nowrap;
+    bottom: 0;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
   }
 `;
 
@@ -74,18 +73,28 @@ const ContentWrap = styled.div<{
     $open && $isLast && `0.5px solid ${theme.colors.primary}`};
 `;
 
-const HalfContent = styled.div<{ $padding: number; $responsiveWidth?: number }>`
+const HalfContent = styled.div`
   display: flex;
+`;
+
+const InnerContent = styled.div<{ $padding: number; $responsiveWidth?: number }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: ${({ $responsiveWidth }) => `${$responsiveWidth}px`};
+  padding: ${({ $padding }) => `${$padding}px`};
+
   div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: ${({ $responsiveWidth }) => `${$responsiveWidth}px`};
-    padding: ${({ $padding }) => `${$padding}px`};
-    img {
-      width: 100%;
-      height: auto;
-    }
+    row-gap: 2rem;
+    line-height: 140%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
   }
 `;
 
@@ -94,7 +103,8 @@ export default function HomeOfferItem({
   onClick,
   openId,
   accordionNumber,
-  text,
+  text1st,
+  text2nd,
   image,
   title,
   containerWidth,
@@ -134,21 +144,30 @@ export default function HomeOfferItem({
         $isFirst={isFirst}
         $isLast={isLast}
       >
-        <HalfContent $padding={padding} $responsiveWidth={responsiveHalfWidth}>
-          <div>
-            <span>{text}</span>
+        <HalfContent>
+          <InnerContent $padding={padding} $responsiveWidth={responsiveHalfWidth}>
+            <div>
+              <span>{text1st}</span>
+              <span>{text2nd}</span>
+            </div>
             <Button
               tabIndex={openId !== id ? -1 : 0}
               variant='primary'
               text='Porozmawiajmy'
               onClick={() => push(routes.contact)}
             />
-          </div>
+          </InnerContent>
         </HalfContent>
-        <HalfContent $padding={padding} $responsiveWidth={responsiveHalfWidth}>
-          <div>
-            <Image src={image} alt={title} />
-          </div>
+        <HalfContent>
+          <InnerContent $padding={padding} $responsiveWidth={responsiveHalfWidth}>
+            <ContentfulImage
+              width={600}
+              height={400}
+              src={image}
+              alt={title}
+              sizes='100vw'
+            />
+          </InnerContent>
         </HalfContent>
       </ContentWrap>
     </Wrap>

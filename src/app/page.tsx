@@ -8,7 +8,7 @@ import PaddingWrapper from '@/templates/paddingWrapper';
 import Foot from '@/components/organisms/foot';
 import Hero from '@/components/organisms/hero';
 import { head } from '@/lib/constants';
-import { getHomeBlog, getHomeRealizations } from '@/lib/api';
+import { getHomeBlog, getHomeOffer, getHomeRealizations } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: head.title,
@@ -18,13 +18,14 @@ export const metadata: Metadata = {
 export default async function Page() {
   const realizations = await getHomeRealizations();
   const blogPosts = await getHomeBlog();
+  const offer = await getHomeOffer();
   return (
     <>
       <Hero />
       <PaddingWrapper>
         <HomeAbout />
         <HomeRealizations realizations={realizations} />
-        <HomeOffer />
+        <HomeOffer offer={offer} />
         <HomeReferences />
         <HomeBlog blogPosts={blogPosts} />
       </PaddingWrapper>

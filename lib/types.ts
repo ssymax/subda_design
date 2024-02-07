@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 export interface SimpleRealizationItemModel {
   sys: {
     id: string;
@@ -172,4 +170,17 @@ export interface BlogPost {
   text3rd: string;
   header4th: string;
   text4th: string;
+}
+
+export interface HomeOfferType {
+  sys: {
+    id: string;
+  };
+  slideNumber: string;
+  header: string;
+  text1st: string;
+  text2nd: string;
+  image: {
+    url: string;
+  };
 }

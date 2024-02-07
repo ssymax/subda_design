@@ -183,7 +183,7 @@ export default function Form({ dark }: FormProps) {
       </InputsWrapper>
       <ButtonAndCheckbox>
         <Button
-          text={serverState.succeeded ? 'Wysłano' : 'Wyślij wiadomość'}
+          text={serverState.succeeded ? 'Wysłano wiadomość' : 'Wyślij wiadomość'}
           variant='primary'
           Icon={serverState.succeeded ? <CheckMark /> : <EmailIcon />}
           onClick={handleSubmit(onSubmit)}

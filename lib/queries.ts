@@ -102,6 +102,24 @@ export const OFFER_QUERY = `query offerEntryQuery {
   }
 }`;
 
+export const HOME_OFFER_QUERY = `query homeOffferCollectionQuery {
+  homeOffferCollection (order: slideNumber_ASC) {
+    items {
+      sys {
+        id
+      }
+      slideNumber
+      header
+      text1st
+      text2nd
+      image {
+        url
+      }
+    }
+  }
+}
+`;
+
 export const HOME_BLOG_QUERY = `query blogCollectionQuery {
   blogCollection (order: date_DESC, limit: 3) {
     items {
