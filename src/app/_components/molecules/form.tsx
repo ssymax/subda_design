@@ -2,6 +2,7 @@
 
 import { useForm, Controller } from 'react-hook-form';
 import { useForm as useFormspree } from '@formspree/react';
+import { useEffect } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import styled from 'styled-components';
@@ -14,7 +15,6 @@ import { defaultFormValues } from '@/lib/constants';
 import { FormProps } from '@/components/types';
 import EmailIcon from '../../../../public/images/email.svg';
 import CheckMark from '../../../../public/images/checkmark.svg';
-import { useEffect } from 'react';
 
 const MessageSchema = z.object({
   name: z
@@ -91,7 +91,7 @@ const Span = styled.span<{ $dark?: boolean }>`
 
 const renderLabel = (dark?: boolean) => (
   <Span $dark={dark}>
-    {policy.accept} <a href='x'>{policy.privacy}</a>
+    {policy.accept} <a href='?modal=true'>{policy.privacy}</a>
   </Span>
 );
 

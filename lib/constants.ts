@@ -58,3 +58,60 @@ export const defaultFormValues = {
   message: '',
   policy: false,
 };
+
+export const privacyPolicyData = {
+  generalTerms: {
+    administrator: {
+      name: 'Marta Subda Design',
+      address: 'ul. Jarosława Iwaszkiewicza 30/24',
+      nip: '7393709206',
+      contact: {
+        postalAddress: 'ul. Jarosława Iwaszkiewicza 30/24',
+        email: 'martasubda@gmail.com',
+      },
+      dataProtectionOfficer:
+        'Nie powołano Inspektora Ochrony Danych zgodnie z Art. 37 RODO.',
+    },
+    privacyPolicy: {
+      integralPart: 'Polityka prywatności stanowi integralną część Regulaminu.',
+      information:
+        'Korzystając z oferowanych przez nas usług, powierzasz nam swoje informacje.',
+      legalBasis:
+        'Przestrzegamy zasad ochrony danych osobowych oraz wszelkich uregulowań prawnych.',
+    },
+    userRights:
+      'Na żądanie osoby, której dane osobowe są przetwarzane, udzielamy wyczerpujących informacji.',
+  },
+  privacyPrinciples: {
+    respect:
+      'Szanujemy Twoją prywatność. Pragniemy zagwarantować Ci wygodę korzystania z naszych usług.',
+    fairUse:
+      'Cenimy zaufanie, jakim Nas obdarzasz, powierzając nam swoje dane osobowe w celu realizacji usług.',
+    transparency:
+      'Jako Użytkownik masz prawo do uzyskania pełnych i jasnych informacji o tym, w jaki sposób wykorzystujemy Twoje dane osobowe.',
+    protection:
+      'Podejmiemy wszystkie uzasadnione działania, aby chronić Twoje dane przed nienależytym i niekontrolowanym wykorzystaniem.',
+    legalBasis: [
+      'art. 6 ust. 1 lit. a - zgoda',
+      'art. 6 ust. 1 lit. b - niezbędność do wykonania umowy',
+      'art. 6 ust. 1 lit. c - niezbędność do wypełnienia obowiązku prawnego',
+      'art. 6 ust. 1 lit. d - ochrona żywotnych interesów',
+      'art. 6 ust. 1 lit. e - wykonanie zadania publicznego',
+      'art. 6 ust. 1 lit. f - prawnie uzasadnione interesy',
+    ],
+    dataRetention:
+      'Twoje dane osobowe przetwarzane będą przez okres realizacji umowy oraz nie dłużej niż 10 lat.',
+  },
+  userRights: {
+    accessAndCopy:
+      'Przysługuje Ci prawo dostępu do swoich danych osobowych i otrzymania kopii danych osobowych.',
+    correction: 'Przysługuje Ci prawo do sprostowania swoich nieprawidłowych danych.',
+    deletion: 'Przysługuje Ci prawo do usunięcia danych osobowych.',
+    restriction: 'Przysługuje Ci prawo do ograniczenia przetwarzania danych osobowych.',
+    dataPortability:
+      'Przysługuje Ci prawo do przenoszenia dostarczonych danych w formie zautomatyzowanej.',
+    objection:
+      'Przysługuje Ci prawo do wniesienia sprzeciwu wobec przetwarzania danych osobowych.',
+    complaint: 'Przysługuje Ci prawo do wniesienia skargi do organu nadzorczego.',
+  },
+};

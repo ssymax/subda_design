@@ -13,6 +13,13 @@ import { getHomeBlog, getHomeOffer, getHomeRealizations } from '@/lib/api';
 export const metadata: Metadata = {
   title: head.title,
   description: head.description,
+  openGraph: {
+    title: 'Subda Design',
+    description: 'Marta Subda Design - projektant wnętrz',
+    images: 'https://subdadesign.pl/hero.png',
+    type: 'website',
+  },
+  metadataBase: new URL('https://subdadesign.pl'),
 };
 
 export default async function Page() {
