@@ -12,6 +12,6 @@ const contentfulLoader = ({ src, width, quality }: ContentfulImageProps) => {
 };
 
 export default function ContentfulImage(props: ContentfulImageProps) {
-  // eslint-disable-next-line react/destructuring-assignment, react/prop-types
-  return <Image alt={props.alt} loader={contentfulLoader} {...props} />;
+  const { alt } = props;
+  return <Image alt={alt} loader={contentfulLoader} {...props} />;
 }
