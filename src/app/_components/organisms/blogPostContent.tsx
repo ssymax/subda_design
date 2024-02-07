@@ -8,8 +8,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import SimpleHeader from '@/app/_components/atoms/simpleHeader';
-import Foot from '@/app/_components/organisms/foot';
-import PaddingWrapper from '@/app/_templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
 import CalendarIcon from '../../../../public/images/calendar.svg';
 
