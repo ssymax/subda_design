@@ -18,6 +18,7 @@ const Card = styled.div`
   padding: 2rem 6rem;
   ${({ theme }) => theme.maxWidth.lg} {
     font-size: 1.6rem;
+    padding: 1rem 2rem;
   }
 `;
 
