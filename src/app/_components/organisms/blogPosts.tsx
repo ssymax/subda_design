@@ -42,6 +42,13 @@ const PostsContainer = styled.div`
   }
 `;
 
+const NoPosts = styled.div`
+  display: flex;
+  font-size: 2rem;
+  margin-top: 3rem;
+  letter-spacing: 2px;
+`;
+
 export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
   const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
@@ -58,6 +65,9 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
         <Sorter order={order} onClick={handleOrderClick} />
         <SearchInput onChange={handleChange} value={search} placeholder='Szukaj' />
       </ActionWrapper>
+      {!!search.length && !sortedPosts.length && (
+        <NoPosts>{`Brak wyników dla "${search}"`}</NoPosts>
+      )}
       <PostsContainer>
         {sortedPosts?.map((p) => (
           <BlogCard
