@@ -9,13 +9,14 @@ import { useGSAP } from '@gsap/react';
 
 const Card = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   row-gap: 2.5rem;
   align-items: center;
   flex-direction: column;
   font-size: 2rem;
   padding: 2rem 6rem;
+  min-height: 30rem;
   ${({ theme }) => theme.maxWidth.lg} {
     font-size: 1.6rem;
     padding: 1rem 2rem;
