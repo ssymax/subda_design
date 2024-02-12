@@ -1,13 +1,20 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import BlogCard from '@/components/molecules/blogCard';
 import Sorter from '@/components/atoms/sorter';
 import SearchInput from '@/components/atoms/searchInput';
 import { HomeBlogItem, Order } from '@/lib/types';
 import { sortAndFilterBlogPosts } from '@/utils/utils';
 import { ASC, DESC } from '@/lib/constants';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ActionWrapper = styled.div`
   position: absolute;
@@ -50,6 +57,7 @@ const NoPosts = styled.div`
 `;
 
 export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
 
@@ -58,6 +66,26 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
   const sortedPosts = sortAndFilterBlogPosts(data, order, search);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const items = gsap.utils.toArray(containerRef.current.children) as HTMLElement[];
+
+      items.forEach((item) => {
+        gsap.from(item, {
+          autoAlpha: 0,
+          y: 100,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: item,
+            start: 'top+=200px bottom',
+          },
+        });
+      });
+    },
+    { scope: containerRef, revertOnUpdate: true, dependencies: data },
+  );
 
   return (
     <>
@@ -68,7 +96,7 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
       {!!search.length && !sortedPosts.length && (
         <NoPosts>{`Brak wyników dla "${search}"`}</NoPosts>
       )}
-      <PostsContainer>
+      <PostsContainer ref={containerRef}>
         {sortedPosts?.map((p) => (
           <BlogCard
             key={p.id}

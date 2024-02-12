@@ -2,29 +2,17 @@
 
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Button from '@/components/atoms/button';
 import { HomeBlogCardProps } from '@/components/types';
 import { routes } from '@/routes/routes';
 import ContentfulImage from '@/lib/contentfulImage';
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
   flex: 1;
-  animation: ${fadeIn} 0.8s ease-in-out;
   position: relative;
 
   &:nth-child(3n + 2) {
