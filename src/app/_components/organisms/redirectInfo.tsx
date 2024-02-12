@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import Line from '@/components/atoms/line';
-import SmallHeader from '@/components/atoms/smallHeader';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 
 import { RedirectInfoProps } from '@/components/types';
@@ -24,6 +23,14 @@ const InnerWrapper = styled.div<{ $inverse?: boolean }>`
     ${({ theme }) => theme.maxWidth.lg} {
       width: 100%;
     }
+  }
+
+  h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
   }
 
   p {
@@ -63,7 +70,7 @@ export default function RedirectInfo({
       <Line />
       <InnerWrapper $inverse={inverse}>
         <div>
-          <SmallHeader>{header}</SmallHeader>
+          <h3>{header}</h3>
           <p>{text}</p>
           <ButtonsGroup
             leftLabel={leftLabel}

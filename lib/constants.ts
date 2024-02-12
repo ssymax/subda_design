@@ -49,7 +49,9 @@ export const head = {
 export const realizations = {
   header: 'Zobacz najnowsze realizacje moich projektów',
   redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz. ',
-  text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i inny`,
+  text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i innych pomieszczeń, 
+  które łączą w sobie nowoczesność z funkcjonalnością, tworząc przestrzenie pełne elegancji i stylu.
+   Specjalizuję się w tworzeniu aranżacji wnętrz, które odzwierciedlają osobowość i potrzeby moich klientów, transformując każde pomieszczenie w wyjątkowe dzieło sztuki.`,
 };
 
 export const defaultFormValues = {
@@ -115,3 +117,25 @@ export const privacyPolicyData = {
     complaint: 'Przysługuje Ci prawo do wniesienia skargi do organu nadzorczego.',
   },
 };
+
+export const opinions = [
+  {
+    id: 1,
+    name: 'Marta',
+    description: `Pani Marta ma wysmakowany gust; jednocześnie dyskretny. Dobiera wzory, kolory i materiały, by pasowały do oświetlenia oraz przestrzeni, jaką dysponuje. Uwzględnia
+      także uwagi klienta, jego gust i potrzeby. Gorąco polecam.`,
+    place: 'Poznań',
+  },
+  {
+    id: 2,
+    name: 'Marta',
+    description: `Właśnie jestem po fantastycznej współpracy z profesjonalną, kreatywną i bardzo zdolną projektantką. Spotkałam się z indywidualnym i elastycznym podejściem do klienta a jednocześnie z wielorakością pomysłów i doświadczeniem mimo młodego wieku właścicielki firmy. Polecam z zamkniętymi oczami aranżowanie, projektowanie i doradztwo SubdaDesign`,
+    place: 'Lublin',
+  },
+  {
+    id: 3,
+    name: 'Katarzyna',
+    description: `Pani Marta świetnie sobie radzi nawet z najbardziej wymagającymi klientami - potrafi połączyć dwa różne światy w jedną wspólną całość. Szczerze polecam współpracę, a finalny projekt już czeka na realizację, której nie możemy się doczekać`,
+    place: 'Warszawa',
+  },
+];

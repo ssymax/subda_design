@@ -6,32 +6,9 @@ import HomeHeader from '@/components/atoms/homeHeader';
 import HomeReferenceCard from '@/components/molecules/homeReferenceCard';
 import Line from '@/components/atoms/line';
 import Parallax from '@/components/atoms/parallax';
+import { opinions } from '@/lib/constants';
 import ArrowIcon from '../../../../public/images/arrow.svg';
 import bathroom from '../../../../public/bathroom.jpg';
-
-const dummyData = [
-  {
-    id: 1,
-    name: 'Object 1',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget convallis justo.',
-    place: 'Place A',
-  },
-  {
-    id: 2,
-    name: 'Object 2',
-    description:
-      'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.',
-    place: 'Place B',
-  },
-  {
-    id: 3,
-    name: 'Object 3',
-    description:
-      'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    place: 'Place C',
-  },
-];
 
 const Wrapper = styled.div`
   display: grid;
@@ -62,13 +39,13 @@ export default function HomeReferences() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClickNext = () =>
-    activeIndex === dummyData.length - 1
+    activeIndex === opinions.length - 1
       ? setActiveIndex(0)
       : setActiveIndex(activeIndex + 1);
 
   const handleClickPrev = () =>
     activeIndex === 0
-      ? setActiveIndex(dummyData.length - 1)
+      ? setActiveIndex(opinions.length - 1)
       : setActiveIndex(activeIndex - 1);
 
   const arrowButtonProps = {
@@ -87,7 +64,7 @@ export default function HomeReferences() {
         >
           <StyledArrowIcon $rotated />
         </IconWrapper>
-        <HomeReferenceCard {...dummyData[activeIndex]} />
+        <HomeReferenceCard {...opinions[activeIndex]} />
         <IconWrapper
           {...arrowButtonProps}
           onClick={handleClickNext}

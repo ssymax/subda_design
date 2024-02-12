@@ -17,7 +17,7 @@ export default async function Page() {
   return (
     <>
       <PaddingWrapper>
-        <section style={{ marginTop: '3rem' }}>
+        <section>
           <SimpleHeader
             isPageHeader
             header={realizations.header}
