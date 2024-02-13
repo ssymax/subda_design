@@ -55,10 +55,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledCloseIcon = styled(CloseIcon)`
+const StyledCloseIcon = styled.div`
   width: 4rem;
   height: 4rem;
-  fill: ${({ theme }) => theme.colors.secondary};
+  svg {
+    fill: ${({ theme }) => theme.colors.secondary};
+  }
   cursor: pointer;
 `;
 
@@ -115,13 +117,15 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
       <HalfWrapper ref={leftWrapRef} />
       <HalfWrapper $open={open} ref={rightWrapRef}>
         <StyledCloseIcon
-          onClick={onLinkClick}
+          onClick={() => onLinkClick()}
           role='button'
-          onKeyDown={(e: KeyboardEvent<SVGAElement>) =>
+          onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
             e.key === 'Enter' && onLinkClick()
           }
           tabIndex={0}
-        />
+        >
+          <CloseIcon />
+        </StyledCloseIcon>
       </HalfWrapper>
       <MobileNav ref={mobileNavRef}>
         {routesArr().map((r) => (
