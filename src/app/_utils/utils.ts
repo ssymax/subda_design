@@ -1,6 +1,8 @@
 import { ASC, DESC } from '@/lib/constants';
 import { HomeBlogItem, Order } from '@/lib/types';
 import dayjs from 'dayjs';
+import gsap from 'gsap';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export function setBodyOverflow(value: 'hidden' | 'auto'): void {
   const { body } = document;

@@ -6,6 +6,7 @@ import { MouseEvent, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalleryButtons from '@/components/molecules/galleryButtons';
 import Line from '@/components/atoms/line';
 import Pill from '@/components/atoms/pill';
@@ -13,15 +14,30 @@ import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
 
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ limitCallbacks: true });
+}
+
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+`;
+
+const ImageWrapper = styled.div`
   position: relative;
+  display: flex;
   img {
+    position: relative !important;
     max-width: 100%;
     height: auto;
-    position: relative !important;
+    object-fit: cover;
+    z-index: -1;
   }
+`;
+
+const ContentWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.beige};
 `;
 
 const HeaderWithText = styled.div`
@@ -137,6 +153,7 @@ export default function RealizationContent({
   const containerRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const galleryButtonsRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   const initialState = {
     id: '',
@@ -187,6 +204,41 @@ export default function RealizationContent({
     },
   );
 
+  useGSAP(
+    () => {
+      if (!imageRef.current) return;
+      const tl = gsap.timeline();
+      tl.from('.header', { x: -50, autoAlpha: 0, duration: 0.8 })
+        .from('.text', { autoAlpha: 0, x: 50 }, '<>')
+        .from(imageRef.current, {
+          height: 0,
+          duration: 3,
+          delay: 0.5,
+          ease: 'expo.inOut',
+        });
+    },
+    { dependencies: [realizationData] },
+  );
+
+  useGSAP(
+    () => {
+      const wrapper = document.querySelector('.wrapper') as HTMLElement;
+      if (!wrapper) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: 'bottom center',
+          scrub: 2,
+        },
+      });
+      const movement = -(wrapper.offsetHeight * 0.2);
+      tl.to(wrapper, { y: movement, ease: 'none' }, 0);
+    },
+    { dependencies: [realizationData] },
+  );
+
   const onImageClick = (image: DetailedImage, index: number) => {
     setActiveIndex(index);
     setGalleryImage(image);
@@ -230,26 +282,31 @@ export default function RealizationContent({
   const gallerySrc = realizationData?.images[activeIndex].url || '';
 
   return (
-    <Section>
-      <ContentfulImage
-        priority
-        fill
-        sizes='100vw'
-        src={realizationData?.mainImage || ''}
-        alt={realizationData?.title || ''}
-      />
-      <PaddingWrapper>
-        <HeaderWithText>
-          <h1>{realizationData?.title}</h1>
-          <span>{realizationData?.description}</span>
-        </HeaderWithText>
-        <Line />
-        <PillsWrapper>
-          {realizationData?.location && <Pill label={realizationData.location} />}
-          {realizationData?.area && <Pill label={`${realizationData.area}`} withSup />}
-          {realizationData?.year && <Pill label={realizationData?.year} />}
-        </PillsWrapper>
-      </PaddingWrapper>
+    <Section id='hero'>
+      <ImageWrapper ref={imageRef}>
+        <ContentfulImage
+          priority
+          sizes='100vw'
+          fill
+          src={realizationData?.mainImage}
+          alt={realizationData?.title}
+        />
+      </ImageWrapper>
+      <ContentWrapper className='wrapper'>
+        <PaddingWrapper>
+          <HeaderWithText>
+            <h1 className='header'>{realizationData?.title}</h1>
+            <span className='text'>{realizationData?.description}</span>
+          </HeaderWithText>
+          <Line />
+          <PillsWrapper>
+            {realizationData?.location && <Pill label={realizationData.location} />}
+            {realizationData?.area && <Pill label={`${realizationData.area}`} withSup />}
+            {realizationData?.year && <Pill label={realizationData?.year} />}
+          </PillsWrapper>
+        </PaddingWrapper>
+      </ContentWrapper>
+
       <ImagesContainer ref={containerRef}>
         <Masonry>
           {realizationData?.images.map((image, index) => (

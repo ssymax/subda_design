@@ -38,18 +38,23 @@ const Header = styled.header`
   }
 `;
 
-const StyledLogo = styled(Logo)`
-  height: 60%;
-  width: auto;
-  fill: ${({ theme }) => theme.colors.secondary};
-  overflow: hidden;
-  z-index: ${({ theme }) => theme.zIndex.level10};
-  cursor: pointer;
-`;
-
 const ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 3rem;
+
   ${({ theme }) => theme.maxWidth.lg} {
     display: none;
+  }
+`;
+
+const LogoWrapper = styled.div`
+  height: 4.2rem;
+  width: 19.2rem;
+  z-index: ${({ theme }) => theme.zIndex.level10};
+  cursor: pointer;
+  svg {
+    fill: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
@@ -89,17 +94,18 @@ export default function Headerbar() {
   return (
     <>
       <Header ref={headerRef}>
-        <StyledLogo
+        <LogoWrapper
           role='button'
           tabIndex={0}
           onClick={() => push(routes.home)}
-          onKeyDown={(e: KeyboardEvent<SVGSVGElement>) =>
+          onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
             e.key === 'Enter' && push(routes.home)
           }
-        />
-        <Menu />
-        <Burger open={open} toggleOpen={handleToggle} />
+        >
+          <Logo />
+        </LogoWrapper>
         <ButtonWrap>
+          <Menu />
           <Button
             large
             text='Porozmawiajmy'
@@ -107,6 +113,7 @@ export default function Headerbar() {
             onClick={() => push(routes.contact)}
           />
         </ButtonWrap>
+        <Burger open={open} toggleOpen={handleToggle} />
       </Header>
       <MenuMobile open={open} setOpen={setOpen} />
     </>
