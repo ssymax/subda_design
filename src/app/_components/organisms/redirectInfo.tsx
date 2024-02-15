@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import Line from '@/components/atoms/line';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 
 import { RedirectInfoProps } from '@/components/types';
