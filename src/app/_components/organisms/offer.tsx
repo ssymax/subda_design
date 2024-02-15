@@ -74,7 +74,8 @@ const Steps = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
-  height: fit-content;
+  height: auto;
+  transition: all 0.3s ease;
   ${({ theme }) => theme.maxWidth.xl} {
     width: 100%;
     margin-top: 8rem;
@@ -87,6 +88,7 @@ const Slides = styled.section`
   width: 100%;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 `;
 
 const List = styled.div`
@@ -97,6 +99,7 @@ const List = styled.div`
 
 export default function Offer({ data }: { data: OfferType }) {
   const cardWrapRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
   const { push } = useRouter();
 
   const approaches = data?.approachesCollection.items;
@@ -111,12 +114,8 @@ export default function Offer({ data }: { data: OfferType }) {
 
       gsap.from(cards, {
         autoAlpha: 0,
-        marginTop: 0,
-        duration: 1,
-        stagger: {
-          amount: 0.2,
-          from: 'random',
-        },
+        duration: 0.8,
+        y: 100,
       });
     },
 
@@ -141,6 +140,11 @@ export default function Offer({ data }: { data: OfferType }) {
             end: 'bottom top',
             scrub: true,
             invalidateOnRefresh: true,
+            snap: {
+              snapTo: 0.5,
+              duration: 0.5,
+              ease: 'power1.inOut',
+            },
           },
         });
 
@@ -176,6 +180,24 @@ export default function Offer({ data }: { data: OfferType }) {
       dependencies: parallaxImages,
     },
   );
+
+  useGSAP(
+    () => {
+      if (!stepsRef.current) return;
+
+      gsap.to(stepsRef.current.parentElement, {
+        filter: 'blur(10px) grayscale(50)',
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: 'center top',
+          pin: stepsRef.current.parentElement,
+          pinSpacing: false,
+          scrub: 2,
+        },
+      });
+    },
+    { scope: stepsRef, dependencies: steps },
+  );
   return (
     <section>
       <PaddingWrapper>
@@ -197,7 +219,7 @@ export default function Offer({ data }: { data: OfferType }) {
             />
             <Image priority src={offerSaloon} alt='' />
           </LeftWrapper>
-          <Steps>
+          <Steps ref={stepsRef}>
             {steps?.map((s, i) => (
               <OfferStep key={s.title} step={s} index={i} stepsLength={steps.length} />
             ))}

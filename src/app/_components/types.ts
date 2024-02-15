@@ -20,6 +20,7 @@ export interface ButtonProps {
   onClick: (e?: MouseEvent<HTMLButtonElement>) => void;
   tabIndex?: number;
   withArrow?: boolean;
+  borderColor?: string;
 }
 
 export interface InputProps {

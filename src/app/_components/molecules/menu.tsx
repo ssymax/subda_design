@@ -10,6 +10,7 @@ const MenuWrap = styled.nav<{ $vertical?: boolean }>`
   display: flex;
   flex-direction: ${({ $vertical }) => ($vertical ? 'column' : 'row')};
   align-items: ${({ $vertical }) => ($vertical ? 'flex-start' : 'center')};
+  row-gap: 0.4rem;
   column-gap: 3rem;
   ${({ theme }) => theme.maxWidth.lg} {
     display: none;

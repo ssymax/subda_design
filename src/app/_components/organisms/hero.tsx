@@ -1,7 +1,10 @@
 'use client';
 
 import styled from 'styled-components';
+import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Image from 'next/image';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
@@ -18,6 +21,7 @@ const Section = styled.section`
   flex-direction: column;
   row-gap: 4rem;
   align-items: center;
+  position: relative;
 
   .mobile {
     ${({ theme }) => theme.minWidth.lg} {
@@ -77,11 +81,27 @@ const StyledPaddingWrapper = styled(PaddingWrapper)`
 `;
 
 export default function Hero() {
+  const imageRef = useRef<HTMLImageElement>(null);
   const { push } = useRouter();
+
+  useGSAP(
+    () => {
+      if (!imageRef.current) return;
+      const tl = gsap.timeline();
+      tl.from(imageRef.current, {
+        filter: 'blur(10px)',
+        scale: 1.1,
+        duration: 1.5,
+        ease: 'expo.inOut',
+      });
+    },
+    { revertOnUpdate: true },
+  );
 
   return (
     <Section>
       <Image
+        ref={imageRef}
         priority
         className='mobile'
         src={heroMobile}
@@ -89,6 +109,7 @@ export default function Hero() {
         placeholder='blur'
       />
       <Image
+        ref={imageRef}
         priority
         className='desktop'
         src={hero}

@@ -2,11 +2,13 @@
 
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import Form from '@/components/molecules/form';
 import FooterInfo from '@/components/molecules/footerInfo';
 import Line from '@/components/atoms/line';
-import { FootProps } from '../types';
+import { FootProps } from '@/components/types';
+import pixelMates from '../../../../public/pixelmates.png';
 
 const Footer = styled.footer<{ $dark?: boolean }>`
   display: flex;
@@ -59,6 +61,11 @@ const RightsAndPolicy = styled.div`
   color: ${({ theme }) => theme.colors.grey};
   font-size: 1.2rem;
   padding: 0.5rem 0 1rem 0;
+  div {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+  }
   ${({ theme }) => theme.maxWidth.lg} {
     flex-direction: column;
     align-items: flex-start;
@@ -66,8 +73,10 @@ const RightsAndPolicy = styled.div`
   }
 `;
 
-const ActiveSpan = styled.span`
+const ActiveLink = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
   &:hover {
     text-decoration: underline;
   }
@@ -82,6 +91,10 @@ const spanProps = {
 
 export default function Foot({ header, children, dark }: FootProps) {
   const { push } = useRouter();
+
+  const openInNewTab = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <Footer $dark={dark}>
@@ -99,9 +112,24 @@ export default function Foot({ header, children, dark }: FootProps) {
           <RightsAndPolicy>
             <span>{copyright} Wszelkie prawa zastrzeżone</span>
             <div>
-              <ActiveSpan {...spanProps} onClick={() => push('?modal=true')}>
+              <ActiveLink
+                {...spanProps}
+                onClick={() => push('?modal=true', { scroll: false })}
+              >
                 Polityka prywatności
-              </ActiveSpan>
+              </ActiveLink>
+              /
+              <ActiveLink
+                {...spanProps}
+                onClick={() => openInNewTab('https://pixelmates.pl')}
+              >
+                Realizacja
+                <Image
+                  height={20}
+                  src={pixelMates}
+                  alt='aplikacje i strony internetowe Olsztyn'
+                />
+              </ActiveLink>
             </div>
           </RightsAndPolicy>
         </PaddingWrapper>

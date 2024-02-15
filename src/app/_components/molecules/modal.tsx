@@ -83,7 +83,7 @@ export default function Modal() {
       {modal && (
         <Dialog>
           <Content>
-            <StyledCloseIcon onClick={() => push(pathname)} />
+            <StyledCloseIcon onClick={() => push(pathname, { scroll: false })} />
             <h3>Polityka prywatności</h3>
             <PrivacyPolicyContainer>
               <PrivacyPolicySection>

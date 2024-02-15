@@ -13,6 +13,7 @@ import Pill from '@/components/atoms/pill';
 import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
+import { minQuery } from '@/styles/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -80,6 +81,10 @@ const PillsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 3rem;
+  ${({ theme }) => theme.maxWidth.md} {
+    flex-direction: column;
+    row-gap: 1rem;
+  }
 `;
 
 const ImagesContainer = styled.div`
@@ -154,6 +159,7 @@ export default function RealizationContent({
   const galleryRef = useRef<HTMLDivElement>(null);
   const galleryButtonsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const initialState = {
     id: '',
@@ -217,26 +223,29 @@ export default function RealizationContent({
           ease: 'expo.inOut',
         });
     },
-    { dependencies: [realizationData] },
+    { dependencies: [realizationData], revertOnUpdate: true },
   );
 
   useGSAP(
     () => {
-      const wrapper = document.querySelector('.wrapper') as HTMLElement;
-      if (!wrapper) return;
+      if (!wrapperRef.current) return;
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: wrapper,
+          trigger: wrapperRef.current,
           start: 'top top',
           end: 'bottom center',
           scrub: 2,
         },
       });
-      const movement = -(wrapper.offsetHeight * 0.2);
-      tl.to(wrapper, { y: movement, ease: 'none' }, 0);
+      const movement = -(wrapperRef.current.offsetHeight * 0.2);
+      const mm = gsap.matchMedia();
+
+      mm.add(minQuery.lg, () => {
+        tl.to(wrapperRef.current, { y: movement, ease: 'none' }, 0);
+      });
     },
-    { dependencies: [realizationData] },
+    { dependencies: [realizationData], revertOnUpdate: true },
   );
 
   const onImageClick = (image: DetailedImage, index: number) => {
@@ -282,7 +291,7 @@ export default function RealizationContent({
   const gallerySrc = realizationData?.images[activeIndex].url || '';
 
   return (
-    <Section id='hero'>
+    <Section>
       <ImageWrapper ref={imageRef}>
         <ContentfulImage
           priority
@@ -292,7 +301,7 @@ export default function RealizationContent({
           alt={realizationData?.title}
         />
       </ImageWrapper>
-      <ContentWrapper className='wrapper'>
+      <ContentWrapper ref={wrapperRef}>
         <PaddingWrapper>
           <HeaderWithText>
             <h1 className='header'>{realizationData?.title}</h1>

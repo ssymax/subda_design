@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -60,6 +60,7 @@ const LogoWrapper = styled.div`
 
 export default function Headerbar() {
   const { push } = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const handleToggle = () => {
@@ -109,8 +110,9 @@ export default function Headerbar() {
           <Button
             large
             text='Porozmawiajmy'
-            variant='primary'
+            variant={pathname === routes.contact ? 'secondary' : 'primary'}
             onClick={() => push(routes.contact)}
+            borderColor='#fff'
           />
         </ButtonWrap>
         <Burger open={open} toggleOpen={handleToggle} />
