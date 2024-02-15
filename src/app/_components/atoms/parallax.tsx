@@ -42,26 +42,17 @@ export default function Parallax({ src }: ParallaxProps) {
   useGSAP(
     () => {
       if (!wrapperRef.current) return;
-      const animation = gsap.fromTo(
-        wrapperRef.current,
-        {
-          y: '-15%',
-          ease: 'expo.inOut',
-        },
-        {
-          y: '+15%',
-        },
-      );
 
-      setTimeout(() => {
-        ScrollTrigger.create({
-          animation,
-          trigger: wrapperRef.current?.parentElement,
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: 'top center',
+          end: 'bottom center',
           scrub: 2,
-          start: 'top bottom',
-          end: 'bottom top',
-        });
-      }, 1000);
+        },
+      });
+      const movement = wrapperRef.current.offsetHeight * 0.2;
+      tl.to(wrapperRef.current, { y: movement, ease: 'none' }, 0);
     },
     { scope: wrapperRef, revertOnUpdate: true },
   );
