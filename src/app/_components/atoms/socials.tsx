@@ -7,6 +7,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   text-transform: uppercase;
+  row-gap: 0.4rem;
   span {
     font-weight: 600;
   }

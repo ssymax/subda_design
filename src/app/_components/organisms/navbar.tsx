@@ -78,7 +78,7 @@ export default function Headerbar() {
         .from(headerRef.current, {
           yPercent: -100,
           paused: true,
-          duration: 0.3,
+          duration: 0.5,
         })
         .progress(1);
 

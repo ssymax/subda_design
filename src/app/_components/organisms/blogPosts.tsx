@@ -2,12 +2,13 @@
 
 import { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import BlogCard from '@/components/molecules/blogCard';
 import Sorter from '@/components/atoms/sorter';
 import SearchInput from '@/components/atoms/searchInput';
 import { HomeBlogItem, Order } from '@/lib/types';
-import { animateBlogPosts, sortAndFilterBlogPosts } from '@/utils/utils';
+import { sortAndFilterBlogPosts } from '@/utils/utils';
 import { ASC, DESC } from '@/lib/constants';
 
 const ActionWrapper = styled.div`
@@ -55,7 +56,9 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
   const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
 
-  const handleOrderClick = () => setOrder((prev) => (prev === DESC ? ASC : DESC));
+  const handleOrderClick = () => {
+    setOrder((prev) => (prev === DESC ? ASC : DESC));
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
@@ -63,9 +66,19 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
 
   useGSAP(
     () => {
-      animateBlogPosts(containerRef);
+      if (!containerRef.current) return;
+
+      const items = gsap.utils.toArray(containerRef.current.children) as HTMLElement[];
+
+      items.forEach((item) => {
+        gsap.from(item, {
+          autoAlpha: 0,
+          y: 100,
+          duration: 0.8,
+        });
+      });
     },
-    { scope: containerRef, revertOnUpdate: true, dependencies: data },
+    { scope: containerRef, dependencies: [sortedPosts, order] },
   );
 
   return (

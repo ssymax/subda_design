@@ -11,6 +11,8 @@ const InnerWrapper = styled.div<{ $inverse?: boolean }>`
   justify-content: space-between;
   column-gap: 5rem;
   flex-direction: ${({ $inverse }) => ($inverse ? 'row-reverse' : 'row')};
+  background-color: ${({ theme }) => theme.colors.beige};
+
   ${({ theme }) => theme.maxWidth.lg} {
     flex-direction: column;
     flex-flow: column-reverse;
@@ -66,24 +68,20 @@ export default function RedirectInfo({
   inverse,
 }: RedirectInfoProps) {
   return (
-    <>
-      <Line />
-      <InnerWrapper $inverse={inverse}>
-        <div>
-          <h3>{header}</h3>
-          <p>{text}</p>
-          <ButtonsGroup
-            leftLabel={leftLabel}
-            rightLabel={rightLabel}
-            onLeftClick={onLeftClick}
-            onRightClick={onRightClick}
-          />
-        </div>
-        <ImageWrapper>
-          <Image src={imageSrc} alt={header} priority />
-        </ImageWrapper>
-      </InnerWrapper>
-      <Line />
-    </>
+    <InnerWrapper $inverse={inverse}>
+      <div>
+        <h3>{header}</h3>
+        <p>{text}</p>
+        <ButtonsGroup
+          leftLabel={leftLabel}
+          rightLabel={rightLabel}
+          onLeftClick={onLeftClick}
+          onRightClick={onRightClick}
+        />
+      </div>
+      <ImageWrapper>
+        <Image src={imageSrc} alt={header} priority />
+      </ImageWrapper>
+    </InnerWrapper>
   );
 }

@@ -1,20 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
 import styled from 'styled-components';
 import { BlogPost } from '@/lib/types';
 import dayjs from 'dayjs';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import SimpleHeader from '@/app/_components/atoms/simpleHeader';
 import ContentfulImage from '@/lib/contentfulImage';
 import CalendarIcon from '../../../../public/images/calendar.svg';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.config({ limitCallbacks: true });
-}
 
 const Section = styled.section`
   margin: 0 auto 3rem auto;
@@ -75,17 +66,7 @@ const Paragraph = styled.p`
   position: relative;
 `;
 
-const Hover = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.beige};
-  opacity: 0.5;
-  left: 0;
-`;
-
 export default function BlogPostContent({ postData }: { postData: BlogPost }) {
-  const postRef = useRef<HTMLElement>(null);
   const date = dayjs(postData?.date).format('DD.MM.YYYY');
 
   const postElements: { id: string; header?: string; text?: string }[] = [
@@ -95,28 +76,8 @@ export default function BlogPostContent({ postData }: { postData: BlogPost }) {
     { id: '4', header: postData?.header4th, text: postData?.text4th },
   ];
 
-  useGSAP(
-    () => {
-      const hovers = document.querySelectorAll('.hover');
-      if (!hovers.length) return;
-
-      hovers.forEach((h) =>
-        gsap.to(h, {
-          yPercent: 100,
-          scrollTrigger: {
-            trigger: h,
-            start: 'top-=100 center',
-            end: 'bottom center',
-            scrub: 0.5,
-          },
-        }),
-      );
-    },
-    { revertOnUpdate: true, scope: postRef, dependencies: [postData] },
-  );
-
   return (
-    <Section ref={postRef}>
+    <Section>
       <SimpleHeader
         isPageHeader
         header={postData?.title || ''}
@@ -146,9 +107,8 @@ export default function BlogPostContent({ postData }: { postData: BlogPost }) {
         />
         {postElements?.map((p) => (
           <Wrapper key={p.id}>
-            {p.header && <Header className='header'>{p.header}</Header>}
-            {p.text && <Paragraph className='paragraph'>{p.text}</Paragraph>}
-            <Hover className='hover' />
+            {p.header && <Header>{p.header}</Header>}
+            {p.text && <Paragraph>{p.text}</Paragraph>}
           </Wrapper>
         ))}
       </Content>

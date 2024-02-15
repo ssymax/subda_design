@@ -3,8 +3,8 @@
 import styled from 'styled-components';
 import { HomeHeaderProps } from '@/components/types';
 import SmallHeader from '@/components/atoms/smallHeader';
-import useMediaQuery from '@/app/_hooks/useMediaQuery';
-import { minQuery } from '@/app/_styles/constants';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { minQuery } from '@/styles/constants';
 
 const Wrapper = styled.div`
   display: flex;
