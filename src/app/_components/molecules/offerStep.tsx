@@ -7,6 +7,8 @@ const Step = styled.div`
   flex-direction: column;
   row-gap: 2rem;
   line-height: 140%;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  position: sticky;
 
   span {
     font-weight: 600;

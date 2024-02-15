@@ -1,10 +1,13 @@
 'use client';
 
+import { useRef } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import { AboutMeType } from '@/lib/types';
 import { minQuery } from '@/styles/constants';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import ContentfulImage from '@/lib/contentfulImage';
+import { useGSAP } from '@gsap/react';
+import { thumbsAnimation } from '@/app/_utils/utils';
 
 const SkillsWrapper = styled.div`
   display: flex;
@@ -34,12 +37,23 @@ const Skill = styled.div`
 `;
 
 export default function AboutSkills({ data }: { data?: AboutMeType }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const largeScreen = useMediaQuery(minQuery.lg);
 
   const aboutImages = data?.imagesCollection.items.map(({ url, title }) => ({
     url,
     title,
   }));
+
+  const skillImgClass = 'skill-image';
+
+  useGSAP(
+    () => {
+      thumbsAnimation(skillImgClass);
+    },
+    { scope: containerRef, revertOnUpdate: true, dependencies: aboutImages },
+  );
 
   const imagePositions: CSSProperties[] = [
     { left: largeScreen ? '55%' : '73%' },
@@ -52,16 +66,16 @@ export default function AboutSkills({ data }: { data?: AboutMeType }) {
   const imagesSizes = [
     { width: 200, height: 120 },
     { width: 200, height: 130 },
-    { width: 200, height: 130 },
-    { width: 200, height: 130 },
-    { width: 150, height: 200 },
+    { width: 200, height: 150 },
+    { width: 250, height: 150 },
+    { width: 120, height: 180 },
   ];
 
   return (
-    <SkillsWrapper>
+    <SkillsWrapper ref={containerRef}>
       {aboutImages?.map((image, index) => (
         <ContentfulImage
-          className='skill-image'
+          className={skillImgClass}
           key={image.url}
           width={largeScreen ? imagesSizes[index].width : imagesSizes[index].width / 2}
           height={largeScreen ? imagesSizes[index].height : imagesSizes[index].height / 2}

@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -38,23 +38,29 @@ const Header = styled.header`
   }
 `;
 
-const StyledLogo = styled(Logo)`
-  height: 60%;
-  width: auto;
-  fill: ${({ theme }) => theme.colors.secondary};
-  overflow: hidden;
-  z-index: ${({ theme }) => theme.zIndex.level10};
-  cursor: pointer;
-`;
-
 const ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 3rem;
+
   ${({ theme }) => theme.maxWidth.lg} {
     display: none;
   }
 `;
 
+const LogoWrapper = styled.div`
+  height: 4.2rem;
+  width: 19.2rem;
+  z-index: ${({ theme }) => theme.zIndex.level10};
+  cursor: pointer;
+  svg {
+    fill: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
 export default function Headerbar() {
   const { push } = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const handleToggle = () => {
@@ -89,24 +95,27 @@ export default function Headerbar() {
   return (
     <>
       <Header ref={headerRef}>
-        <StyledLogo
+        <LogoWrapper
           role='button'
           tabIndex={0}
           onClick={() => push(routes.home)}
-          onKeyDown={(e: KeyboardEvent<SVGSVGElement>) =>
+          onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
             e.key === 'Enter' && push(routes.home)
           }
-        />
-        <Menu />
-        <Burger open={open} toggleOpen={handleToggle} />
+        >
+          <Logo />
+        </LogoWrapper>
         <ButtonWrap>
+          <Menu />
           <Button
             large
             text='Porozmawiajmy'
-            variant='primary'
+            variant={pathname === routes.contact ? 'secondary' : 'primary'}
             onClick={() => push(routes.contact)}
+            borderColor='#fff'
           />
         </ButtonWrap>
+        <Burger open={open} toggleOpen={handleToggle} />
       </Header>
       <MenuMobile open={open} setOpen={setOpen} />
     </>

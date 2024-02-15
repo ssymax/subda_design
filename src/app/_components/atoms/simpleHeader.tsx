@@ -83,7 +83,7 @@ export default function SimpleHeader({
       >
         {header}
       </Header>
-      {isPageHeader && <Line className='line' />}
+      {isPageHeader && <Line />}
     </div>
   );
 }

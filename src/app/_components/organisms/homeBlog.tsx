@@ -1,9 +1,12 @@
 'use client';
 
+import { useRef } from 'react';
 import styled from 'styled-components';
+import { useGSAP } from '@gsap/react';
 import HomeHeader from '@/components/atoms/homeHeader';
 import BlogCard from '@/components/molecules/blogCard';
 import { HomeBlogItemModel } from '@/lib/types';
+import { animateBlogPosts } from '@/utils/utils';
 
 const description = `Przygotowałam dla Państwa artykuły, mogące pomóc w wielu 
 aspektach urządzania mieszkań i innych przestrzeni.`;
@@ -22,6 +25,13 @@ const Wrapper = styled.div`
 `;
 
 export default function HomeBlog({ blogPosts }: { blogPosts: HomeBlogItemModel[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useGSAP(
+    () => {
+      animateBlogPosts(containerRef);
+    },
+    { scope: containerRef, revertOnUpdate: true, dependencies: blogPosts },
+  );
   return (
     <section>
       <HomeHeader
@@ -29,7 +39,7 @@ export default function HomeBlog({ blogPosts }: { blogPosts: HomeBlogItemModel[]
         header='Porady, trendy i wskazówki'
         description={description}
       />
-      <Wrapper>
+      <Wrapper ref={containerRef}>
         {blogPosts?.map((d) => (
           <BlogCard key={d.sys.id} slug={d.slug} url={d.image.url} title={d.title} />
         ))}

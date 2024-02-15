@@ -4,7 +4,11 @@ import styled, { css } from 'styled-components';
 import { ButtonProps, ButtonVariant } from '@/components/types';
 import ArrowIcon from '../../../../public/images/arrow.svg';
 
-const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
+const Btn = styled.button<{
+  $variant: ButtonVariant;
+  $large?: boolean;
+  $borderColor?: string;
+}>`
   display: flex;
   align-items: center;
   border-radius: 2rem;
@@ -23,7 +27,9 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
   svg {
     width: auto;
     height: 2rem;
-    transition: fill 0.15s ease-in-out;
+    transition:
+      fill 0.15s ease-in-out,
+      transform 0.3s ease-in-out;
   }
 
   ${({ $variant }) =>
@@ -43,16 +49,17 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
         border: 1px solid ${({ theme }) => theme.colors.secondary};
         svg {
           fill: ${({ theme }) => theme.colors.secondary};
+          transform: translateX(0.5rem);
         }
       }
     `}
 
-  ${({ $variant }) =>
+  ${({ $variant, $borderColor }) =>
     $variant === 'secondary' &&
     css`
       color: ${({ theme }) => theme.colors.secondary};
       background-color: ${({ theme }) => theme.colors.dark};
-      border: 1px solid ${({ theme }) => theme.colors.dark};
+      border: 1px solid ${({ theme }) => $borderColor || theme.colors.dark};
 
       svg {
         fill: ${({ theme }) => theme.colors.secondary};
@@ -64,6 +71,7 @@ const Btn = styled.button<{ $variant: ButtonVariant; $large?: boolean }>`
         border: 1px solid ${({ theme }) => theme.colors.dark};
         svg {
           fill: ${({ theme }) => theme.colors.dark};
+          transform: translateX(0.5rem);
         }
       }
     `};
@@ -77,9 +85,16 @@ export default function Button({
   onClick,
   tabIndex,
   withArrow = true,
+  borderColor,
 }: ButtonProps) {
   return (
-    <Btn $variant={variant} $large={large} onClick={onClick} tabIndex={tabIndex || 0}>
+    <Btn
+      $borderColor={borderColor}
+      $variant={variant}
+      $large={large}
+      onClick={onClick}
+      tabIndex={tabIndex || 0}
+    >
       {text}
       {Icon || (withArrow && <ArrowIcon />)}
     </Btn>

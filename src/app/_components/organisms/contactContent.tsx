@@ -149,12 +149,23 @@ export default function ContactContent() {
         autoAlpha: 0,
         scale: 1.05,
         duration: 0.8,
-        ease: 'power2.out',
       }).from(
         elements,
         { x: -100, autoAlpha: 0, ease: 'power2.out', stagger: 0.05, duration: 0.8 },
         '<>',
       );
+
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.right',
+          start: 'top top',
+          scrub: 2,
+        },
+      });
+
+      scrollTl.to('.right', {
+        y: 100,
+      });
     },
     { scope: containerRef, revertOnUpdate: true },
   );
