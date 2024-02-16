@@ -11,6 +11,7 @@ import ButtonsGroup from '@/components/molecules/buttonsGroup';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import { routes } from '@/routes/routes';
 import PaddingWrapper from '@/templates/paddingWrapper';
+import { minQuery } from '@/styles/constants';
 import hero from '../../../../public/hero.png';
 import heroMobile from '../../../../public/hero_mobile.png';
 import Line from '../atoms/line';
@@ -28,8 +29,19 @@ const Section = styled.section`
   flex-direction: column;
   row-gap: 4rem;
   align-items: center;
-  position: relative;
 
+  ${({ theme }) => theme.maxWidth.lg} {
+    row-gap: 2rem;
+    margin: 0 auto;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  overflow: hidden;
+  margin-top: -7rem;
+  z-index: -1;
+  left: 0;
+  display: flex;
   .mobile {
     ${({ theme }) => theme.minWidth.lg} {
       display: none;
@@ -42,16 +54,10 @@ const Section = styled.section`
     }
   }
 
-  ${({ theme }) => theme.maxWidth.lg} {
-    row-gap: 2rem;
-    margin: 0 auto;
+  img {
+    max-width: 100%;
+    height: auto;
   }
-`;
-
-const ImageWrapper = styled.div`
-  overflow: hidden;
-  margin-top: -7rem;
-  z-index: -1;
 `;
 
 const TextAndButtons = styled.div`
@@ -93,22 +99,28 @@ export default function Hero() {
   const imageRef = useRef<HTMLImageElement>(null);
   const { push } = useRouter();
 
-  useGSAP(() => {
-    if (!imageRef.current) return;
-
-    gsap.to(imageRef.current, {
-      y: -70,
-      filter: 'blur(5px)',
-      scrollTrigger: {
-        trigger: imageRef.current,
-        start: 'top top',
-        end: 'bottom top-=70',
-        pin: true,
-        pinSpacing: false,
-        scrub: 2,
-      },
-    });
-  }, {});
+  useGSAP(
+    () => {
+      if (!imageRef.current) return;
+      const mm = gsap.matchMedia();
+      mm.add(minQuery.lg, () => {
+        gsap.to(imageRef.current, {
+          y: -70,
+          filter: 'blur(5px)',
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: 'top top',
+            end: 'bottom top-=70',
+            pin: true,
+            pinSpacing: false,
+            scrub: 2,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
+    },
+    { revertOnUpdate: true },
+  );
 
   return (
     <Section>
@@ -118,14 +130,14 @@ export default function Hero() {
           className='mobile'
           src={heroMobile}
           alt='Dom w Gryźlinach'
-          placeholder='blur'
+          sizes='100vw'
         />
         <Image
           priority
+          sizes='100vw'
           className='desktop'
           src={hero}
           alt='Dom w Gryźlinach'
-          placeholder='blur'
         />
       </ImageWrapper>
 
