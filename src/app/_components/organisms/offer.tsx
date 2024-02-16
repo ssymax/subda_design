@@ -80,6 +80,9 @@ const Steps = styled.div`
     width: 100%;
     margin-top: 8rem;
   }
+  ${({ theme }) => theme.maxWidth.lg} {
+    padding: 4rem 2rem;
+  }
 `;
 
 const Slides = styled.section`

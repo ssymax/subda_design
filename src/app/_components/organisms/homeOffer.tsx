@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import HomeHeader from '@/components/atoms/homeHeader';
 import HomeOfferItem from '@/components/molecules/homeOfferItem';
 import HomeOfferItemMobile from '@/components/molecules/homeOfferItemMobile';
-import useMediaQuery from '@/app/_hooks/useMediaQuery';
-import { maxQuery, minQuery } from '@/app/_styles/constants';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { maxQuery, minQuery } from '@/styles/constants';
 import { HomeOfferType } from '@/lib/types';
 
 const description = `Zachęcam do zapoznania się z ofertą i podzielenia się swoimi 
