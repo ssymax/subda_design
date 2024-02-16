@@ -2,13 +2,15 @@
 
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import PaddingWrapper from '@/templates/paddingWrapper';
-import Form from '@/components/molecules/form';
 import FooterInfo from '@/components/molecules/footerInfo';
 import Line from '@/components/atoms/line';
 import { FootProps } from '@/components/types';
 import pixelMates from '../../../../public/pixelmates.png';
+
+const DynamicForm = dynamic(() => import('@/components/molecules/form'), { ssr: false });
 
 const Footer = styled.footer<{ $dark?: boolean }>`
   display: flex;
@@ -101,7 +103,7 @@ export default function Foot({ header, children, dark }: FootProps) {
       <Header $dark={dark}>{header || `Bądźmy w kontakcie`}</Header>
       <FormAndInfo>
         <PaddingWrapper>
-          <Form dark={dark} />
+          <DynamicForm dark={dark} />
           {children}
         </PaddingWrapper>
         <FooterInfo />

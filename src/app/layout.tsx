@@ -7,6 +7,7 @@ import Navbar from '@/components/organisms/navbar';
 import Modal from '@/components/molecules/modal';
 import Providers from '@/providers/providers';
 import StyledComponentsRegistry from '../../lib/registry';
+import LenisScroller from './_components/atoms/lenisScroller';
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
               <Divider />
               {children}
+              <LenisScroller />
               <Modal />
             </Providers>
           </StyledComponentsRegistry>

@@ -29,8 +29,8 @@ export default async function Page() {
   return (
     <>
       <Hero />
+      <HomeAbout />
       <PaddingWrapper>
-        <HomeAbout />
         <HomeRealizations realizations={realizations} />
         <HomeOffer offer={offer} />
         <HomeReferences />
