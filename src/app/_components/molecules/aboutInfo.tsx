@@ -48,8 +48,6 @@ const ImageWrapper = styled.div`
     border-radius: 1rem;
     width: 100%;
     height: auto;
-    position: relative !important;
-    left: 0;
   }
 `;
 
@@ -95,10 +93,11 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
         {data?.image.url && (
           <ImageWrapper>
             <ContentfulImage
-              fill
               src={data.image.url}
               alt={data?.image.title || ''}
               sizes='100vw'
+              width={500}
+              height={700}
             />
           </ImageWrapper>
         )}
