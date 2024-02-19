@@ -9,12 +9,12 @@ import Providers from '@/providers/providers';
 import StyledComponentsRegistry from '../../lib/registry';
 import LenisScroller from './_components/atoms/lenisScroller';
 
-const raleway = Raleway({
-  weight: ['300', '400', '500', '600', '700', '800'],
-  style: ['normal'],
-  subsets: ['latin'],
-  display: 'swap',
-});
+// const raleway = Raleway({
+//   weight: ['300', '400', '500', '600', '700', '800'],
+//   style: ['normal'],
+//   subsets: ['latin'],
+//   display: 'swap',
+// });
 
 const Divider = styled.div`
   height: 7rem;
@@ -28,8 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body suppressHydrationWarning>
-        <StyledComponentsRegistry>
-          <main className={raleway.className}>
+        <main>
+          <StyledComponentsRegistry>
             <Providers>
               <Navbar />
               <Divider />
@@ -37,8 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <LenisScroller />
               <Modal />
             </Providers>
-          </main>
-        </StyledComponentsRegistry>
+          </StyledComponentsRegistry>
+        </main>
       </body>
     </html>
   );

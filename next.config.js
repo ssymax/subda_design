@@ -3,7 +3,7 @@ const nextConfig = {
   compiler: {
     styledComponents: {
       ssr: true,
-      displayName: false,
+      displayName: true,
     },
   },
   images: {
