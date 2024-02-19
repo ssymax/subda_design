@@ -42,10 +42,10 @@ const Accordion = styled.div<{
     color: ${({ theme }) => theme.colors.secondary};
     background-color: ${({ theme }) => theme.colors.primary};
   }
-  :first-child {
+  .number {
     font-size: 4rem;
   }
-  :last-child {
+  .title {
     white-space: nowrap;
     bottom: 0;
     writing-mode: vertical-lr;
@@ -134,8 +134,8 @@ export default function HomeOfferItem({
           if (e.key === 'Enter') onClick();
         }}
       >
-        <span>{accordionNumber}</span>
-        <span>{title}</span>
+        <span className='number'>{accordionNumber}</span>
+        <span className='title'>{title}</span>
       </Accordion>
       <ContentWrap
         $open={openId === id}

@@ -36,7 +36,6 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
   width: 50%;
-  position: relative;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
