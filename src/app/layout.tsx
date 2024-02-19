@@ -28,8 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body suppressHydrationWarning>
-        <main className={raleway.className}>
-          <StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <main className={raleway.className}>
             <Providers>
               <Navbar />
               <Divider />
@@ -37,8 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <LenisScroller />
               <Modal />
             </Providers>
-          </StyledComponentsRegistry>
-        </main>
+          </main>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
