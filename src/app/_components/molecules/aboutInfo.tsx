@@ -90,8 +90,8 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
         />
       </LeftWrapper>
       <RightWrapper className='right'>
-        {data?.image.url && (
-          <ImageWrapper>
+        <ImageWrapper>
+          {data?.image.url && (
             <ContentfulImage
               src={data.image.url}
               alt={data?.image.title || ''}
@@ -99,8 +99,8 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
               width={500}
               height={700}
             />
-          </ImageWrapper>
-        )}
+          )}
+        </ImageWrapper>
       </RightWrapper>
     </AboutWrapper>
   );
