@@ -23,7 +23,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "split-type": "^0.3.4",
-    "styled-components": "^6.1.2",
+    "styled-components": "5.3.8",
     "styled-normalize": "^8.1.0",
     "zod": "^3.22.4"
   },
