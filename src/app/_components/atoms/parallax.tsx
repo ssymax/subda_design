@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ParallaxProps } from '@/components/types';
+import { useGSAP } from '@gsap/react';
+import { maxQuery, minQuery } from '@/app/_styles/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,8 +19,9 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  overflow: hidden;
   margin: 5rem 0;
+  overflow: hidden;
+  position: relative;
   ${({ theme }) => theme.maxWidth.lg} {
     height: 20rem;
   }
@@ -28,38 +31,56 @@ const StyledImage = styled(Image)`
   width: 100%;
   height: auto;
   border-radius: 1rem;
-  z-index: -1;
+  position: absolute;
   ${({ theme }) => theme.maxWidth.lg} {
-    max-width: 120%;
+    width: 150%;
     height: auto;
   }
 `;
 
 export default function Parallax({ src }: ParallaxProps) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (!wrapperRef.current) return;
+  useGSAP(
+    () => {
+      if (!imageRef.current) return;
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: wrapperRef.current,
+          trigger: imageRef.current,
+          start: 'top-=100px center',
+          end: 'bottom center',
+          scrub: 1.5,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const mobileTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: imageRef.current,
           start: 'top center',
           end: 'bottom center',
           scrub: 2,
+          invalidateOnRefresh: true,
         },
       });
-      const movement = wrapperRef.current.offsetHeight * 0.2;
-      tl.to(wrapperRef.current, { y: movement, ease: 'none' }, 0);
-    }, 1000);
-  });
+
+      const mm = gsap.matchMedia();
+      const movement = imageRef.current.offsetHeight * 0.15;
+      const mobileMovement = imageRef.current.offsetHeight * 0.1;
+      mm.add(minQuery.lg, () => {
+        tl.to(imageRef.current, { y: movement, ease: 'none' }, 0);
+      });
+      mm.add(maxQuery.lg, () => {
+        mobileTl.to(imageRef.current, { y: mobileMovement, ease: 'none' }, 0);
+      });
+    },
+    { scope: imageRef, revertOnUpdate: true },
+  );
 
   return (
     <Section>
-      <div ref={wrapperRef}>
-        <StyledImage src={src} alt='' />
-      </div>
+      <StyledImage ref={imageRef} src={src} alt='' sizes='100vw' />
     </Section>
   );
 }
