@@ -36,12 +36,14 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
   width: 50%;
-  position: relative;
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
-  padding: 0 5%;
+`;
 
+const ImageWrapper = styled.div`
+  padding: 0 5%;
+  position: relative;
   img {
     border-radius: 1rem;
     width: 100%;
@@ -88,16 +90,17 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
         />
       </LeftWrapper>
       <RightWrapper className='right'>
-        {data?.image.url && (
-          <ContentfulImage
-            priority
-            src={data.image.url}
-            alt={data?.image.title || ''}
-            sizes='100vw'
-            width={500}
-            height={300}
-          />
-        )}
+        <ImageWrapper>
+          {data?.image.url && (
+            <ContentfulImage
+              src={data.image.url}
+              alt={data?.image.title || ''}
+              sizes='100vw'
+              width={500}
+              height={700}
+            />
+          )}
+        </ImageWrapper>
       </RightWrapper>
     </AboutWrapper>
   );
