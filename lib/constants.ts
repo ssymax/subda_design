@@ -1,3 +1,4 @@
+export const baseUrl = 'https://subdadesign.pl';
 export const DESC = 'desc';
 export const ASC = 'asc';
 
