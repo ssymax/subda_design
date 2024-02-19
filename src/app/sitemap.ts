@@ -14,12 +14,12 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const blogs = allPosts.map((post) => ({
-    url: `${baseUrl}/${post.slug}`,
+    url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 
   const realizations = allRealizations.map((realization) => ({
-    url: `${baseUrl}/${realization.slug}`,
+    url: `${baseUrl}/realizacje/${realization.slug}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 
