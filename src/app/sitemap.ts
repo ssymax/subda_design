@@ -9,7 +9,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const allRealizations = await getAllRealizations();
 
   const routes = routesArr(true).map((r) => ({
-    url: `${baseUrl}${r}`,
+    url: `${baseUrl}${r.route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 
