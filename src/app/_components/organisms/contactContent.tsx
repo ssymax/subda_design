@@ -77,16 +77,22 @@ const A = styled.a`
   }
 `;
 
-const ImageWrapper = styled.div`
+const RightWrapper = styled.div`
   width: 50%;
   padding: 0 5%;
+  position: relative;
   ${({ theme }) => theme.maxWidth.xl} {
     padding: 0;
   }
   ${({ theme }) => theme.maxWidth.lg} {
     width: 100%;
   }
+`;
 
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
   img {
     max-width: 100%;
     height: auto;
@@ -203,9 +209,11 @@ export default function ContactContent() {
                 </Profiles>
               </ContactsAndProfiles>
             </Info>
-            <ImageWrapper className='right'>
-              <Image priority src={diningRoom} alt='' />
-            </ImageWrapper>
+            <RightWrapper className='right'>
+              <ImageWrapper>
+                <Image src={diningRoom} alt='' sizes='100vw' />
+              </ImageWrapper>
+            </RightWrapper>
           </Container>
         </PaddingWrapper>
       </section>
