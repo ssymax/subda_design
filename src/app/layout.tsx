@@ -2,13 +2,17 @@
 
 import React from 'react';
 import { Raleway } from 'next/font/google';
+import dynamic from 'next/dynamic';
 import styled, { ThemeProvider } from 'styled-components';
 import Navbar from '@/components/organisms/navbar';
-import Modal from '@/components/molecules/modal';
 import StyledComponentsRegistry from '../../lib/registry';
 import LenisScroller from './_components/atoms/lenisScroller';
 import { theme as defaultTheme } from './_styles/theme';
 import GlobalStyle from './_styles/globalStyle';
+
+const DynamicModal = dynamic(() => import('@/components/molecules/modal'), {
+  ssr: false,
+});
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -36,8 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Navbar />
               <Divider />
               {children}
+              <DynamicModal />
               <LenisScroller />
-              <Modal />
             </StyledComponentsRegistry>
           </ThemeProvider>
         </main>
