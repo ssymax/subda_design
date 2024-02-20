@@ -39,7 +39,7 @@ const ArrowButton = styled.button`
   }
 `;
 
-const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
+const StyledArrowIcon = styled(ArrowIcon)<{ $rotated?: boolean }>`
   position: absolute;
   width: 3rem;
   top: 50%;
