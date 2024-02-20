@@ -33,8 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body suppressHydrationWarning>
         <main style={raleway.style}>
-          <Providers>
-            <StyledComponentsRegistry>
+          <StyledComponentsRegistry>
+            <Providers>
               <div>
                 <Navbar />
                 <Divider />
@@ -42,8 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <LenisScroller />
                 <DynamicModal />
               </div>
-            </StyledComponentsRegistry>
-          </Providers>
+            </Providers>
+          </StyledComponentsRegistry>
         </main>
       </body>
     </html>
