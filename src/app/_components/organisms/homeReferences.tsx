@@ -27,7 +27,7 @@ const IconWrapper = styled.div`
   user-select: none;
 `;
 
-const StyledArrowIcon = styled(ArrowIcon)<{ $rotated: boolean }>`
+const StyledArrowIcon = styled(ArrowIcon)<{ $rotated?: boolean }>`
   position: absolute;
   width: 100%;
   top: 50%;

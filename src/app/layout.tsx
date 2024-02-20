@@ -1,13 +1,17 @@
 'use client';
 
 import React from 'react';
-import styled from 'styled-components';
 import { Raleway } from 'next/font/google';
+import dynamic from 'next/dynamic';
+import styled from 'styled-components';
 import Navbar from '@/components/organisms/navbar';
-import Modal from '@/components/molecules/modal';
-import Providers from '@/providers/providers';
-import StyledComponentsRegistry from '../../lib/registry';
-import LenisScroller from './_components/atoms/lenisScroller';
+import StyledComponentsRegistry from '@/lib/registry';
+import LenisScroller from '@/components/atoms/lenisScroller';
+import Providers from './_providers/providers';
+
+const DynamicModal = dynamic(() => import('@/components/molecules/modal'), {
+  ssr: false,
+});
 
 const raleway = Raleway({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -28,17 +32,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body suppressHydrationWarning>
-        <StyledComponentsRegistry>
-          <main className={raleway.className}>
+        <main style={raleway.style}>
+          <StyledComponentsRegistry>
             <Providers>
-              <Navbar />
-              <Divider />
-              {children}
-              <LenisScroller />
-              <Modal />
+              <div>
+                <Navbar />
+                <Divider />
+                {children}
+                <LenisScroller />
+                <DynamicModal />
+              </div>
             </Providers>
-          </main>
-        </StyledComponentsRegistry>
+          </StyledComponentsRegistry>
+        </main>
       </body>
     </html>
   );
