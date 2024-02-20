@@ -9,7 +9,6 @@ import SmallHeader from '@/components/atoms/smallHeader';
 import { head } from '@/lib/constants';
 import { getAboutMe } from '@/lib/api';
 import kitchen2 from '../../../public/kitchen2.jpg';
-// import AboutInfo from '@/components/molecules/aboutInfo';
 import AboutSkills from '../_components/molecules/aboutSkills';
 
 const DynamicInfo = dynamic(() => import('@/components/molecules/aboutInfo'), {
