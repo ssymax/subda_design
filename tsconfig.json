@@ -27,9 +27,17 @@
       "@/routes/*": ["./src/app/_routes/*"],
       "@/utils/*": ["./src/app/_utils/*"],
       "@/hooks/*": ["./src/app/_hooks/*"],
-      "@/lib/*": ["./lib/*"]
+      "@/lib/*": ["./lib/*"],
+      "@/fonts/*": ["./app/_fonts/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    ".next/types/**/*.ts",
+    "src/pages/_document.js"
+  ],
   "exclude": ["node_modules"]
 }
