@@ -3,12 +3,11 @@
 import React from 'react';
 import { Raleway } from 'next/font/google';
 import dynamic from 'next/dynamic';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import Navbar from '@/components/organisms/navbar';
-import StyledComponentsRegistry from '../../lib/registry';
-import LenisScroller from './_components/atoms/lenisScroller';
-import { theme as defaultTheme } from './_styles/theme';
-import GlobalStyle from './_styles/globalStyle';
+import StyledComponentsRegistry from '@/lib/registry';
+import LenisScroller from '@/components/atoms/lenisScroller';
+import Providers from './_providers/providers';
 
 const DynamicModal = dynamic(() => import('@/components/molecules/modal'), {
   ssr: false,
@@ -34,16 +33,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body suppressHydrationWarning>
         <main style={raleway.style}>
-          <ThemeProvider theme={defaultTheme}>
+          <Providers>
             <StyledComponentsRegistry>
-              <GlobalStyle />
-              <Navbar />
-              <Divider />
-              {children}
-              <DynamicModal />
-              <LenisScroller />
+              <div>
+                <Navbar />
+                <Divider />
+                {children}
+                <LenisScroller />
+                <DynamicModal />
+              </div>
             </StyledComponentsRegistry>
-          </ThemeProvider>
+          </Providers>
         </main>
       </body>
     </html>
