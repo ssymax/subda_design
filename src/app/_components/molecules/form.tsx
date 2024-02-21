@@ -96,7 +96,7 @@ const renderLabel = (dark?: boolean) => (
 );
 
 export default function Form({ dark }: FormProps) {
-  const { handleSubmit, control, reset } = useForm<MessageSchemaType>({
+  const { handleSubmit, control, reset, setValue } = useForm<MessageSchemaType>({
     defaultValues: defaultFormValues,
     resolver: zodResolver(MessageSchema),
   });

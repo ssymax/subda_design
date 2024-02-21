@@ -1,0 +1,62 @@
+@import '../variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $primary;
+  row-gap: 2rem;
+  position: relative;
+  width: 100%;
+
+  &--error {
+    border-bottom: 1px solid red;
+  }
+
+  &--dark {
+    border-bottom: 1px solid $secondary;
+  }
+}
+
+.label {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-left: 0.5rem;
+  color: $primary;
+  &--dark {
+    color: $secondary;
+  }
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0.7rem 0.25rem;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  color: $primary;
+
+  &::placeholder {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    text-transform: capitalize;
+    color: $primary;
+  }
+
+  &--dark {
+    color: $secondary;
+    &::placeholder {
+      color: $secondary;
+    }
+  }
+}
+
+.error {
+  position: absolute;
+  font-weight: 500;
+  color: red;
+  font-size: 1.2rem;
+  left: 0.5rem;
+  bottom: -2.2rem;
+}

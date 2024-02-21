@@ -1,0 +1,53 @@
+@import '../variables';
+
+.wrapper {
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+  background-color: $secondary; 
+  border: 1px solid $dark; 
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  .left, .right {
+    position: absolute;
+    transform-origin: 50% 50%;
+  }
+
+  .left {
+    transform: rotate(90deg);
+    width: 2rem;
+    margin-right: -1rem;
+    fill: $primary; 
+  }
+
+  .right {
+    margin-left: -1rem;
+    transform: rotate(-90deg);
+    width: 2rem;
+    fill: $primary; 
+  }
+
+  .desc {
+    fill: $grey;  
+  } 
+
+  .asc {
+    fill: $grey; 
+  }
+
+  &:hover {
+    background-color: $dark; 
+    border: 1px solid $secondary; 
+
+    .left, .right {
+      fill: $secondary; 
+      transition: all 0.15s ease-in-out;
+    }
+  }
+}
+

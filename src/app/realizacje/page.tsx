@@ -21,7 +21,7 @@ export default async function Page() {
           <SimpleHeader
             isPageHeader
             header={realizations.header}
-            textAlign='left'
+            alignLeft
             fontSize='8rem'
           />
           <Realizations data={data} />

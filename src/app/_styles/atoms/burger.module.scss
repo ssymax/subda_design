@@ -1,0 +1,35 @@
+@import '../_variables.scss';
+@import '../_mixins.scss';
+
+.burger {
+  width: 3rem;
+  height: 2.2rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: $level10;
+  transition: height 0.2s ease;
+
+  &.open {
+    height: 0.2rem;
+  }
+
+  @include min-width-lg {
+    display: none;
+  }
+
+
+  .line {
+    height: 0.2rem;
+    background-color: $secondary;
+    transition: all 0.2s ease;
+    transition-delay: 0.2s;
+    user-select: none;
+
+    &.open {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+}

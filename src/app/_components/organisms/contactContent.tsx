@@ -181,8 +181,8 @@ export default function ContactContent() {
       <section>
         <PaddingWrapper>
           <Headers>
-            <SimpleHeader mobileFont fontSize='8rem' header={contactData.mail} />
-            <SimpleHeader mobileFont fontSize='8rem' header={contactData.phone} />
+            <SimpleHeader alignLeft header={contactData.mail} />
+            <SimpleHeader alignLeft header={contactData.phone} />
           </Headers>
           <Container ref={containerRef}>
             <Info className='left'>

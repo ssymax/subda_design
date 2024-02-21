@@ -1,0 +1,51 @@
+@import '../variables.scss';
+
+.wrapper {
+  background: $secondary;
+  border: 1px solid $dark;
+  border-radius: 2rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  column-gap: 2rem;
+  transition: all 0.15s ease-in-out;
+
+  &--value {
+    background: $dark;
+  }
+
+  &:focus-within {
+    background-color: $dark;
+    svg {
+      fill: $secondary;
+    }
+  }
+
+  svg {
+    opacity: 50%;
+  }
+}
+
+.search {
+  width: 10rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: $dark;
+
+  &--value {
+    color: $secondary;
+  }
+
+  &::placeholder {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 500;
+    opacity: 60%;
+    padding-left: 1rem;
+  }
+  &:focus {
+    color: $secondary
+  }
+}

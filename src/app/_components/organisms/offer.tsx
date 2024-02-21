@@ -211,8 +211,8 @@ export default function Offer({ data }: { data: OfferType }) {
         <SplitedWrapper>
           <LeftWrapper>
             <div>
-              <SimpleHeader header='Prosta droga' />
-              <SimpleHeader header='ku wymarzonym wnętrzom' />
+              <SimpleHeader alignLeft header='Prosta droga' />
+              <SimpleHeader alignLeft header='ku wymarzonym wnętrzom' />
             </div>
             <span>{data?.stepsDescription}</span>
             <Button

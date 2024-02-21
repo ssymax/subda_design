@@ -8,6 +8,8 @@ import Navbar from '@/components/organisms/navbar';
 import StyledComponentsRegistry from '@/lib/registry';
 import LenisScroller from '@/components/atoms/lenisScroller';
 import Providers from './_providers/providers';
+import 'normalize.css';
+import '@/styles/global.scss';
 
 const DynamicModal = dynamic(() => import('@/components/molecules/modal'), {
   ssr: false,

@@ -81,9 +81,9 @@ export default function BlogPostContent({ postData }: { postData: BlogPost }) {
       <SimpleHeader
         isPageHeader
         header={postData?.title || ''}
-        textAlign='left'
+        alignLeft
         fontSize='6rem'
-        lineHeight='120%'
+        lineHeight
       />
       {postData?.date && (
         <Date>

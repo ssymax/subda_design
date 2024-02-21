@@ -202,10 +202,8 @@ export interface SimpleHeaderProps {
   header: string;
   isPageHeader?: boolean;
   fontSize?: string;
-  paddingBottom?: string;
-  textAlign?: string;
-  lineHeight?: string;
-  mobileFont?: boolean;
+  alignLeft?: boolean;
+  lineHeight?: boolean;
 }
 
 export interface SorterProps {

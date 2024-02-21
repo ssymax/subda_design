@@ -143,8 +143,8 @@ export default function Hero() {
 
       <StyledPaddingWrapper>
         <div>
-          <SimpleHeader header='Sztuka życia' />
-          <SimpleHeader header='W pięknych wnętrzach' />
+          <SimpleHeader alignLeft header='Sztuka życia' />
+          <SimpleHeader alignLeft header='W pięknych wnętrzach' />
         </div>
         <TextAndButtons>
           <span>{text}</span>

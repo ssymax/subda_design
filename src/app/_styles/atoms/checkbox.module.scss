@@ -1,0 +1,52 @@
+@import '../_variables.scss';
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  position: relative;
+  column-gap: 1rem;
+  user-select: none;
+  
+  &.dark {
+    color: $secondary;
+  }
+}
+
+.input {
+  appearance: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid $primary;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  z-index: 1;
+  
+  &.dark {
+    border: 1px solid $secondary;
+  }
+}
+
+.icon {
+  position: absolute;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  left: 0.1rem;
+  z-index: 0;
+  &.dark {
+    svg {
+      fill: $secondary;
+    }
+  }
+  
+}
+
+.error {
+  position: absolute;
+  font-weight: 500;
+  color: red;
+  font-size: 1.2rem;
+  left: 0.5rem;
+  bottom: -2.2rem;
+}

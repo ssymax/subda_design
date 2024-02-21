@@ -2,41 +2,16 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ParallaxProps } from '@/components/types';
 import { useGSAP } from '@gsap/react';
-import { maxQuery, minQuery } from '@/app/_styles/constants';
+import { maxQuery, minQuery } from '@/styles/constants';
+import styles from '@/styles/atoms/parallax.module.scss';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const Section = styled.section`
-  height: 50rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  margin: 5rem 0;
-  overflow: hidden;
-  position: relative;
-  ${({ theme }) => theme.maxWidth.lg} {
-    height: 20rem;
-  }
-`;
-
-const StyledImage = styled(Image)`
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  position: absolute;
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 150%;
-    height: auto;
-  }
-`;
 
 export default function Parallax({ src }: ParallaxProps) {
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -79,8 +54,8 @@ export default function Parallax({ src }: ParallaxProps) {
   );
 
   return (
-    <Section>
-      <StyledImage ref={imageRef} src={src} alt='' sizes='100vw' />
-    </Section>
+    <div className={styles.parallax}>
+      <Image ref={imageRef} src={src} alt='' sizes='100vw' />
+    </div>
   );
 }

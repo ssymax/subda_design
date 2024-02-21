@@ -15,11 +15,13 @@
     "@studio-freight/react-lenis": "^0.0.44",
     "@types/styled-components": "^5.1.34",
     "babel-preset-next": "^1.4.0",
+    "clsx": "^2.1.0",
     "contentful": "^10.6.15",
     "dayjs": "^1.11.10",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "gsap": "^3.12.4",
     "next": "^14.1.0",
+    "normalize.css": "^8.0.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
@@ -45,6 +47,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.1.1",
+    "sass": "^1.71.0",
     "typescript": "^5"
   }
 }
