@@ -29,6 +29,7 @@ export default function SimpleHeader({
       if (!headerRef.current) return;
       const text = SplitType.create(headerRef.current, { types: 'words' });
       const { words } = text;
+
       gsap.from(words, {
         yPercent: 200,
         duration: 0.8,

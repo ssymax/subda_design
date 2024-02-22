@@ -18,12 +18,7 @@ export default async function Page() {
     <>
       <PaddingWrapper>
         <section>
-          <SimpleHeader
-            isPageHeader
-            header={realizations.header}
-            alignLeft
-            fontSize='8rem'
-          />
+          <SimpleHeader isPageHeader header={realizations.header} alignLeft />
           <Realizations data={data} />
         </section>
       </PaddingWrapper>
