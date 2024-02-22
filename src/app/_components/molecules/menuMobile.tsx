@@ -58,11 +58,8 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
 
   const { contextSafe } = useGSAP({ scope: containerRef });
 
-  const onLinkClick = contextSafe((route?: string) => {
-    entryTl.reverse().eventCallback('onReverseComplete', () => {
-      setOpen(false);
-      if (route) push(route);
-    });
+  const onLinkClick = contextSafe(() => {
+    entryTl.reverse().eventCallback('onReverseComplete', () => setOpen(false));
   });
 
   const navClass = clsx(styles.nav, { [styles['nav---open']]: open });
@@ -85,25 +82,22 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
       </div>
       <ul className={styles.list} ref={mobileNavRef}>
         {routesArr().map((r) => (
-          <span
-            role='button'
-            tabIndex={0}
+          <Link
             className={styles.link}
             key={r.route}
-            onClick={() => onLinkClick(r.route)}
-            onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
-              e.key === 'Enter' && onLinkClick(r.route)
-            }
+            href={r.route}
+            onClick={() => onLinkClick()}
           >
             <li>{r.text}</li>
-          </span>
+          </Link>
         ))}
         <Button
           large
           text='Porozmawiajmy'
           variant='primary'
           onClick={() => {
-            onLinkClick(routes.contact);
+            onLinkClick();
+            push(routes.contact);
           }}
         />
       </ul>
