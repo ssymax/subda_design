@@ -39,11 +39,14 @@
   transform: translateX(-50%);
 }
 
+.item {
+  list-style: none;
+}
+
 .link {
   text-decoration: none;
   color: $secondary;
-  list-style: none;
-  
+
   &.active {
     font-weight: 600;
   }
@@ -52,8 +55,10 @@
 .closeIcon {
   width: 4rem;
   height: 4rem;
+
   svg {
     fill: $secondary;
   }
+
   cursor: pointer;
 }
