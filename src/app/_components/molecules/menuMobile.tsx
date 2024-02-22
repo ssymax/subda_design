@@ -82,14 +82,11 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
       </div>
       <ul className={styles.list} ref={mobileNavRef}>
         {routesArr().map((r) => (
-          <Link
-            className={styles.link}
-            key={r.route}
-            href={r.route}
-            onClick={() => onLinkClick()}
-          >
-            <li>{r.text}</li>
-          </Link>
+          <li className={styles.item} key={r.route}>
+            <Link className={styles.link} href={r.route} onClick={() => onLinkClick()}>
+              {r.text}
+            </Link>
+          </li>
         ))}
         <Button
           large

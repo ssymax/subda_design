@@ -25,6 +25,7 @@ export default function Line({ additionalClass }: LineProps) {
         scrollTrigger: {
           trigger: lineRef.current,
           start: 'top bottom',
+          invalidateOnRefresh: true,
         },
       });
     },
