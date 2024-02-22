@@ -1,28 +1,13 @@
 'use client';
 
 import { useRef } from 'react';
-import styled from 'styled-components';
 import { useGSAP } from '@gsap/react';
 import HomeHeader from '@/components/atoms/homeHeader';
 import BlogCard from '@/components/molecules/blogCard';
 import { HomeBlogItemModel } from '@/lib/types';
 import { animateBlogPosts } from '@/utils/utils';
-
-const description = `Przygotowałam dla Państwa artykuły, mogące pomóc w wielu 
-aspektach urządzania mieszkań i innych przestrzeni.`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  column-gap: 6rem;
-  margin-bottom: 3rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    row-gap: 3rem;
-    flex-direction: column;
-    justify-content: center;
-  }
-`;
+import styles from '@/styles/organisms/homeBlog.module.scss';
+import { blogDescription } from '@/lib/constants';
 
 export default function HomeBlog({ blogPosts }: { blogPosts: HomeBlogItemModel[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,13 +22,13 @@ export default function HomeBlog({ blogPosts }: { blogPosts: HomeBlogItemModel[]
       <HomeHeader
         smallHeader='Blog'
         header='Porady, trendy i wskazówki'
-        description={description}
+        description={blogDescription}
       />
-      <Wrapper ref={containerRef}>
+      <div className={styles.posts} ref={containerRef}>
         {blogPosts?.map((d) => (
           <BlogCard key={d.sys.id} slug={d.slug} url={d.image.url} title={d.title} />
         ))}
-      </Wrapper>
+      </div>
     </section>
   );
 }

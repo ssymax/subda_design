@@ -1,0 +1,83 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+$accordionHeight: 8rem;
+
+.wrapper {
+  width: 100%;
+
+  @include min-width-md {
+    display: none;
+  }
+}
+
+.accordion {
+  height: $accordionHeight;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  border: 0.5px solid $primary;
+
+  &--first {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+
+  &--last-not-open {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  &:hover {
+    color: $secondary;
+    background-color: $primary;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+}
+
+.content {
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  row-gap: 3rem;
+  overflow: clip;
+  padding: 0rem 1rem;
+  transition: height 0.3s cubic-bezier(0.59, 0.18, 0.88, 0.88);
+  border-left: 0.5px solid $primary;
+  border-right: 0.5px solid $primary;
+
+  &--open {
+    height: calc(93rem - 4 * $accordionHeight);
+  }
+
+  &--last-and-open {
+    border-bottom: 0.5px solid $primary;
+  }
+
+  &--last {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    line-height: 140%;
+    font-size: 1.4rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    align-self: center;
+    border-radius: 1rem;
+  }
+}

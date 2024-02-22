@@ -1,0 +1,70 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary;
+  width: 100%;
+  padding: 5rem 7.5rem;
+
+  @include max-width-lg {
+    padding: 5rem 2.4rem;
+  }
+}
+
+.logo {
+  width: 22.5rem;
+  margin-bottom: 2rem;
+}
+
+.moreInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 5rem;
+
+  @include max-width-lg {
+    flex-direction: column;
+    row-gap: 4rem;
+  }
+}
+
+.personal {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  font-weight: 500;
+  row-gap: 2rem;
+  width: 50%;
+
+  @include max-width-lg {
+    width: 100%;
+    font-weight: 700;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+  }
+}
+
+.linksAndText {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+
+  @include max-width-lg {
+    width: 100%;
+  }
+}
+
+.info {
+  width: 30rem;
+  font-size: 1.2rem;
+  
+  @include max-width-lg {
+    width: 100%;
+  }
+}

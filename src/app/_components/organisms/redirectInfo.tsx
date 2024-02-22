@@ -1,60 +1,8 @@
-import styled from 'styled-components';
 import Image from 'next/image';
 import ButtonsGroup from '@/components/molecules/buttonsGroup';
-
 import { RedirectInfoProps } from '@/components/types';
-
-const InnerWrapper = styled.div<{ $inverse?: boolean }>`
-  padding: 2rem 0 4rem 0;
-  display: flex;
-  justify-content: space-between;
-  column-gap: 5rem;
-  flex-direction: ${({ $inverse }) => ($inverse ? 'row-reverse' : 'row')};
-  background-color: ${({ theme }) => theme.colors.beige};
-
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-    flex-flow: column-reverse;
-    row-gap: 2rem;
-  }
-
-  div {
-    width: 50%;
-
-    ${({ theme }) => theme.maxWidth.lg} {
-      width: 100%;
-    }
-  }
-
-  h3 {
-    font-size: 2rem;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-  }
-
-  p {
-    font-size: 2.2rem;
-    line-height: 140%;
-    font-weight: 300;
-    margin-bottom: 8rem;
-
-    ${({ theme }) => theme.maxWidth.lg} {
-      font-size: 1.6rem;
-      line-height: 140%;
-      margin-bottom: 5rem;
-    }
-  }
-`;
-
-const ImageWrapper = styled.div`
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 1rem;
-  }
-`;
+import styles from '@/styles/organisms/redirectInfo.module.scss';
+import clsx from 'clsx';
 
 export default function RedirectInfo({
   header,
@@ -66,8 +14,12 @@ export default function RedirectInfo({
   imageSrc,
   inverse,
 }: RedirectInfoProps) {
+  const containerClass = clsx(styles.container, {
+    [styles['container-reverse']]: inverse,
+  });
+
   return (
-    <InnerWrapper $inverse={inverse}>
+    <div className={containerClass}>
       <div>
         <h3>{header}</h3>
         <p>{text}</p>
@@ -78,9 +30,9 @@ export default function RedirectInfo({
           onRightClick={onRightClick}
         />
       </div>
-      <ImageWrapper>
-        <Image src={imageSrc} alt={header} priority />
-      </ImageWrapper>
-    </InnerWrapper>
+      <div className={styles.image}>
+        <Image className={styles.image} src={imageSrc} alt={header} priority />
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,19 @@
+@import '../_mixins.scss';
+@import '../_variables.scss';
+
+.wrapper {
+  height: calc(100vh - 7rem);
+  width: 100%;
+  color: $secondary;
+  background-color: $dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  letter-spacing: 2px;
+  row-gap: 4rem;
+
+  @include max-width-lg {
+    height: calc(100vh - 6rem);
+  }
+}

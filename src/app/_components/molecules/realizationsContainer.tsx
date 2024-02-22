@@ -1,29 +1,16 @@
 'use client';
 
-import styled from 'styled-components';
 import gsap from 'gsap';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import RealizationItem from '@/components/molecules/realizationItem';
 import { RealizationsContainerProps } from '@/components/types';
+import styles from '@/styles/molecules/realizationsContainer.module.scss';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const Wrapper = styled.div`
-  padding: 2rem 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-flow: row;
-  grid-template-rows: auto;
-  gap: 4rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 export default function RealizationsContainer({
   realizations,
@@ -52,8 +39,8 @@ export default function RealizationsContainer({
   );
 
   return (
-    <Wrapper ref={wrapperRef}>
+    <div className={styles.container} ref={wrapperRef}>
       {realizations?.map((r) => <RealizationItem key={r.id} {...r} />)}
-    </Wrapper>
+    </div>
   );
 }

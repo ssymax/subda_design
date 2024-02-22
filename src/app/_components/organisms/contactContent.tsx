@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import styled from 'styled-components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { contactData, contactTexts, socials } from '@/lib/constants';
@@ -10,134 +9,8 @@ import PaddingWrapper from '@/templates/paddingWrapper';
 import Foot from '@/components/organisms/foot';
 import InfoItem from '@/components/atoms/infoItem';
 import SimpleHeader from '@/components/atoms/simpleHeader';
+import styles from '@/styles/organisms/contactContent.module.scss';
 import diningRoom from '../../../../public/kontakt.jpg';
-
-const Headers = styled.div`
-  margin: 8rem 0;
-  ${({ theme }) => theme.maxWidth.lg} {
-    margin: 4rem 0;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  column-gap: 5rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-  }
-`;
-
-const Info = styled.div`
-  width: 50%;
-  flex-direction: column;
-  display: flex;
-  row-gap: 10rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 100%;
-    row-gap: 0;
-  }
-`;
-
-const ContactsAndProfiles = styled.div`
-  display: flex;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-  }
-`;
-
-const Contacts = styled.div`
-  display: flex;
-  width: 50%;
-  flex-direction: column;
-  row-gap: 3rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 100%;
-    row-gap: 0;
-  }
-`;
-
-const Profiles = styled.div`
-  width: 50%;
-`;
-
-const A = styled.a`
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: 500;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  min-width: 6rem;
-  text-align: center;
-  border-radius: 2rem;
-  padding: 0.2rem 0;
-  font-size: 1.8rem;
-  &:hover {
-    color: ${({ theme }) => theme.colors.secondary};
-    background-color: ${({ theme }) => theme.colors.primary};
-    border: 1px solid ${({ theme }) => theme.colors.secondary};
-  }
-`;
-
-const RightWrapper = styled.div`
-  width: 50%;
-  padding: 0 5%;
-  position: relative;
-  ${({ theme }) => theme.maxWidth.xl} {
-    padding: 0;
-  }
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 100%;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 1rem;
-    margin-top: -15%;
-    margin-bottom: -30%;
-    ${({ theme }) => theme.maxWidth.xl} {
-      margin-top: -10%;
-    }
-    ${({ theme }) => theme.maxWidth.lg} {
-      margin-top: 0;
-      margin-bottom: 2rem;
-    }
-  }
-`;
-
-const Empty = styled.div`
-  background-color: ${({ theme }) => theme.colors.dark};
-  height: 20rem;
-  margin-bottom: -3rem;
-  margin-top: 5%;
-  ${({ theme }) => theme.maxWidth.xxl} {
-    height: 7rem;
-  }
-  ${({ theme }) => theme.maxWidth.xxl} {
-    height: 5rem;
-  }
-  ${({ theme }) => theme.maxWidth.lg} {
-    height: 0;
-  }
-`;
-
-const Iframe = styled.iframe`
-  border: 0;
-  width: 100%;
-  height: 50rem;
-  margin: 5rem 0;
-  border-radius: 1rem;
-  filter: grayscale(100);
-  ${({ theme }) => theme.maxWidth.lg} {
-    height: 40rem;
-    margin: 0;
-    margin-top: 4rem;
-  }
-`;
 
 const mapSrc = `https://www.google.com/maps/embed/v1/place?q=Subda%20Design&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS}`;
 
@@ -147,11 +20,11 @@ export default function ContactContent() {
   useGSAP(
     () => {
       const tl = gsap.timeline();
-      const texts = document.querySelector('.left');
+      const texts = document.querySelector('[class*="info"]');
       if (!texts) return;
       const elements = gsap.utils.toArray(texts?.children);
 
-      tl.from('.right', {
+      tl.from('[class*="right"]', {
         autoAlpha: 0,
         scale: 1.05,
         duration: 0.8,
@@ -163,13 +36,13 @@ export default function ContactContent() {
 
       const scrollTl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.right',
+          trigger: '[class*="right"]',
           start: 'top top',
           scrub: 2,
         },
       });
 
-      scrollTl.to('.right', {
+      scrollTl.to('[class*="right"]', {
         y: 100,
       });
     },
@@ -180,15 +53,15 @@ export default function ContactContent() {
     <>
       <section>
         <PaddingWrapper>
-          <Headers>
+          <div className={styles.headers}>
             <SimpleHeader alignLeft header={contactData.mail} />
             <SimpleHeader alignLeft header={contactData.phone} />
-          </Headers>
-          <Container ref={containerRef}>
-            <Info className='left'>
+          </div>
+          <div className={styles.container} ref={containerRef}>
+            <div className={styles.info}>
               <InfoItem header='Zapraszam do kontaktu' text={contactTexts.invite} />
-              <ContactsAndProfiles className='contacts'>
-                <Contacts>
+              <div className={styles.contactsAndProfiles}>
+                <div className={styles.contacts}>
                   <InfoItem header='Info'>
                     <span>{contactData.mail}</span>
                     <span>{contactData.phone}</span>
@@ -197,29 +70,41 @@ export default function ContactContent() {
                     <span>{contactData.street}</span>
                     <span>{contactData.city}</span>
                   </InfoItem>
-                </Contacts>
-                <Profiles>
+                </div>
+                <div className={styles.profiles}>
                   <InfoItem horizontal header='Moje profile'>
                     {socials.map((s) => (
-                      <A key={s.id} rel='noreferrer' target='_blank' href={s.href}>
+                      <a
+                        className={styles.link}
+                        key={s.id}
+                        rel='noreferrer'
+                        target='_blank'
+                        href={s.href}
+                      >
                         {s.shortcut}
-                      </A>
+                      </a>
                     ))}
                   </InfoItem>
-                </Profiles>
-              </ContactsAndProfiles>
-            </Info>
-            <RightWrapper className='right'>
-              <ImageWrapper>
+                </div>
+              </div>
+            </div>
+            <div className={styles.right}>
+              <div className={styles.image}>
                 <Image src={diningRoom} alt='' sizes='100vw' />
-              </ImageWrapper>
-            </RightWrapper>
-          </Container>
+              </div>
+            </div>
+          </div>
         </PaddingWrapper>
       </section>
-      <Empty />
+      <div className={styles.empty} />
       <Foot dark header='Jedna wiadomość zaczyna każdy projekt'>
-        <Iframe loading='lazy' allowFullScreen src={mapSrc} />
+        <iframe
+          title='map'
+          className={styles.iframe}
+          loading='lazy'
+          allowFullScreen
+          src={mapSrc}
+        />
       </Foot>
     </>
   );

@@ -1,0 +1,10 @@
+@import '../_mixins.scss';
+@import '../_variables.scss';
+
+.offset {
+  height: 7rem;
+  background-color: $dark;
+  @include max-width-lg {
+    height: 6rem;
+  }
+}

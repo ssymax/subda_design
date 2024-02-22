@@ -1,0 +1,65 @@
+@import '../mixins.scss';
+
+.container {
+  margin: 0 auto 3rem auto;
+  width: 50vw;
+  min-height: 100vh;
+
+  @include max-width-lg {
+    width: 100%;
+  }
+}
+
+.date {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 1rem;
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+  margin-top: 5.5rem;
+
+  img {
+    border-radius: 1rem;
+    margin: 4rem 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.intro {
+  font-weight: 600;
+  line-height: 150%;
+  font-size: 2.2rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  font-weight: 600;
+  line-height: 150%;
+  font-size: 2.2rem;
+  position: relative;
+}
+
+.paragraph {
+  font-weight: 300;
+  line-height: 150%;
+  position: relative;
+}

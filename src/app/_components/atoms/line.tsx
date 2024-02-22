@@ -5,12 +5,13 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from '@/styles/atoms/line.module.scss';
+import { LineProps } from '@/components/types';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ limitCallbacks: true });
 }
-export default function Line() {
+export default function Line({ additionalClass }: LineProps) {
   const lineRef = useRef(null);
 
   useGSAP(
@@ -30,9 +31,11 @@ export default function Line() {
     { revertOnUpdate: true },
   );
 
+  const classes = `${styles.line} ${additionalClass}`;
+
   return (
     <>
-      <hr className={styles.line} ref={lineRef} />
+      <hr className={classes} ref={lineRef} />
     </>
   );
 }

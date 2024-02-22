@@ -1,40 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import { CSSProperties, useRef } from 'react';
 import { AboutMeType } from '@/lib/types';
 import { minQuery } from '@/styles/constants';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import ContentfulImage from '@/lib/contentfulImage';
 import { useGSAP } from '@gsap/react';
-import { thumbsAnimation } from '@/app/_utils/utils';
-
-const SkillsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-bottom: 6rem;
-  img {
-    position: absolute;
-    z-index: 1;
-    border-radius: 1rem;
-  }
-
-  :last-child {
-    border-bottom: none;
-  }
-`;
-
-const Skill = styled.div`
-  font-size: 2.8rem;
-  font-weight: 700;
-  border-bottom: 0.5px solid ${({ theme }) => theme.colors.grey};
-  padding: 2rem 0;
-  position: relative;
-  ${({ theme }) => theme.maxWidth.lg} {
-    font-size: 2rem;
-  }
-`;
+import { thumbsAnimation } from '@/utils/utils';
+import styles from '@/styles/molecules/aboutSkills.module.scss';
 
 export default function AboutSkills({ data }: { data?: AboutMeType }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -72,7 +45,7 @@ export default function AboutSkills({ data }: { data?: AboutMeType }) {
   ];
 
   return (
-    <SkillsWrapper ref={containerRef}>
+    <div className={styles.skills} ref={containerRef}>
       {aboutImages?.map((image, index) => (
         <ContentfulImage
           className={skillImgClass}
@@ -84,7 +57,11 @@ export default function AboutSkills({ data }: { data?: AboutMeType }) {
           style={imagePositions[index]}
         />
       ))}
-      {data?.skills.map((s) => <Skill key={s}>{s}</Skill>)}
-    </SkillsWrapper>
+      {data?.skills.map((s) => (
+        <div className={styles.skill} key={s}>
+          {s}
+        </div>
+      ))}
+    </div>
   );
 }

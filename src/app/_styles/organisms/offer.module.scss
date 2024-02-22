@@ -1,0 +1,87 @@
+@import '../_mixins.scss';
+@import '../_variables.scss';
+
+
+.cardWrapper {
+  display: flex;
+  justify-items: center;
+  column-gap: 6rem;
+  margin: 3rem auto;
+  min-height: 80rem;
+
+  @include max-width-xl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-auto-flow: row;
+  }
+}
+
+.splitedWrapper {
+  display: flex;
+  column-gap: 5.5rem;
+  margin: 8rem 0;
+  align-items: center;
+
+  @include max-width-xl {
+    flex-direction: column;
+  }
+}
+
+.leftWrapper {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 3rem;
+
+  @include max-width-xl {
+    width: 100%;
+  }
+
+  span {
+    line-height: 140%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+}
+
+.steps {
+  width: 40%;
+  border-radius: 1rem;
+  border: 1px solid $primary;
+  background-color: $secondary;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  height: auto;
+  transition: all 0.3s ease;
+
+  @include max-width-xl {
+    width: 100%;
+    margin-top: 8rem;
+  }
+
+  @include max-width-lg {
+    padding: 4rem 2rem;
+  }
+}
+
+.slides {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

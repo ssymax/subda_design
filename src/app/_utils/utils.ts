@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { ASC, DESC } from '@/lib/constants';
 import { HomeBlogItem, Order } from '@/lib/types';
-import { minQuery } from '../_styles/constants';
+import { minQuery } from '@/styles/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 

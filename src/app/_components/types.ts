@@ -216,3 +216,12 @@ export interface SearchInputProps {
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
+
+export type LineProps = {
+  additionalClass?: string;
+};
+
+export type PaddingWrapperProps = {
+  additionalClass?: string;
+  children: ReactNode;
+};

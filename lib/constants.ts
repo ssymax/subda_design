@@ -140,3 +140,20 @@ export const opinions = [
     place: 'Warszawa',
   },
 ];
+
+export const heroText = `Tworząc swój wymarzony projekt wnętrz, pragną Państwo
+współpracować z kimś, kto rozumie Państwa potrzeby.`;
+
+export const aboutText = `Nazywam się Marta Subda – dyplomowana architekt wnętrz i absolwentka prestiżowego Uniwersytetu Artystycznego w Poznaniu. Moja pasja do sztuki 
+i designu wyraża się w licznych projektach, które tworzyłam przez lata. 
+Od przemyślanych przestrzeni mieszkalnych po wyjątkowe realizacje komercyjne - nieustannie podchodzę do każdego zadania z entuzjazmem.
+Moim celem jest adaptacja przestrzeni tak, by doskonale oddawała 
+charakter, sposób życia i gusta moich Klientów. W projektowaniu wnętrz 
+stawiam na bliską współpracę z inwestorami, dzięki której mogę pełniej 
+zrozumieć ich wizję i stworzyć wnętrza przekraczające oczekiwania.`;
+
+export const blogDescription = `Przygotowałam dla Państwa artykuły, mogące pomóc w wielu 
+aspektach urządzania mieszkań i innych przestrzeni.`;
+
+export const realizationsDescription = `Każdy projekt jest wynikiem dokładnego zbadania potrzeb 
+i dodania indywidualnego charakteru Państwa wnętrzom.`;

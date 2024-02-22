@@ -1,0 +1,120 @@
+@import "../mixins.scss";
+@import '../variables.scss';
+
+$accordionWidth: 8rem;
+$accordionWidthSmall: 6rem;
+$containerWidth: 100%;
+$padding: 3rem;
+
+.wrapper {
+  display: flex;
+  overflow: hidden;
+
+  @include max-width-md {
+    display: none;
+  }
+}
+
+.accordion {
+  display: flex;
+  color: $primary;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 1rem 0 2rem 0;
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  border: 0.5px solid $primary;
+
+  &:hover {
+    color: $secondary;
+    background-color: $primary;
+  }
+
+  @include min-width-lg {
+    width: $accordionWidth;
+  }
+
+  @include max-width-lg {
+    width: $accordionWidthSmall;
+  }
+
+
+  &--open {
+    pointer-events: none;
+  }
+
+  &--first {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+
+  &--not-open-last-not-first {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+}
+
+.number {
+  font-size: 4rem;
+}
+
+.title {
+  white-space: nowrap;
+  bottom: 0;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  transition: width 0.3s cubic-bezier(0.59, 0.18, 0.88, 0.88);
+  border-bottom: 0.5px solid $primary;
+  border-top: 0.5px solid $primary;
+
+  &--open {
+    @include min-width-lg {
+      width: calc($containerWidth - 32rem);
+
+    }
+
+    @include max-width-lg {
+      width: calc($containerWidth - 24rem);
+    }
+  }
+
+  &--open-and-last {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-right: 0.5px solid $primary;
+  }
+}
+
+.half {
+  display: flex;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc($containerWidth - 4rem - 4 * $padding) ;
+  padding: $padding;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    line-height: 140%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+}

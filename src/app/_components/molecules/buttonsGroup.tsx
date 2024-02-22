@@ -1,17 +1,8 @@
 'use client';
 
-import styled from 'styled-components';
 import Button from '@/components/atoms/button';
 import { ButtonsGroupProps } from '@/components/types';
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 1.2rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    justify-content: center;
-  }
-`;
+import styles from '@/styles/molecules/buttonsGroup.module.scss';
 
 export default function ButtonsGroup({
   leftLabel,
@@ -20,9 +11,9 @@ export default function ButtonsGroup({
   onRightClick,
 }: ButtonsGroupProps) {
   return (
-    <Wrapper>
+    <div className={styles.group}>
       <Button variant='secondary' text={leftLabel} onClick={onLeftClick} />
       <Button variant='primary' text={rightLabel} onClick={onRightClick} />
-    </Wrapper>
+    </div>
   );
 }

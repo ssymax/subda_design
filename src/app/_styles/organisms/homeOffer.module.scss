@@ -1,0 +1,17 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.container {
+  display: flex;
+  background-color: $secondary;
+  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+  
+  @include max-width-md {
+    height: 93rem;
+    flex-direction: column;
+    overflow-y: hidden;
+  }
+
+}

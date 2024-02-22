@@ -1,0 +1,15 @@
+@import '../variables.scss';
+
+.step {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  line-height: 140%;
+  background-color: $secondary;
+  position: sticky;
+
+  span {
+    font-weight: 600;
+    font-size: 2.2rem;
+  }
+}

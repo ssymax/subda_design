@@ -1,0 +1,44 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.actions {
+  position: absolute;
+  right: 5.5rem;
+  top: 22.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  z-index: $level1;
+
+  @include max-width-lg {
+    top: 16rem;
+    right: 2.4rem;
+  }
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5.5rem;
+  margin-top: 3rem;
+  grid-auto-flow: row;
+  min-height: 100vh;
+
+  @include max-width-lg {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5.5rem;
+    row-gap: 5.5rem;
+  }
+
+  @include max-width-md {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.noPosts {
+  display: flex;
+  font-size: 2rem;
+  margin-top: 3rem;
+  letter-spacing: 2px;
+}

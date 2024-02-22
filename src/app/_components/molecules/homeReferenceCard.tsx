@@ -1,36 +1,11 @@
 'use client';
 
 import { useRef } from 'react';
-import styled from 'styled-components';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import { HomeReferenceCardProps } from '@/components/types';
 import { useGSAP } from '@gsap/react';
-
-const Card = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  row-gap: 2.5rem;
-  align-items: center;
-  flex-direction: column;
-  font-size: 2rem;
-  padding: 2rem 6rem;
-  min-height: 30rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    font-size: 1.6rem;
-    padding: 1rem 2rem;
-  }
-`;
-
-const Description = styled.span`
-  text-align: center;
-  line-height: 150%;
-`;
-
-const NameAndPlace = styled.span`
-  text-transform: uppercase;
-`;
+import styles from '@/styles/molecules/homeReferenceCard.module.scss';
 
 export default function HomeReferenceCard({
   name,
@@ -83,9 +58,11 @@ export default function HomeReferenceCard({
   );
 
   return (
-    <Card>
-      <Description ref={descriptionRef}>{description}</Description>
-      <NameAndPlace ref={nameRef}>{`${name}, ${place}`}</NameAndPlace>
-    </Card>
+    <div className={styles.card}>
+      <span className={styles.description} ref={descriptionRef}>
+        {description}
+      </span>
+      <span className={styles.name} ref={nameRef}>{`${name}, ${place}`}</span>
+    </div>
   );
 }

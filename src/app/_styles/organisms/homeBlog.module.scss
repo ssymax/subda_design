@@ -1,0 +1,14 @@
+@import '../mixins.scss';
+
+.posts {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  column-gap: 6rem;
+  margin-bottom: 3rem;
+  @include max-width-lg {
+    row-gap: 3rem;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

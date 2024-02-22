@@ -23,12 +23,10 @@
       "@/templates/*": ["./src/app/_templates/*"],
       "@/components/*": ["./src/app/_components/*"],
       "@/styles/*": ["./src/app/_styles/*"],
-      "@/providers/*": ["./src/app/_providers/*"],
       "@/routes/*": ["./src/app/_routes/*"],
       "@/utils/*": ["./src/app/_utils/*"],
       "@/hooks/*": ["./src/app/_hooks/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/fonts/*": ["./app/_fonts/*"]
+      "@/lib/*": ["./lib/*"]
     }
   },
   "include": [

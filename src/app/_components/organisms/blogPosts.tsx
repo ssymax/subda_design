@@ -1,7 +1,6 @@
 'use client';
 
 import { ChangeEvent, useRef, useState } from 'react';
-import styled from 'styled-components';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import BlogCard from '@/components/molecules/blogCard';
@@ -10,46 +9,7 @@ import SearchInput from '@/components/atoms/searchInput';
 import { HomeBlogItem, Order } from '@/lib/types';
 import { sortAndFilterBlogPosts } from '@/utils/utils';
 import { ASC, DESC } from '@/lib/constants';
-
-const ActionWrapper = styled.div`
-  position: absolute;
-  right: 5.5rem;
-  top: 22.5rem;
-  display: flex;
-  align-items: center;
-  column-gap: 2rem;
-  z-index: ${({ theme }) => theme.zIndex.level1};
-  ${({ theme }) => theme.maxWidth.lg} {
-    top: 16rem;
-    right: 2.4rem;
-  }
-`;
-
-const PostsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 5.5rem;
-  margin-top: 3rem;
-  grid-auto-flow: row;
-  min-height: 100vh;
-
-  ${({ theme }) => theme.maxWidth.xl} {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 5.5rem;
-    row-gap: 5.5rem;
-  }
-  ${({ theme }) => theme.maxWidth.md} {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const NoPosts = styled.div`
-  display: flex;
-  font-size: 2rem;
-  margin-top: 3rem;
-  letter-spacing: 2px;
-`;
+import styles from '@/styles/organisms/blogPosts.module.scss';
 
 export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,14 +43,14 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
 
   return (
     <>
-      <ActionWrapper>
+      <div className={styles.actions}>
         <Sorter order={order} onClick={handleOrderClick} />
         <SearchInput onChange={handleChange} value={search} placeholder='Szukaj' />
-      </ActionWrapper>
+      </div>
       {!!search.length && !sortedPosts.length && (
-        <NoPosts>{`Brak wyników dla "${search}"`}</NoPosts>
+        <div className={styles.noPosts}>{`Brak wyników dla "${search}"`}</div>
       )}
-      <PostsContainer ref={containerRef}>
+      <div className={styles.posts} ref={containerRef}>
         {sortedPosts?.map((p) => (
           <BlogCard
             key={p.id}
@@ -100,7 +60,7 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
             title={p.title}
           />
         ))}
-      </PostsContainer>
+      </div>
     </>
   );
 }
