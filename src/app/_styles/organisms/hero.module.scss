@@ -13,31 +13,6 @@
   }
 }
 
-.imageWrapper {
-  overflow: hidden;
-  margin-top: -7rem;
-  z-index: -1;
-  left: 0;
-  display: flex;
-
-  .mobile {
-    @include min-width-lg {
-      display: none;
-    }
-  }
-
-  .desktop {
-    @include max-width-lg {
-      display: none;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-}
-
 .textAndButtons {
   align-self: flex-end;
   display: flex;
@@ -72,5 +47,9 @@
   flex-direction: column;
   row-gap: 4rem;
   background-color: $beige;
+}
+
+.headers {
   padding-top: 4rem;
+  background-color: $beige;
 }
