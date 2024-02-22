@@ -1,0 +1,91 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.slide {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 11rem;
+
+  @include max-width-lg {
+    justify-content: center;
+    padding-right: 0;
+  }
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: transform;
+}
+
+.content {
+  aspect-ratio: 1 / 1;
+  background-color: $dark;
+  color: $secondary;
+  width: 30vw;
+  border-radius: 1rem;
+  display: flex;
+  padding: 4rem;
+  flex-direction: column;
+  row-gap: 3rem;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  @include max-width-xxl {
+    width: 35vw;
+  }
+  @include max-width-xl {
+    width: 42vw;
+  }
+
+  &--even {
+    background-color: $secondary;
+    color: $primary;
+  }
+
+  h4 {
+    text-transform: uppercase;
+  }
+
+  span {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 140%;
+  }
+
+  @include max-width-lg {
+    width: 50vw;
+    row-gap: 2rem;
+    height: auto;
+    padding: 2rem;
+    span {
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+  }
+
+  @include max-width-md  {
+    width: 80%;
+    min-height: 60vh;
+    aspect-ratio: auto;
+    span {
+      font-size: 1.6rem;
+    }
+  }
+}

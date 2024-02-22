@@ -1,0 +1,9 @@
+@import '../_variables.scss';
+
+.pill {
+  border-radius: 2rem;
+  border: 1px solid $grey;
+  padding: 1rem 3rem;
+  color: $grey;
+  font-weight: 600;
+}

@@ -1,0 +1,41 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7rem;
+  background-color: $dark;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5.5rem;
+  z-index: $level8;
+
+ @include max-width-lg {
+    height: 6rem;
+    padding: 0 2.4rem;
+  }
+}
+
+.buttonWrap {
+  display: flex;
+  align-items: center;
+  column-gap: 3rem;
+
+ @include max-width-lg{
+    display: none;
+  }
+}
+
+.logo {
+  height: 4.2rem;
+  width: 19.2rem;
+  z-index: $level10;
+  cursor: pointer;
+  svg {
+    fill: $secondary;
+  }
+}

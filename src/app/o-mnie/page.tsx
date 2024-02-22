@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import SimpleHeader from '@/components/atoms/simpleHeader';
 import Foot from '@/components/organisms/foot';
 import AboutBottomHeader from '@/components/molecules/aboutBottomHeader';
 import Parallax from '@/components/atoms/parallax';
 import SmallHeader from '@/components/atoms/smallHeader';
+import AboutSkills from '@/components/molecules/aboutSkills';
+import AboutInfo from '@/components/molecules/aboutInfo';
 import { head } from '@/lib/constants';
 import { getAboutMe } from '@/lib/api';
 import kitchen2 from '../../../public/kitchen2.jpg';
-import AboutSkills from '../_components/molecules/aboutSkills';
-
-const DynamicInfo = dynamic(() => import('@/components/molecules/aboutInfo'), {
-  ssr: false,
-});
 
 export const metadata: Metadata = {
   title: `O mnie - ${head.title}`,
@@ -27,7 +23,7 @@ export default async function AboutMe() {
       <section>
         <PaddingWrapper>
           <SimpleHeader isPageHeader header='O mnie' />
-          <DynamicInfo data={data} />
+          <AboutInfo data={data} />
           <SmallHeader>Umiejętności</SmallHeader>
           <AboutSkills data={data} />
         </PaddingWrapper>

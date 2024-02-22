@@ -1,75 +1,25 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
 'use client';
 
 import { KeyboardEvent, useRef } from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
+import clsx from 'clsx';
 import { useGSAP } from '@gsap/react';
 import Button from '@/components/atoms/button';
 import { MenuMobileProps } from '@/components/types';
 import { routes, routesArr } from '@/routes/routes';
+import styles from '@/styles/molecules/menuMobile.module.scss';
 import CloseIcon from '../../../../public/images/close.svg';
-
-const Container = styled.div<{ $open: boolean }>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: ${({ $open }) => ($open ? 'flex' : 'none')};
-  height: 100%;
-  z-index: ${({ theme }) => theme.zIndex.level10};
-`;
-
-const HalfWrapper = styled.div<{ $open?: boolean }>`
-  background-color: ${({ theme }) => theme.colors.dark};
-  position: relative;
-  height: 100%;
-  width: 50%;
-  display: flex;
-  justify-content: end;
-  align-items: start;
-  padding: 1rem 1.4rem;
-`;
-
-const MobileNav = styled.nav`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-evenly;
-  align-items: center;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.secondary};
-  position: absolute;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.secondary};
-  &.active {
-    font-weight: 600;
-  }
-`;
-
-const StyledCloseIcon = styled.div`
-  width: 4rem;
-  height: 4rem;
-  svg {
-    fill: ${({ theme }) => theme.colors.secondary};
-  }
-  cursor: pointer;
-`;
 
 export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
   const { push } = useRouter();
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
   const leftWrapRef = useRef<HTMLDivElement | null>(null);
   const rightWrapRef = useRef<HTMLDivElement | null>(null);
-  const mobileNavRef = useRef<HTMLElement | null>(null);
+  const mobileNavRef = useRef<HTMLUListElement | null>(null);
 
   const entryTl = gsap.timeline({ paused: true, reversed: true });
   useGSAP(
@@ -112,11 +62,14 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
     entryTl.reverse().eventCallback('onReverseComplete', () => setOpen(false));
   });
 
+  const navClass = clsx(styles.nav, { [styles['nav---open']]: open });
+
   return (
-    <Container ref={containerRef} $open={open}>
-      <HalfWrapper ref={leftWrapRef} />
-      <HalfWrapper $open={open} ref={rightWrapRef}>
-        <StyledCloseIcon
+    <nav className={navClass} ref={containerRef}>
+      <div className={styles.half} ref={leftWrapRef} />
+      <div className={styles.half} ref={rightWrapRef}>
+        <div
+          className={styles.closeIcon}
           onClick={() => onLinkClick()}
           role='button'
           onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
@@ -125,13 +78,18 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
           tabIndex={0}
         >
           <CloseIcon />
-        </StyledCloseIcon>
-      </HalfWrapper>
-      <MobileNav ref={mobileNavRef}>
+        </div>
+      </div>
+      <ul className={styles.list} ref={mobileNavRef}>
         {routesArr().map((r) => (
-          <StyledLink key={r.route} href={r.route} onClick={() => onLinkClick()}>
-            {r.text}
-          </StyledLink>
+          <Link
+            className={styles.link}
+            key={r.route}
+            href={r.route}
+            onClick={() => onLinkClick()}
+          >
+            <li>{r.text}</li>
+          </Link>
         ))}
         <Button
           large
@@ -142,7 +100,7 @@ export default function MenuMobile({ open, setOpen }: MenuMobileProps) {
             push(routes.contact);
           }}
         />
-      </MobileNav>
-    </Container>
+      </ul>
+    </nav>
   );
 }

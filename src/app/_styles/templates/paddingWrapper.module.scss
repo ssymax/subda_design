@@ -1,0 +1,12 @@
+@import '../mixins.scss';
+
+.padding {
+  width: 100%;
+  padding: 0 5.5rem;
+  display: flex;
+  flex-direction: column;
+
+  @include max-width-lg {
+    padding: 0 2.4rem;
+  }
+}

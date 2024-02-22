@@ -1,15 +1,10 @@
-'use client';
+import styles from '@/styles/templates/paddingWrapper.module.scss';
+import { PaddingWrapperProps } from '@/components/types';
 
-import styled from 'styled-components';
-
-const PaddingWrapper = styled.div`
-  width: 100%;
-  padding: 0 5.5rem;
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => theme.maxWidth.lg} {
-    padding: 0 2.4rem;
-  }
-`;
-
-export default PaddingWrapper;
+export default function PaddingWrapper({
+  additionalClass,
+  children,
+}: PaddingWrapperProps) {
+  const classes = `${styles.padding} ${additionalClass}`;
+  return <div className={classes}>{children}</div>;
+}

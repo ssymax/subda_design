@@ -1,0 +1,40 @@
+@import '../mixins.scss';
+
+.item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  text-transform: uppercase;
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 1.8rem;
+     @include max-width-lg {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+.image {
+  overflow: hidden;
+  position: relative;
+  border-radius: 1rem;
+  img {
+    transition: transform 1.5s ease;
+    transform-origin: 50% 50%;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  @include max-width-lg {
+    font-size: 1.8rem;
+  }
+}

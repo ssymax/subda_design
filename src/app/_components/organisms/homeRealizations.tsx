@@ -1,6 +1,5 @@
 'use client';
 
-import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import HomeHeader from '@/components/atoms/homeHeader';
 import Line from '@/components/atoms/line';
@@ -8,16 +7,8 @@ import RealizationsContainer from '@/components/molecules/realizationsContainer'
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import { RealizationItem } from '@/lib/types';
-
-const description = `Każdy projekt jest wynikiem dokładnego zbadania potrzeb 
-i dodania indywidualnego charakteru Państwa wnętrzom.`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-`;
+import { realizationsDescription } from '@/lib/constants';
+import styles from '@/styles/organisms/homeRealizations.module.scss';
 
 export default function HomeRealizations({
   realizations,
@@ -31,18 +22,18 @@ export default function HomeRealizations({
       <HomeHeader
         smallHeader='Realizacje'
         header='Wybrane prace'
-        description={description}
+        description={realizationsDescription}
       />
       <RealizationsContainer realizations={realizations} />
       <Line />
-      <ButtonWrapper>
+      <div className={styles.buttons}>
         <Button
           large
           variant='primary'
           text='Zobacz pełne portfolio'
           onClick={() => push(routes.realizations)}
         />
-      </ButtonWrapper>
+      </div>
     </section>
   );
 }

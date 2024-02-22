@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import styled from 'styled-components';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRouter } from 'next/navigation';
@@ -10,59 +9,24 @@ import InfoItem from '@/components/atoms/infoItem';
 import { AboutMeType } from '@/lib/types';
 import { routes } from '@/routes/routes';
 import ContentfulImage from '@/lib/contentfulImage';
-
-const AboutWrapper = styled.div`
-  display: flex;
-  margin-top: 3rem;
-  column-gap: 10rem;
-  margin-bottom: 10rem;
-  min-height: 100vh;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column-reverse;
-    row-gap: 5rem;
-  }
-`;
-
-const LeftWrapper = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 5rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    row-gap: 0rem;
-    width: 100%;
-  }
-`;
-
-const RightWrapper = styled.div`
-  width: 50%;
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 100%;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  padding: 0 5%;
-  position: relative;
-  img {
-    border-radius: 1rem;
-    width: 100%;
-    height: auto;
-  }
-`;
+import styles from '@/styles/molecules/aboutInfo.module.scss';
 
 export default function AboutInfo({ data }: { data?: AboutMeType }) {
   const aboutRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
   const { push } = useRouter();
 
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-      const texts = document.querySelector('.left');
-      if (!texts) return;
-      const elements = gsap.utils.toArray(texts?.children);
+      if (!leftRef.current) return;
+      if (!rightRef.current) return;
 
-      tl.from('.right', {
+      const tl = gsap.timeline();
+      const texts = leftRef.current.children;
+      const elements = gsap.utils.toArray(texts);
+
+      tl.from(rightRef.current, {
         autoAlpha: 0,
         scale: 1.05,
         duration: 0.8,
@@ -77,8 +41,8 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
   );
 
   return (
-    <AboutWrapper ref={aboutRef}>
-      <LeftWrapper className='left'>
+    <div className={styles.info} ref={aboutRef}>
+      <div ref={leftRef} className={styles.left}>
         {data?.info.map((item) => (
           <InfoItem key={item.header} header={item.header} text={item.text} />
         ))}
@@ -88,11 +52,12 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
           onLeftClick={() => push(routes.offer)}
           onRightClick={() => push(routes.contact)}
         />
-      </LeftWrapper>
-      <RightWrapper className='right'>
-        <ImageWrapper>
+      </div>
+      <div ref={rightRef} className={styles.right}>
+        <div className={styles.image}>
           {data?.image.url && (
             <ContentfulImage
+              priority
               src={data.image.url}
               alt={data?.image.title || ''}
               sizes='100vw'
@@ -100,8 +65,8 @@ export default function AboutInfo({ data }: { data?: AboutMeType }) {
               height={700}
             />
           )}
-        </ImageWrapper>
-      </RightWrapper>
-    </AboutWrapper>
+        </div>
+      </div>
+    </div>
   );
 }

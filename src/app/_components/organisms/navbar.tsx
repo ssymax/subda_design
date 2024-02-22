@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
 'use client';
 
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { useRouter, usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -12,51 +13,13 @@ import MenuMobile from '@/components/molecules/menuMobile';
 import Burger from '@/components/atoms/burger';
 import { routes } from '@/routes/routes';
 import { setBodyOverflow } from '@/utils/utils';
+import styles from '@/styles/organisms/navbar.module.scss';
 import Logo from '../../../../public/images/logo.svg';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ limitCallbacks: true });
 }
-
-const Header = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 7rem;
-  background-color: ${({ theme }) => theme.colors.dark};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5.5rem;
-  z-index: ${({ theme }) => theme.zIndex.level8};
-
-  ${({ theme }) => theme.maxWidth.lg} {
-    height: 6rem;
-    padding: 0 2.4rem;
-  }
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 3rem;
-
-  ${({ theme }) => theme.maxWidth.lg} {
-    display: none;
-  }
-`;
-
-const LogoWrapper = styled.div`
-  height: 4.2rem;
-  width: 19.2rem;
-  z-index: ${({ theme }) => theme.zIndex.level10};
-  cursor: pointer;
-  svg {
-    fill: ${({ theme }) => theme.colors.secondary};
-  }
-`;
 
 export default function Headerbar() {
   const { push } = useRouter();
@@ -94,8 +57,9 @@ export default function Headerbar() {
 
   return (
     <>
-      <Header ref={headerRef}>
-        <LogoWrapper
+      <header className={styles.header} ref={headerRef}>
+        <div
+          className={styles.logo}
           role='button'
           tabIndex={0}
           onClick={() => push(routes.home)}
@@ -104,8 +68,8 @@ export default function Headerbar() {
           }
         >
           <Logo />
-        </LogoWrapper>
-        <ButtonWrap>
+        </div>
+        <div className={styles.buttonWrap}>
           <Menu />
           <Button
             large
@@ -114,9 +78,9 @@ export default function Headerbar() {
             onClick={() => push(routes.contact)}
             borderColor='#fff'
           />
-        </ButtonWrap>
+        </div>
         <Burger open={open} toggleOpen={handleToggle} />
-      </Header>
+      </header>
       <MenuMobile open={open} setOpen={setOpen} />
     </>
   );

@@ -1,0 +1,13 @@
+@import "../mixins.scss";
+
+.header {
+  text-transform: uppercase;
+  padding-bottom: 2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  @include max-width-lg {
+    font-weight: 600;
+    padding-bottom: 1rem;
+  }
+  
+}

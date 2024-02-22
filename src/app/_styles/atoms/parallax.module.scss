@@ -1,0 +1,28 @@
+@import '../mixins.scss';
+
+.parallax {
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  margin: 5rem 0;
+  overflow: hidden;
+  position: relative;
+  @include max-width-lg {
+    height: 20rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    position: absolute;
+  
+   @include max-width-lg {
+      width: 150%;
+      height: auto;
+    }
+  }
+}
+

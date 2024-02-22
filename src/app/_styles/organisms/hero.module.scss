@@ -1,0 +1,55 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  align-items: center;
+
+  @include max-width-lg {
+    row-gap: 2rem;
+    margin: 0 auto;
+  }
+}
+
+.textAndButtons {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+  row-gap: 4rem;
+
+  @include max-width-lg {
+    width: 100%;
+  }
+
+  span {
+    font-size: 3rem;
+    line-height: 140%;
+
+    @include max-width-lg {
+      font-size: 1.8rem;
+    }
+  }
+
+  div {
+    @include max-width-lg {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
+
+.paddingWrap {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  background-color: $beige;
+}
+
+.headers {
+  padding-top: 4rem;
+  background-color: $beige;
+}

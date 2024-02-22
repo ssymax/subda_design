@@ -1,51 +1,14 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+
 'use client';
 
-import styled from 'styled-components';
+import { MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { RealizationItemProps } from '@/components/types';
 import Button from '@/components/atoms/button';
 import { routes } from '@/routes/routes';
 import ContentfulImage from '@/lib/contentfulImage';
-import { MouseEvent } from 'react';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.5rem;
-  text-transform: uppercase;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    span {
-      font-size: 1.8rem;
-      ${({ theme }) => theme.maxWidth.lg} {
-        font-size: 1.6rem;
-      }
-    }
-  }
-`;
-
-const ImageWrapper = styled.div`
-  overflow: hidden;
-  position: relative;
-  border-radius: 1rem;
-  img {
-    transition: transform 1.5s ease;
-    transform-origin: 50% 50%;
-    width: 100%;
-    height: auto;
-    border-radius: 1rem;
-  }
-`;
-
-const Title = styled.h3`
-  font-size: 2.4rem;
-  font-weight: 600;
-  ${({ theme }) => theme.maxWidth.lg} {
-    font-size: 1.8rem;
-  }
-`;
+import styles from '@/styles/molecules/realizationItem.module.scss';
 
 export default function RealizationItem({
   mainImage,
@@ -74,26 +37,27 @@ export default function RealizationItem({
   };
 
   return (
-    <Wrapper>
-      <ImageWrapper
+    <div className={styles.item}>
+      <div
+        className={styles.image}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         onMouseMove={handleMouseMove}
       >
         <ContentfulImage src={mainImage} alt={title} width={800} height={600} />
-      </ImageWrapper>
+      </div>
       <div>
         <span>{type}</span>
         <span>{year}</span>
       </div>
       <div>
-        <Title>{title}</Title>
+        <h3 className={styles.title}>{title}</h3>
         <Button
           variant='primary'
           text='Zobacz'
           onClick={() => push(`${routes.realizations}/${slug}`)}
         />
       </div>
-    </Wrapper>
+    </div>
   );
 }

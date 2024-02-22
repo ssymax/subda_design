@@ -9,6 +9,7 @@ import Foot from '@/components/organisms/foot';
 import Hero from '@/components/organisms/hero';
 import { head } from '@/lib/constants';
 import { getHomeBlog, getHomeOffer, getHomeRealizations } from '@/lib/api';
+import HeroImage from './_components/atoms/heroImage';
 
 export const metadata: Metadata = {
   title: head.title,
@@ -28,6 +29,7 @@ export default async function Page() {
   const offer = await getHomeOffer();
   return (
     <>
+      <HeroImage />
       <Hero />
       <HomeAbout />
       <PaddingWrapper>

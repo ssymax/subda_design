@@ -1,0 +1,10 @@
+@import '../mixins.scss';
+
+.group {
+  display: flex;
+  align-items: center;
+  column-gap: 1.2rem;
+  @include max-width-lg {
+    justify-content: center;
+  }
+}

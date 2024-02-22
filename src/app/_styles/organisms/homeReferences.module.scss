@@ -1,0 +1,31 @@
+@import '../mixins.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 3rem auto 3rem;
+  min-height: 20rem;
+  width: 80%;
+  margin: 6rem auto;
+
+  @include max-width-lg {
+    width: 100%;
+  }
+}
+
+.icon {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arrow {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  &--rotated {
+    transform: rotate(180deg) translateY(50%);
+  }
+}

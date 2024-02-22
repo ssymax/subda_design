@@ -1,23 +1,19 @@
 'use client';
 
 import { useRef } from 'react';
-import styled from 'styled-components';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import styles from '@/styles/atoms/line.module.scss';
+import { LineProps } from '@/components/types';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ limitCallbacks: true });
 }
-
-const Hr = styled.hr`
-  border-top: 1px solid ${({ theme }) => theme.colors.dark};
-  width: 100%;
-`;
-
-export default function Line() {
+export default function Line({ additionalClass }: LineProps) {
   const lineRef = useRef(null);
+
   useGSAP(
     () => {
       if (!lineRef.current) return;
@@ -35,9 +31,11 @@ export default function Line() {
     { revertOnUpdate: true },
   );
 
+  const classes = `${styles.line} ${additionalClass}`;
+
   return (
     <>
-      <Hr ref={lineRef} />
+      <hr className={classes} ref={lineRef} />
     </>
   );
 }

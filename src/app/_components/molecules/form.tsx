@@ -4,8 +4,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { useForm as useFormspree } from '@formspree/react';
 import { useEffect } from 'react';
 import { z } from 'zod';
+import clsx from 'clsx';
 import { zodResolver } from '@hookform/resolvers/zod';
-import styled from 'styled-components';
 import Input from '@/components/atoms/input';
 import Button from '@/components/atoms/button';
 import Checkbox from '@/components/atoms/checkbox';
@@ -13,6 +13,7 @@ import useMediaQuery from '@/hooks/useMediaQuery';
 import { maxQuery } from '@/styles/constants';
 import { defaultFormValues } from '@/lib/constants';
 import { FormProps } from '@/components/types';
+import styles from '@/styles/molecules/form.module.scss';
 import EmailIcon from '../../../../public/images/email.svg';
 import CheckMark from '../../../../public/images/checkmark.svg';
 
@@ -40,59 +41,10 @@ const policy = {
   privacy: 'politykę prywatności',
 };
 
-const StyledForm = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 5rem;
-  align-items: flex-end;
-  padding: 0 2rem;
-`;
-
-const InputsWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  column-gap: 5rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-    row-gap: 3rem;
-  }
-`;
-
-const HalfWrapper = styled.div`
-  width: 50%;
-  display: flex;
-  column-gap: 5rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-    width: 100%;
-    row-gap: 3rem;
-  }
-`;
-
-const ButtonAndCheckbox = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    width: 100%;
-  }
-`;
-
-const Span = styled.span<{ $dark?: boolean }>`
-  font-size: 1.2rem;
-  a {
-    text-decoration: underline;
-    color: ${({ theme, $dark }) =>
-      $dark ? theme.colors.secondary : theme.colors.primary};
-    font-weight: 500;
-  }
-`;
-
 const renderLabel = (dark?: boolean) => (
-  <Span $dark={dark}>
+  <span className={clsx(styles.policy, { [styles['policy--dark']]: dark })}>
     {policy.accept} <a href='?modal=true'>{policy.privacy}</a>
-  </Span>
+  </span>
 );
 
 export default function Form({ dark }: FormProps) {
@@ -124,9 +76,9 @@ export default function Form({ dark }: FormProps) {
   }, [serverState.succeeded, reset]);
 
   return (
-    <StyledForm>
-      <InputsWrapper>
-        <HalfWrapper>
+    <form className={styles.form}>
+      <div className={styles.inputs}>
+        <div className={styles.half}>
           <Controller
             control={control}
             name='name'
@@ -161,8 +113,8 @@ export default function Form({ dark }: FormProps) {
               />
             )}
           />
-        </HalfWrapper>
-        <HalfWrapper>
+        </div>
+        <div className={styles.half}>
           <Controller
             control={control}
             name='message'
@@ -179,9 +131,9 @@ export default function Form({ dark }: FormProps) {
               />
             )}
           />
-        </HalfWrapper>
-      </InputsWrapper>
-      <ButtonAndCheckbox>
+        </div>
+      </div>
+      <div className={styles.btnAndCheck}>
         <Button
           text={serverState.succeeded ? 'Wysłano wiadomość' : 'Wyślij wiadomość'}
           variant='primary'
@@ -202,7 +154,7 @@ export default function Form({ dark }: FormProps) {
             />
           )}
         />
-      </ButtonAndCheckbox>
-    </StyledForm>
+      </div>
+    </form>
   );
 }

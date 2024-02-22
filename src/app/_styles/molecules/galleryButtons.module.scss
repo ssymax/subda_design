@@ -1,0 +1,51 @@
+@import '../variables.scss';
+
+@mixin arrows {
+  position: absolute;
+  width: 3rem;
+  top: 50%;
+}
+
+.wrapper {
+  display: flex;
+  position: absolute;
+  right: 5.5rem;
+  column-gap: 3rem;
+  bottom: 5.5rem;
+}
+
+.button {
+  background-color: $secondary;
+  height: 5rem;
+  position: relative;
+  width: 5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid $primary;
+  svg {
+    fill: $primary;
+    transition: fill 0.15s ease-in-out;
+  }
+
+  &:hover {
+    color: $secondary;
+    background-color: $primary;
+    border: 1px solid $secondary;
+    svg {
+      fill: $secondary;
+    }
+  }
+}
+
+.leftArrow {
+  @include arrows;
+  transform: rotate(180deg) translateY(50%);
+}
+
+.rightArrow {
+  @include arrows;
+  transform: translateY(-50%);
+}

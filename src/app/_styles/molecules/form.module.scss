@@ -1,0 +1,59 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+  align-items: flex-end;
+  padding: 0 2rem;
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  column-gap: 5rem;
+
+  @include max-width-lg {
+    flex-direction: column;
+    row-gap: 3rem;
+  }
+}
+
+.half {
+  width: 100%;
+  display: flex;
+  column-gap: 5rem;
+
+  @include max-width-lg {
+    flex-direction: column;
+    row-gap: 3rem;
+  }
+}
+
+.btnAndCheck {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+
+  @include max-width-lg {
+    width: 100%;
+  }
+}
+
+.policy {
+  font-size: 1.2rem;
+
+  a {
+    text-decoration: underline;
+    font-weight: 500;
+    color: $primary;
+  }
+
+  &--dark {
+    a {
+      color: $secondary;
+    }
+  }
+}

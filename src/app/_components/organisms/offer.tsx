@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import styled from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
@@ -16,89 +15,12 @@ import { routes } from '@/routes/routes';
 import OfferStep from '@/components/molecules/offerStep';
 import { minQuery } from '@/styles/constants';
 import OfferSlide from '@/components/molecules/slide';
+import styles from '@/styles/organisms/offer.module.scss';
 import offerSaloon from '../../../../public/offer-saloon.jpg';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const CardWrapper = styled.div`
-  display: flex;
-  justify-items: center;
-  column-gap: 6rem;
-  margin: 3rem auto;
-  min-height: 80rem;
-
-  ${({ theme }) => theme.maxWidth.xl} {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    grid-auto-flow: row;
-  }
-`;
-
-const SplitedWrapper = styled.div`
-  display: flex;
-  column-gap: 5.5rem;
-  margin: 8rem 0;
-  align-items: center;
-  ${({ theme }) => theme.maxWidth.xl} {
-    flex-direction: column;
-  }
-`;
-
-const LeftWrapper = styled.div`
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 3rem;
-  ${({ theme }) => theme.maxWidth.xl} {
-    width: 100%;
-  }
-  span {
-    line-height: 140%;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 1rem;
-  }
-`;
-
-const Steps = styled.div`
-  width: 40%;
-  border-radius: 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  height: auto;
-  transition: all 0.3s ease;
-  ${({ theme }) => theme.maxWidth.xl} {
-    width: 100%;
-    margin-top: 8rem;
-  }
-  ${({ theme }) => theme.maxWidth.lg} {
-    padding: 4rem 2rem;
-  }
-`;
-
-const Slides = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
 
 export default function Offer({ data }: { data: OfferType }) {
   const cardWrapRef = useRef<HTMLDivElement>(null);
@@ -127,15 +49,15 @@ export default function Offer({ data }: { data: OfferType }) {
 
   useGSAP(
     () => {
-      const slides = gsap.utils.toArray('.slide') as HTMLElement[];
+      const slides = gsap.utils.toArray('[class*="slide_slide"]') as HTMLElement[];
       const getRatio = (el: HTMLElement) =>
         window.innerHeight / (window.innerHeight + el.offsetHeight);
 
       const mm = gsap.matchMedia();
 
       slides.forEach((slide, i) => {
-        const bg = slide.querySelector('.background');
-        const content = slide.querySelector('.content');
+        const bg = slide.querySelector('[class*="slide_background"]');
+        const content = slide.querySelector('[class*="slide_content"]');
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: slide,
@@ -205,14 +127,14 @@ export default function Offer({ data }: { data: OfferType }) {
     <section>
       <PaddingWrapper>
         <SimpleHeader isPageHeader header='Oferta' />
-        <CardWrapper ref={cardWrapRef}>
+        <div className={styles.cardWrapper} ref={cardWrapRef}>
           {approaches?.map((a) => <OfferCard key={a.url} {...a} />)}
-        </CardWrapper>
-        <SplitedWrapper>
-          <LeftWrapper>
+        </div>
+        <div className={styles.splitedWrapper}>
+          <div className={styles.leftWrapper}>
             <div>
-              <SimpleHeader header='Prosta droga' />
-              <SimpleHeader header='ku wymarzonym wnętrzom' />
+              <SimpleHeader alignLeft header='Prosta droga' />
+              <SimpleHeader alignLeft header='ku wymarzonym wnętrzom' />
             </div>
             <span>{data?.stepsDescription}</span>
             <Button
@@ -221,17 +143,17 @@ export default function Offer({ data }: { data: OfferType }) {
               onClick={() => push(routes.contact)}
             />
             <Image priority src={offerSaloon} alt='' />
-          </LeftWrapper>
-          <Steps ref={stepsRef}>
+          </div>
+          <div className={styles.steps} ref={stepsRef}>
             {steps?.map((s, i) => (
               <OfferStep key={s.title} step={s} index={i} stepsLength={steps.length} />
             ))}
-          </Steps>
-        </SplitedWrapper>
+          </div>
+        </div>
       </PaddingWrapper>
 
-      <Slides>
-        <List>
+      <div className={styles.slides}>
+        <div className={styles.list}>
           {info?.map((item, i) => (
             <OfferSlide
               key={item.id}
@@ -240,8 +162,8 @@ export default function Offer({ data }: { data: OfferType }) {
               index={i}
             />
           ))}
-        </List>
-      </Slides>
+        </div>
+      </div>
     </section>
   );
 }

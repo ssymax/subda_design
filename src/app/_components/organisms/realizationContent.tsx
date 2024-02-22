@@ -4,7 +4,6 @@
 
 import { MouseEvent, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
-import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalleryButtons from '@/components/molecules/galleryButtons';
@@ -14,141 +13,12 @@ import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
 import { minQuery } from '@/styles/constants';
+import styles from '@/styles/organisms/realizationContent.module.scss';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ limitCallbacks: true });
 }
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  display: flex;
-  img {
-    position: relative !important;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    z-index: -1;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.beige};
-`;
-
-const HeaderWithText = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 6rem 0;
-  column-gap: 3rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-    row-gap: 6rem;
-  }
-  h1 {
-    width: 50%;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 5.4rem;
-    ${({ theme }) => theme.maxWidth.lg} {
-      width: 100%;
-    }
-    ${({ theme }) => theme.maxWidth.md} {
-      font-size: 2.8rem;
-      font-weight: 300;
-    }
-  }
-  span {
-    width: 50%;
-    font-size: 1.8rem;
-    font-weight: 300;
-    line-height: 140%;
-    ${({ theme }) => theme.maxWidth.lg} {
-      width: 100%;
-      font-size: 1.6rem;
-      font-weight: 300;
-    }
-  }
-`;
-
-const PillsWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 3rem;
-  ${({ theme }) => theme.maxWidth.md} {
-    flex-direction: column;
-    row-gap: 1rem;
-  }
-`;
-
-const ImagesContainer = styled.div`
-  margin: 0 auto;
-  padding-top: 10rem;
-`;
-
-const Masonry = styled.div`
-  column-count: 2;
-  column-gap: 10%;
-  padding: 0 10%;
-  position: relative;
-
-  ${({ theme }) => theme.minWidth.md} {
-    :nth-child(odd) {
-      margin-top: 10%;
-    }
-    :nth-child(even) {
-      margin-top: 20%;
-    }
-  }
-
-  ${({ theme }) => theme.maxWidth.md} {
-    column-count: 1;
-  }
-`;
-
-const Brick = styled.div`
-  break-inside: avoid;
-  counter-increment: brick-counter;
-  position: relative;
-  ${({ theme }) => theme.maxWidth.md} {
-    margin-top: 10%;
-  }
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: 1rem;
-  }
-`;
-
-const Gallery = styled.div`
-  display: 'none';
-  position: fixed;
-  justify-content: center;
-  align-items: center;
-  z-index: 20000;
-  width: 100%;
-  cursor: pointer;
-
-  img {
-    user-select: none;
-    max-height: 100%;
-    width: 'auto';
-    object-fit: contain;
-
-    ${({ theme }) => theme.maxWidth.xl} {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-`;
 
 export default function RealizationContent({
   realizationData,
@@ -291,8 +161,8 @@ export default function RealizationContent({
   const gallerySrc = realizationData?.images[activeIndex].url || '';
 
   return (
-    <Section>
-      <ImageWrapper ref={imageRef}>
+    <section className={styles.section}>
+      <div className={styles.imageWrapper} ref={imageRef}>
         <ContentfulImage
           priority
           sizes='100vw'
@@ -300,39 +170,43 @@ export default function RealizationContent({
           src={realizationData?.mainImage}
           alt={realizationData?.title}
         />
-      </ImageWrapper>
-      <ContentWrapper ref={wrapperRef}>
+      </div>
+      <div className={styles.contentWrapper} ref={wrapperRef}>
         <PaddingWrapper>
-          <HeaderWithText>
+          <div className={styles.headerWithText}>
             <h1 className='header'>{realizationData?.title}</h1>
             <span className='text'>{realizationData?.description}</span>
-          </HeaderWithText>
+          </div>
           <Line />
-          <PillsWrapper>
+          <div className={styles.pills}>
             {realizationData?.location && <Pill label={realizationData.location} />}
             {realizationData?.area && <Pill label={`${realizationData.area}`} withSup />}
             {realizationData?.year && <Pill label={realizationData?.year} />}
-          </PillsWrapper>
+          </div>
         </PaddingWrapper>
-      </ContentWrapper>
+      </div>
 
-      <ImagesContainer ref={containerRef}>
-        <Masonry>
+      <div className={styles.imagesContainer} ref={containerRef}>
+        <div className={styles.masonry}>
           {realizationData?.images.map((image, index) => (
-            <Brick
+            <div
+              className={styles.brick}
               key={image.id}
               id={image.id}
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
               tabIndex={0}
               role='presentation'
               onClick={() => onImageClick(image, index)}
               onKeyDown={(e) => e.key === 'Enter' && onImageClick(image, index)}
             >
               <img src={image.url} alt={realizationData?.title} />
-            </Brick>
+            </div>
           ))}
-        </Masonry>
-        <Gallery
+        </div>
+        <div
+          className={styles.gallery}
           ref={galleryRef}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
           role='presentation'
           onClick={() => onGalleryClick()}
@@ -344,8 +218,8 @@ export default function RealizationContent({
             onNextClick={handleClickNext}
             onPrevClick={handleClickPrev}
           />
-        </Gallery>
-      </ImagesContainer>
-    </Section>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,88 +1,18 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 'use client';
 
-import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import clsx from 'clsx';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import FooterInfo from '@/components/molecules/footerInfo';
+import Form from '@/components/molecules/form';
 import Line from '@/components/atoms/line';
 import { FootProps } from '@/components/types';
+import styles from '@/styles/organisms/foot.module.scss';
 import pixelMates from '../../../../public/pixelmates.png';
-
-const DynamicForm = dynamic(() => import('@/components/molecules/form'), { ssr: false });
-
-const Footer = styled.footer<{ $dark?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme, $dark }) =>
-    $dark ? theme.colors.dark : theme.colors.secondary};
-  margin-top: 3rem;
-`;
-
-const Header = styled.h1<{ $dark?: boolean }>`
-  margin-top: 8rem;
-  font-size: 4.6rem;
-  text-transform: uppercase;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 5rem;
-  color: ${({ theme, $dark }) => ($dark ? theme.colors.secondary : theme.colors.primary)};
-  ${({ theme }) => theme.maxWidth.md} {
-    font-size: 2.8rem;
-    font-weight: 300;
-    width: 100%;
-    text-align: left;
-    padding-left: 2.4rem;
-  }
-`;
-
-const FormAndInfo = styled.div`
-  width: 100%;
-  margin-top: 7rem;
-  ${({ theme }) => theme.maxWidth.lg} {
-    display: flex;
-    row-gap: 4rem;
-    flex-direction: column;
-  }
-`;
-
-const WhiteWrap = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondary};
-`;
-
-const StyledLine = styled(Line)`
-  margin-top: 2rem;
-`;
-
-const RightsAndPolicy = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.grey};
-  font-size: 1.2rem;
-  padding: 0.5rem 0 1rem 0;
-  div {
-    display: flex;
-    column-gap: 1rem;
-    align-items: center;
-  }
-  ${({ theme }) => theme.maxWidth.lg} {
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 1.5rem;
-  }
-`;
-
-const ActiveLink = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
 
 const copyright = String.fromCodePoint(0x00a9);
 
@@ -98,30 +28,35 @@ export default function Foot({ header, children, dark }: FootProps) {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const footClass = clsx(styles.footer, { [styles['footer--dark']]: dark });
+  const headerClass = clsx(styles.header, { [styles['header--dark']]: dark });
+
   return (
-    <Footer $dark={dark}>
-      <Header $dark={dark}>{header || `Bądźmy w kontakcie`}</Header>
-      <FormAndInfo>
+    <footer className={footClass}>
+      <h1 className={headerClass}>{header || `Bądźmy w kontakcie`}</h1>
+      <div className={styles.formAndInfo}>
         <PaddingWrapper>
-          <DynamicForm dark={dark} />
+          <Form dark={dark} />
           {children}
         </PaddingWrapper>
         <FooterInfo />
-      </FormAndInfo>
-      <WhiteWrap>
+      </div>
+      <div className={styles.white}>
         <PaddingWrapper>
-          <StyledLine />
-          <RightsAndPolicy>
+          <Line additionalClass={styles.line} />
+          <div className={styles.rightsAndPolicy}>
             <span>{copyright} Wszelkie prawa zastrzeżone</span>
             <div>
-              <ActiveLink
+              <div
+                className={styles.link}
                 {...spanProps}
                 onClick={() => push('?modal=true', { scroll: false })}
               >
                 Polityka prywatności
-              </ActiveLink>
+              </div>
               /
-              <ActiveLink
+              <div
+                className={styles.link}
                 {...spanProps}
                 onClick={() => openInNewTab('https://pixelmates.pl')}
               >
@@ -131,11 +66,11 @@ export default function Foot({ header, children, dark }: FootProps) {
                   src={pixelMates}
                   alt='aplikacje i strony internetowe Olsztyn'
                 />
-              </ActiveLink>
+              </div>
             </div>
-          </RightsAndPolicy>
+          </div>
         </PaddingWrapper>
-      </WhiteWrap>
-    </Footer>
+      </div>
+    </footer>
   );
 }

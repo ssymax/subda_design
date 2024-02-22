@@ -202,10 +202,8 @@ export interface SimpleHeaderProps {
   header: string;
   isPageHeader?: boolean;
   fontSize?: string;
-  paddingBottom?: string;
-  textAlign?: string;
-  lineHeight?: string;
-  mobileFont?: boolean;
+  alignLeft?: boolean;
+  lineHeight?: boolean;
 }
 
 export interface SorterProps {
@@ -218,3 +216,12 @@ export interface SearchInputProps {
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
+
+export type LineProps = {
+  additionalClass?: string;
+};
+
+export type PaddingWrapperProps = {
+  additionalClass?: string;
+  children: ReactNode;
+};
