@@ -34,7 +34,6 @@ export default function HeroImage() {
             pinSpacing: false,
             scrub: 2,
             invalidateOnRefresh: true,
-            markers: true,
           },
         });
       });
