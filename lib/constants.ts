@@ -49,7 +49,7 @@ export const head = {
 
 export const realizations = {
   header: 'Zobacz najnowsze realizacje moich projektów',
-  redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz. ',
+  redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz',
   text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i innych pomieszczeń, 
   które łączą w sobie nowoczesność z funkcjonalnością, tworząc przestrzenie pełne elegancji i stylu.
    Specjalizuję się w tworzeniu aranżacji wnętrz, które odzwierciedlają osobowość i potrzeby moich klientów, transformując każde pomieszczenie w wyjątkowe dzieło sztuki.`,

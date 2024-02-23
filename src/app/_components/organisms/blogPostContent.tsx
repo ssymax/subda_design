@@ -1,5 +1,3 @@
-'use client';
-
 import { BlogPost } from '@/lib/types';
 import dayjs from 'dayjs';
 import SimpleHeader from '@/app/_components/atoms/simpleHeader';
@@ -23,7 +21,7 @@ export default function BlogPostContent({ postData }: { postData: BlogPost }) {
         isPageHeader
         header={postData?.title || ''}
         alignLeft
-        fontSize='6rem'
+        mediumFont
         lineHeight
       />
       {postData?.date && (

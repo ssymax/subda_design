@@ -15,7 +15,7 @@ export default function RedirectInfo({
   inverse,
 }: RedirectInfoProps) {
   const containerClass = clsx(styles.container, {
-    [styles['container-reverse']]: inverse,
+    [styles['container--reverse']]: inverse,
   });
 
   return (
