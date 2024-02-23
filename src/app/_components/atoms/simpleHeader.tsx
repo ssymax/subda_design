@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
 export default function SimpleHeader({
   header,
   isPageHeader,
-  fontSize,
+  mediumFont,
   alignLeft,
   lineHeight,
 }: SimpleHeaderProps) {
@@ -48,17 +48,12 @@ export default function SimpleHeader({
     [styles['header--page']]: isPageHeader,
     [styles['header--line']]: lineHeight,
     [styles['header--align']]: alignLeft,
+    [styles['header--medium-font']]: mediumFont,
   });
 
   return (
     <div className={styles.overflow}>
-      <div
-        ref={headerRef}
-        className={headerClass}
-        style={{
-          fontSize: `${fontSize}`,
-        }}
-      >
+      <div ref={headerRef} className={headerClass}>
         {header}
       </div>
       {isPageHeader && <Line />}

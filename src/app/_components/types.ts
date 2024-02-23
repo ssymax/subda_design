@@ -201,9 +201,9 @@ export interface InfoItemProps {
 export interface SimpleHeaderProps {
   header: string;
   isPageHeader?: boolean;
-  fontSize?: string;
   alignLeft?: boolean;
   lineHeight?: boolean;
+  mediumFont?: boolean;
 }
 
 export interface SorterProps {

@@ -15,8 +15,7 @@
   }
 
   @include max-width-lg {
-    flex-direction: column;
-    flex-flow: column-reverse;
+    flex-direction: column-reverse;
     row-gap: 2rem;
   }
 

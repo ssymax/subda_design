@@ -24,6 +24,9 @@ export default function HomeReferenceCard({
       const { lines } = text;
       const tl = gsap.timeline();
 
+      if (tl.isActive()) return;
+      tl.clear();
+
       tl.fromTo(
         lines,
         {
