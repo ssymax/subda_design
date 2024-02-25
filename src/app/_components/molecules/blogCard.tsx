@@ -1,4 +1,3 @@
-
 import { memo } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/atoms/button';
