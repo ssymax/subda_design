@@ -1,11 +1,23 @@
 @import '../mixins.scss';
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
   flex: 1;
   position: relative;
+  animation: slideUp 0.8s ease-out;
 
   &:nth-child(3n + 2) {
     margin-top: 12rem;
@@ -29,7 +41,7 @@
     border-radius: 1rem;
     display: flex;
     justify-content: center;
-    
+
     @include max-width-lg {
       height: 50rem;
     }
@@ -47,7 +59,7 @@
     width: 80%;
     font-size: 2rem;
 
-    @include max-width-lg{ 
+    @include max-width-lg {
       font-weight: 600;
       line-height: 130%;
     }

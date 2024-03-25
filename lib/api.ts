@@ -31,14 +31,16 @@ async function fetchGraphQL(
   variables?: Record<string, any>,
 ): Promise<any> {
   return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+    preview
+      ? `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`
+      : `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${
           preview
-            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+            ? process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
             : process.env.CONTENTFUL_ACCESS_TOKEN
         }`,
       },
@@ -95,7 +97,7 @@ export async function getRealization(slug: string): Promise<DetailedRealizationI
     }
     
   `,
-    false,
+    true,
   );
 
   return detailedRealizationsConverter(realization.data);
@@ -152,7 +154,8 @@ export async function getBlogPosts(limit: number): Promise<HomeBlogItem[]> {
 }
 
 export async function getPost(slug: string): Promise<BlogPost[]> {
-  const post = await fetchGraphQL(`query {
+  const post = await fetchGraphQL(
+    `query {
     blogCollection (where: {slug: "${slug}"}) {
       items {
         sys {
@@ -179,6 +182,8 @@ export async function getPost(slug: string): Promise<BlogPost[]> {
         text4th
       }
     }
-  }`);
+  }`,
+    true,
+  );
   return post.data.blogCollection.items;
 }

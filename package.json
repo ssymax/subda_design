@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "split-type": "^0.3.4",
+    "swr": "^2.2.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {

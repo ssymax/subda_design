@@ -3,28 +3,30 @@
 'use client';
 
 import { MouseEvent, useRef, useState } from 'react';
+import useSWR from 'swr';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalleryButtons from '@/components/molecules/galleryButtons';
 import Line from '@/components/atoms/line';
 import Pill from '@/components/atoms/pill';
-import { DetailedImage, DetailedRealizationItem } from '@/lib/types';
+import { DetailedImage } from '@/lib/types';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import ContentfulImage from '@/lib/contentfulImage';
 import { minQuery } from '@/styles/constants';
 import styles from '@/styles/organisms/realizationContent.module.scss';
+import { getRealization } from '@/lib/api';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ limitCallbacks: true });
 }
 
-export default function RealizationContent({
-  realizationData,
-}: {
-  realizationData: DetailedRealizationItem;
-}) {
+export default function RealizationContent({ slug }: { slug: string }) {
+  const { data } = useSWR(slug, () => getRealization(slug));
+
+  const realizationData = data?.[0];
+
   const containerRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const galleryButtonsRef = useRef<HTMLDivElement>(null);
@@ -167,7 +169,7 @@ export default function RealizationContent({
           priority
           sizes='100vw'
           fill
-          src={realizationData?.mainImage}
+          src={realizationData?.mainImage || ''}
           alt={realizationData?.title}
         />
       </div>
