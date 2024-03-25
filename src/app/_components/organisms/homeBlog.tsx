@@ -1,6 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
 import HomeHeader from '@/components/atoms/homeHeader';
 import BlogCard from '@/components/molecules/blogCard';
 import { HomeBlogItemModel } from '@/lib/types';
