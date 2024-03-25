@@ -146,7 +146,7 @@ export async function getBlogPosts(limit: number): Promise<HomeBlogItem[]> {
         }
       }
     }`,
-    false,
+    true,
     { limit },
   );
 
