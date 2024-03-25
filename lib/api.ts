@@ -97,7 +97,7 @@ export async function getRealization(slug: string): Promise<DetailedRealizationI
     }
     
   `,
-    false,
+    true,
   );
 
   return detailedRealizationsConverter(realization.data);
@@ -146,7 +146,7 @@ export async function getBlogPosts(limit: number): Promise<HomeBlogItem[]> {
         }
       }
     }`,
-    true,
+    false,
     { limit },
   );
 

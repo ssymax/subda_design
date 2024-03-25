@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import RealizationContent from '@/app/_components/organisms/realizationContent';
 import Foot from '@/components/organisms/foot';
-import { getRealization } from '@/lib/api';
+import { getAllRealizations, getRealization } from '@/lib/api';
 import { head } from '@/lib/constants';
 
 export async function generateMetadata({
@@ -16,12 +16,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const realizationData = await getRealization(params.slug);
+export async function generateStaticParams() {
+  const realizations = await getAllRealizations();
 
+  return realizations.map((realization) => ({
+    slug: realization.slug,
+  }));
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <>
-      <RealizationContent realizationData={realizationData[0]} />
+      <RealizationContent slug={params.slug} />
       <Foot />
     </>
   );

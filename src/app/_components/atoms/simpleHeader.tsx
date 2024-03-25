@@ -41,7 +41,7 @@ export default function SimpleHeader({
         },
       });
     },
-    { scope: headerRef },
+    { scope: headerRef, dependencies: [header] },
   );
 
   const headerClass = clsx(styles.header, {
