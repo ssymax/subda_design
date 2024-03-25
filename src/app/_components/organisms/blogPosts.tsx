@@ -1,8 +1,6 @@
 'use client';
 
-import { ChangeEvent, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { ChangeEvent, useState } from 'react';
 import BlogCard from '@/components/molecules/blogCard';
 import Sorter from '@/components/atoms/sorter';
 import SearchInput from '@/components/atoms/searchInput';
@@ -12,7 +10,6 @@ import { ASC, DESC } from '@/lib/constants';
 import styles from '@/styles/organisms/blogPosts.module.scss';
 
 export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [order, setOrder] = useState<Order>(DESC);
   const [search, setSearch] = useState('');
 
@@ -24,23 +21,6 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
 
   const sortedPosts = sortAndFilterBlogPosts(data, order, search);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
-
-      const items = gsap.utils.toArray(containerRef.current.children) as HTMLElement[];
-
-      items.forEach((item) => {
-        gsap.from(item, {
-          autoAlpha: 0,
-          y: 100,
-          duration: 0.8,
-        });
-      });
-    },
-    { scope: containerRef, dependencies: [sortedPosts, order] },
-  );
-
   return (
     <>
       <div className={styles.actions}>
@@ -50,7 +30,7 @@ export default function BlogPosts({ data }: { data: HomeBlogItem[] }) {
       {!!search.length && !sortedPosts.length && (
         <div className={styles.noPosts}>{`Brak wyników dla "${search}"`}</div>
       )}
-      <div className={styles.posts} ref={containerRef}>
+      <div className={styles.posts}>
         {sortedPosts?.map((p) => (
           <BlogCard
             key={p.id}

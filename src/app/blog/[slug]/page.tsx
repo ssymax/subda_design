@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import BlogPostContent from '@/app/_components/organisms/blogPostContent';
 import Foot from '@/app/_components/organisms/foot';
 import PaddingWrapper from '@/app/_templates/paddingWrapper';
-import { getPost } from '@/lib/api';
+import { getBlogPosts, getPost, getTotalBlogsNumber } from '@/lib/api';
 import { head } from '@/lib/constants';
 
 export async function generateMetadata({
@@ -17,7 +17,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export async function generateStaticParams() {
+  const limit = await getTotalBlogsNumber();
+  const posts = await getBlogPosts(limit.total);
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function Page({ params }: { params: { slug: string } }) {
   const postData = await getPost(params.slug);
   return (
     <>
