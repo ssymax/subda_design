@@ -19,19 +19,18 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const limit = await getTotalBlogsNumber();
-  const posts = await getBlogPosts(limit.total);
+  const posts = await getBlogPosts(limit?.total);
 
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export async function Page({ params }: { params: { slug: string } }) {
-  const postData = await getPost(params.slug);
+export default function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <PaddingWrapper>
-        <BlogPostContent postData={postData[0]} />
+        <BlogPostContent slug={params.slug} />
       </PaddingWrapper>
       <Foot />
     </>

@@ -1,11 +1,18 @@
-import { BlogPost } from '@/lib/types';
+'use client';
+
 import dayjs from 'dayjs';
+import useSWR from 'swr';
 import SimpleHeader from '@/app/_components/atoms/simpleHeader';
 import ContentfulImage from '@/lib/contentfulImage';
 import styles from '@/styles/organisms/blogPostContent.module.scss';
+import { getPost } from '@/lib/api';
 import CalendarIcon from '../../../../public/images/calendar.svg';
 
-export default function BlogPostContent({ postData }: { postData: BlogPost }) {
+export default function BlogPostContent({ slug }: { slug: string }) {
+  const { data } = useSWR(slug, () => getPost(slug));
+
+  const postData = data?.[0];
+
   const date = dayjs(postData?.date).format('DD.MM.YYYY');
 
   const postElements: { id: string; header?: string; text?: string }[] = [
