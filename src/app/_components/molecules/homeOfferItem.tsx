@@ -24,7 +24,7 @@ export default function HomeOfferItem({
   const { push } = useRouter();
   const accordionsWidth = itemsQuantity * accordionWidth;
   const responsiveHalfWidth =
-    containerWidth && (containerWidth - accordionWidth) / 2 - 4 * padding;
+    containerWidth && (containerWidth - accordionWidth) / 2 - 3 * padding;
   const isFirst = index === 0;
   const isLast = index === itemsQuantity - 1;
 

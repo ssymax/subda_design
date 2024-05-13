@@ -1,4 +1,4 @@
-@import "../mixins.scss";
+@import '../mixins.scss';
 @import '../variables.scss';
 
 $accordionWidth: 8rem;
@@ -41,7 +41,6 @@ $padding: 3rem;
     width: $accordionWidthSmall;
   }
 
-
   &--open {
     pointer-events: none;
   }
@@ -55,7 +54,6 @@ $padding: 3rem;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
   }
-
 }
 
 .number {
@@ -71,7 +69,7 @@ $padding: 3rem;
 
 .content {
   display: flex;
-  justify-content: space-between;
+  gap: 2rem;
   transition: width 0.3s cubic-bezier(0.59, 0.18, 0.88, 0.88);
   border-bottom: 0.5px solid $primary;
   border-top: 0.5px solid $primary;
@@ -79,7 +77,6 @@ $padding: 3rem;
   &--open {
     @include min-width-lg {
       width: calc($containerWidth - 32rem);
-
     }
 
     @include max-width-lg {
@@ -102,7 +99,7 @@ $padding: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc($containerWidth - 4rem - 4 * $padding) ;
+  width: calc($containerWidth - 4rem - 3 * $padding);
   padding: $padding;
 
   div {

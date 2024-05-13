@@ -45,10 +45,11 @@ $accordionHeight: 8rem;
   height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   row-gap: 3rem;
-  overflow: clip;
+  overflow: hidden;
   padding: 0rem 1rem;
+  top: 1rem;
   transition: height 0.3s cubic-bezier(0.59, 0.18, 0.88, 0.88);
   border-left: 0.5px solid $primary;
   border-right: 0.5px solid $primary;
@@ -70,8 +71,10 @@ $accordionHeight: 8rem;
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
+    justify-content: space-between;
     line-height: 140%;
     font-size: 1.4rem;
+    padding: 1rem 0;
   }
 
   img {
@@ -79,5 +82,6 @@ $accordionHeight: 8rem;
     height: auto;
     align-self: center;
     border-radius: 1rem;
+    margin-bottom: 1rem;
   }
 }

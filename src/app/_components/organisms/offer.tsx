@@ -133,8 +133,8 @@ export default function Offer({ data }: { data: OfferType }) {
         <div className={styles.splitedWrapper}>
           <div className={styles.leftWrapper}>
             <div>
-              <SimpleHeader alignLeft header='Prosta droga' />
-              <SimpleHeader alignLeft header='ku wymarzonym wnętrzom' />
+              <SimpleHeader alignLeft header='Tylko 4 kroki' />
+              <SimpleHeader alignLeft header='do wymarzonego projektu!' />
             </div>
             <span>{data?.stepsDescription}</span>
             <Button

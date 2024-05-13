@@ -49,10 +49,9 @@ export const head = {
 
 export const realizations = {
   header: 'Zobacz najnowsze realizacje moich projektów',
-  redirectHeader: 'Odkryj nieograniczone możliwości aranżacji Twoich wnętrz',
-  text: `Moja oferta obejmuje wyjątkowe projekty kuchni, łazienek i innych pomieszczeń, 
-  które łączą w sobie nowoczesność z funkcjonalnością, tworząc przestrzenie pełne elegancji i stylu.
-   Specjalizuję się w tworzeniu aranżacji wnętrz, które odzwierciedlają osobowość i potrzeby moich klientów, transformując każde pomieszczenie w wyjątkowe dzieło sztuki.`,
+  redirectHeader:
+    'POZWÓL MI SPRAWIĆ, BY TAKŻE TWOJE WNĘTRZA ZYSKAŁY NIEPOWTARZALNY BLASK',
+  text: `Przygotowuję projekty kuchni, łazienek i innych pomieszczeń mieszkalnych oraz komercyjnych. Łączę nowoczesność z funkcjonalnością, tworząc przyjazne przestrzenie z charakterem, odzwierciedlające osobowość i potrzeby moich klientów. Chcesz, by Twoje wnętrze zachwycało i służyło przez długie lata? Porozmawiajmy o Twoim marzeniu - i o tym, jak je spełnić.`,
 };
 
 export const defaultFormValues = {
@@ -141,16 +140,14 @@ export const opinions = [
   },
 ];
 
-export const heroText = `Tworząc swój wymarzony projekt wnętrz, pragną Państwo
-współpracować z kimś, kto rozumie Państwa potrzeby.`;
+export const heroText = `Cześć! Szukasz pomocy w urządzaniu mieszkania, domu, biura czy restauracji? Przygotuję dla Ciebie projekt wnętrz - funkcjonalnej kuchni, stylowego salonu, wygodnej sypialni czy innej przestrzeni.`;
 
-export const aboutText = `Nazywam się Marta Subda – dyplomowana architekt wnętrz i absolwentka prestiżowego Uniwersytetu Artystycznego w Poznaniu. Moja pasja do sztuki 
-i designu wyraża się w licznych projektach, które tworzyłam przez lata. 
-Od przemyślanych przestrzeni mieszkalnych po wyjątkowe realizacje komercyjne - nieustannie podchodzę do każdego zadania z entuzjazmem.
-Moim celem jest adaptacja przestrzeni tak, by doskonale oddawała 
-charakter, sposób życia i gusta moich Klientów. W projektowaniu wnętrz 
-stawiam na bliską współpracę z inwestorami, dzięki której mogę pełniej 
-zrozumieć ich wizję i stworzyć wnętrza przekraczające oczekiwania.`;
+export const aboutText = `Cześć, jestem Marta Subda. Serdecznie witam Cię w moim studiu projektowym.
+
+Jestem doświadczonym architektem wnętrz z dyplomem prestiżowego Uniwersytetu Artystycznego w Poznaniu. Moje studio projektowe Subda Design działa od 2015 roku. Na koncie mam już dziesiątki zrealizowanych projektów, zarówno prywatnych, jak i komercyjnych. 
+
+Swobodnie poruszam się w każdym stylu wnętrzarskim. Cyklicznie podnoszę swoje kompetencje, biorę udział w szkoleniach, śledzę trendy w kraju i za granicą. Każdy projekt poprzedza uważna rozmowa z inwestorem i gruntowny research potrzeb, na które ma odpowiadać projektowana przestrzeń. 
+.`;
 
 export const blogDescription = `Przygotowałam dla Państwa artykuły, mogące pomóc w wielu 
 aspektach urządzania mieszkań i innych przestrzeni.`;
