@@ -16,8 +16,8 @@ export default function Hero() {
     <section className={styles.container}>
       <PaddingWrapper additionalClass={styles.paddingWrap}>
         <div className={styles.headers}>
-          <SimpleHeader alignLeft header='Sztuka życia' />
-          <SimpleHeader alignLeft header='W pięknych wnętrzach' />
+          <SimpleHeader alignLeft header='Projekty architektoniczne' />
+          <SimpleHeader alignLeft header='z pięknym wnętrzem' />
         </div>
         <div className={styles.textAndButtons}>
           <span>{heroText}</span>

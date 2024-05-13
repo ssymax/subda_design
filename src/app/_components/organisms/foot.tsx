@@ -33,7 +33,7 @@ export default function Foot({ header, children, dark }: FootProps) {
 
   return (
     <footer className={footClass}>
-      <h1 className={headerClass}>{header || `Bądźmy w kontakcie`}</h1>
+      <h1 className={headerClass}>{header || `Masz pytania?`}</h1>
       <div className={styles.formAndInfo}>
         <PaddingWrapper>
           <Form dark={dark} />
