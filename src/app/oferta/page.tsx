@@ -7,6 +7,9 @@ import { getOffer } from '@/lib/api';
 export const metadata: Metadata = {
   title: `Oferta - ${head.title}`,
   description: head.description,
+  alternates: {
+    canonical: 'https://www.subdadesign.pl/oferta',
+  },
 };
 
 export default async function Page() {

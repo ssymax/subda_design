@@ -9,6 +9,16 @@ const nextConfig = {
     loader: 'custom',
     formats: ['image/avif', 'image/webp'],
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'subdadesign.pl' }],
+        destination: 'https://www.subdadesign.pl/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -13,6 +13,9 @@ export async function generateMetadata({
   return {
     title: `${rel[0].title} - ${head.title}`,
     description: rel[0].description,
+    alternates: {
+      canonical: `https://www.subdadesign.pl/realizacje/${params.slug}`,
+    },
   };
 }
 

@@ -10,6 +10,9 @@ import { head } from '@/lib/constants';
 export const metadata: Metadata = {
   title: `Blog - ${head.title}`,
   description: head.description,
+  alternates: {
+    canonical: 'https://www.subdadesign.pl/blog',
+  },
 };
 
 export default async function Page() {

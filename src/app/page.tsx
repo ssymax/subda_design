@@ -13,6 +13,7 @@ import HeroImage from './_components/atoms/heroImage';
 
 export const metadata: Metadata = {
   title: head.title,
+
   description: head.description,
   openGraph: {
     title: 'Subda Design',
@@ -21,6 +22,9 @@ export const metadata: Metadata = {
     type: 'website',
   },
   metadataBase: new URL('https://subdadesign.pl'),
+  alternates: {
+    canonical: 'https://www.subdadesign.pl',
+  },
 };
 
 export default async function Page() {
