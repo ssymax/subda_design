@@ -9,6 +9,9 @@ const DynamicContent = dynamic(() => import('@/components/organisms/contactConte
 export const metadata: Metadata = {
   title: `Kontakt - ${head.title}`,
   description: contactTexts.invite,
+  alternates: {
+    canonical: 'https://wwww.subdadesign.pl/kontakt',
+  },
 };
 
 export default function Page() {

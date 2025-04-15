@@ -14,6 +14,9 @@ import kitchen2 from '../../../public/kitchen2.jpg';
 export const metadata: Metadata = {
   title: `O mnie - ${head.title}`,
   description: head.description,
+  alternates: {
+    canonical: 'https://www.subdadesign.pl/o-mnie',
+  },
 };
 
 export default async function AboutMe() {
