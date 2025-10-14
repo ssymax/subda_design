@@ -32,7 +32,7 @@ export const socials = [
 export const contactData = {
   street: 'Jarosława Iwaszkiewicza 30/24',
   city: '10-089 Olsztyn',
-  mail: 'info@subdadesign.pl',
+  mail: 'subdadesign@gmail.com',
   phone: '+48 600 047 360',
 };
 
