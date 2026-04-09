@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { contactData, contactTexts, socials } from '@/lib/constants';
+import { toMailtoHref, toMapsHref, toPhoneHref } from '@/lib/contactLinks';
 import PaddingWrapper from '@/templates/paddingWrapper';
 import Foot from '@/components/organisms/foot';
 import InfoItem from '@/components/atoms/infoItem';
@@ -16,6 +17,7 @@ const mapSrc = `https://www.google.com/maps/embed/v1/place?q=Subda%20Design&key=
 
 export default function ContactContent() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const address = `${contactData.street}, ${contactData.city}`;
 
   useGSAP(
     () => {
@@ -54,8 +56,20 @@ export default function ContactContent() {
       <section>
         <PaddingWrapper>
           <div className={styles.headers}>
-            <SimpleHeader alignLeft header={contactData.mail} />
-            <SimpleHeader alignLeft header={contactData.phone} />
+            <a
+              className={styles.headerLink}
+              href={toMailtoHref(contactData.mail)}
+              aria-label={`Wyślij email na adres ${contactData.mail}`}
+            >
+              <SimpleHeader alignLeft header={contactData.mail} />
+            </a>
+            <a
+              className={styles.headerLink}
+              href={toPhoneHref(contactData.phone)}
+              aria-label={`Zadzwoń pod numer ${contactData.phone}`}
+            >
+              <SimpleHeader alignLeft header={contactData.phone} />
+            </a>
           </div>
           <div className={styles.container} ref={containerRef}>
             <div className={styles.info}>
@@ -63,12 +77,29 @@ export default function ContactContent() {
               <div className={styles.contactsAndProfiles}>
                 <div className={styles.contacts}>
                   <InfoItem header='Info'>
-                    <span>{contactData.mail}</span>
-                    <span>{contactData.phone}</span>
+                    <a
+                      className={styles.contactLink}
+                      href={toMailtoHref(contactData.mail)}
+                    >
+                      {contactData.mail}
+                    </a>
+                    <a
+                      className={styles.contactLink}
+                      href={toPhoneHref(contactData.phone)}
+                    >
+                      {contactData.phone}
+                    </a>
                   </InfoItem>
                   <InfoItem header='Adres'>
-                    <span>{contactData.street}</span>
-                    <span>{contactData.city}</span>
+                    <a
+                      className={styles.contactLink}
+                      href={toMapsHref(address)}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <span>{contactData.street}</span>
+                      <span>{contactData.city}</span>
+                    </a>
                   </InfoItem>
                 </div>
                 <div className={styles.profiles}>
