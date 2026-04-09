@@ -9,6 +9,22 @@
   }
 }
 
+.headerLink,
+.contactLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.headerLink {
+  display: block;
+}
+
+.contactLink {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
 .container {
   display: flex;
   column-gap: 5rem;

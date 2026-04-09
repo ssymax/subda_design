@@ -3,7 +3,8 @@
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { setBodyOverflow } from '@/app/_utils/utils';
-import { privacyPolicyData } from '@/lib/constants';
+import { contactData, privacyPolicyData } from '@/lib/constants';
+import { toMailtoHref, toMapsHref } from '@/lib/contactLinks';
 import styles from '@/styles/molecules/modal.module.scss';
 import CloseIcon from '../../../../public/images/close.svg';
 
@@ -12,6 +13,7 @@ export default function Modal() {
   const modal = searchParams.get('modal');
   const pathname = usePathname();
   const { push } = useRouter();
+  const fullAddress = `${privacyPolicyData.generalTerms.administrator.address}, ${contactData.city}`;
 
   useEffect(() => {
     if (modal) setBodyOverflow('hidden');
@@ -35,15 +37,38 @@ export default function Modal() {
                   Administrator: {privacyPolicyData.generalTerms.administrator.name}
                 </p>
                 <p className={styles.privacyPolicyText}>
-                  Adres: {privacyPolicyData.generalTerms.administrator.address}
+                  Adres:{' '}
+                  <a
+                    className={styles.contactLink}
+                    href={toMapsHref(fullAddress)}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {privacyPolicyData.generalTerms.administrator.address}
+                  </a>
                 </p>
                 <p className={styles.privacyPolicyText}>
                   NIP: {privacyPolicyData.generalTerms.administrator.nip}
                 </p>
                 <p className={styles.privacyPolicyText}>
                   Kontakt:{' '}
-                  {privacyPolicyData.generalTerms.administrator.contact.postalAddress},{' '}
-                  {privacyPolicyData.generalTerms.administrator.contact.email}
+                  <a
+                    className={styles.contactLink}
+                    href={toMapsHref(fullAddress)}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {privacyPolicyData.generalTerms.administrator.contact.postalAddress}
+                  </a>
+                  ,{' '}
+                  <a
+                    className={styles.contactLink}
+                    href={toMailtoHref(
+                      privacyPolicyData.generalTerms.administrator.contact.email,
+                    )}
+                  >
+                    {privacyPolicyData.generalTerms.administrator.contact.email}
+                  </a>
                 </p>
                 <p className={styles.privacyPolicyText}>
                   Inspektor Ochrony Danych:{' '}
